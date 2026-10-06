@@ -1,0 +1,26 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0061-p21",
+ "round_id": "r0061",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nDeprecationWarning filter check logic inverted\n\nDescription\n\nThe `check_warnings_filter()` function in `astroid/util.py` has inverted logic that prevents deprecation warnings from being properly detected when they should be ignored in `__main__` context.\n\nSteps/Code to Reproduce\n\n```python\nimport warnings\nfrom astroid.util import check_warnings_filter\n\n# Set up a warning filter to ignore DeprecationWarnings in __main__\nwarnings.filterwarnings(\"ignore\", category=DeprecationWarning, module=\"__main__\")\n\n# This should return True when DeprecationWarnings are being ignored in __main__\n# but currently returns False due to inverted logic\nresult = check_warnings_filter()\nprint(f\"check_warnings_filter() returned: {result}\")\nprint(f\"Expected: True (DeprecationWarnings should be ignored in __main__)\")\n\n# Check the actual filter\nfor i, filter_item in enumerate(warnings.filters):\n    if issubclass(filter_item[2], DeprecationWarning):\n        print(f\"Filter {i}: action={filter_item[0]}, module={filter_item[3]}\")\n```\n\nThe function currently checks for the wrong conditions - it looks for filters that are NOT \"ignore\" and NOT \"__main__\", when it should be looking for filters that ARE \"ignore\" and ARE \"__main__\".\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "pylint-dev__astroid.b114f6b5.func_basic__sso1mvc0",
+  "environment": "jyangballin/swesmith.x86_64.pylint-dev_1776_astroid.b114f6b5",
+  "fail_to_pass": [
+   "tests/test_decorators.py::TestDeprecationDecorators::test_deprecated_default_argument_values_one_arg",
+   "tests/test_decorators.py::TestDeprecationDecorators::test_deprecated_default_argument_values_two_args"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

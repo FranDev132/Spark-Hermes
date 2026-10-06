@@ -1,0 +1,25 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0061-p04",
+ "round_id": "r0061",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\n# Instance call inference fails for self-referential __call__ attributes\n\n## Description\n\nThe inference engine fails to correctly handle instances where a class has a `__call__` attribute that references an instance of the same class. This creates a situation where the instance's call inference mechanism doesn't properly handle self-referential call patterns.\n\n## Steps to reproduce\n\nThe following code demonstrates the issue:\n\n```python\nclass A:\n    __call__ = A()\nA()\n```\n\nWhen trying to infer the result of calling an instance of class `A`, the inference engine fails to correctly handle the self-referential nature of the `__call__` attribute.\n\n## Expected behavior\n\nThe inference engine should correctly handle self-referential `__call__` attributes and properly infer the result of calling an instance of a class that has such an attribute.\n\n## Actual behavior\n\nThe inference engine fails to correctly infer the result of the call, leading to incorrect type inference for expressions involving instances of classes with self-referential `__call__` attributes.\n\nThis issue affects code analysis tools that rely on astroid's inference capabilities, potentially causing incorrect type information to be reported for code that uses this pattern.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "pylint-dev__astroid.b114f6b5.pr_2436",
+  "environment": "jyangballin/swesmith.x86_64.pylint-dev_1776_astroid.b114f6b5",
+  "fail_to_pass": [
+   "tests/test_inference.py::InferenceTest::test_infer_call_result_same_proxied_class"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

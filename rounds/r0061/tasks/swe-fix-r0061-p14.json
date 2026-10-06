@@ -1,0 +1,33 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0061-p14",
+ "round_id": "r0061",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nGPXTrackSegment methods missing after recent changes\n\n#### Description\n\nSeveral methods on GPXTrackSegment appear to have been removed, causing AttributeError when trying to use them. Methods like `move()`, `split()`, `remove_point()`, `get_uphill_downhill()`, and `get_location_at()` are no longer available.\n\n#### Steps/Code to Reproduce\n\n```python\nimport gpxpy\nimport gpxpy.gpx as mod_gpx\nimport datetime as mod_datetime\n\n# Create a simple GPX track segment\ngpx = mod_gpx.GPX()\ntrack = mod_gpx.GPXTrack()\nsegment = mod_gpx.GPXTrackSegment()\n\n# Add some points\np1 = mod_gpx.GPXTrackPoint(latitude=45.0, longitude=10.0, elevation=100)\np2 = mod_gpx.GPXTrackPoint(latitude=45.1, longitude=10.1, elevation=150)\nsegment.points = [p1, p2]\ntrack.segments = [segment]\ngpx.tracks = [track]\n\n# Try to use methods that should exist\ntry:\n    # This should work but raises AttributeError\n    uphill, downhill = segment.get_uphill_downhill()\n    print(f\"Uphill: {uphill}, Downhill: {downhill}\")\nexcept AttributeError as e:\n    print(f\"Error: {e}\")\n\ntry:\n    # This should work but raises AttributeError  \n    part1, part2 = segment.split(1)\n    print(\"Split successful\")\nexcept AttributeError as e:\n    print(f\"Error: {e}\")\n\ntry:\n    # This should work but raises AttributeError\n    segment.remove_point(0)\n    print(\"Point removed\")\nexcept AttributeError as e:\n    print(f\"Error: {e}\")\n```\n\nExpected output:\n```\nUphill: 50.0, Downhill: 0\nSplit successful\nPoint removed\n```\n\nActual output:\n```\nError: 'GPXTrackSegment' object has no attribute 'get_uphill_downhill'\nError: 'GPXTrackSegment' object has no attribute 'split'\nError: 'GPXTrackSegment' object has no attribute 'remove_point'\n```\n\nThe same issue occurs with other methods like `move()` and `get_location_at()`.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "tkrajina__gpxpy.09fc46b3.func_pm_class_rm_funcs__62ft1asw",
+  "environment": "jyangballin/swesmith.x86_64.tkrajina_1776_gpxpy.09fc46b3",
+  "fail_to_pass": [
+   "test.py::GPXTests::test_get_location_at",
+   "test.py::GPXTests::test_named_tuples_values_uphill_downhill",
+   "test.py::GPXTests::test_remove_point_from_segment",
+   "test.py::GPXTests::test_split",
+   "test.py::GPXTests::test_split_and_join",
+   "test.py::GPXTests::test_track_with_elevation_zero",
+   "test.py::GPXTests::test_track_with_some_points_are_without_elevations",
+   "test.py::GPXTests::test_track_without_elevation",
+   "test.py::GPXTests::test_uphill_downhill_with_no_elevations"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

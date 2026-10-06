@@ -1,0 +1,33 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0061-p12",
+ "round_id": "r0061",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nOAuth1 endpoints returning wrong status codes for valid requests\n\n#### Description\n\nOAuth1 request token and access token endpoints are returning incorrect HTTP status codes. Valid requests that should return 200 are returning 401, and some invalid requests that should return 401 are returning 200.\n\n#### Steps/Code to Reproduce\n\n```python\nfrom oauthlib.oauth1 import Client\nfrom oauthlib.oauth1.rfc5849.endpoints import RequestTokenEndpoint, AccessTokenEndpoint\nfrom oauthlib.oauth1.rfc5849 import RequestValidator\n\n# Setup\nclass TestValidator(RequestValidator):\n    def validate_client_key(self, client_key, request):\n        return True\n    def validate_requested_realms(self, client_key, realms, request):\n        return True\n    def validate_redirect_uri(self, client_key, redirect_uri, request):\n        return True\n    def get_client_secret(self, client_key, request):\n        return 'bar'\n    def get_request_token_secret(self, client_key, token, request):\n        return 'secret'\n    def validate_timestamp_and_nonce(self, client_key, timestamp, nonce, request, request_token=None):\n        return True\n\nvalidator = TestValidator()\nendpoint = RequestTokenEndpoint(validator)\n\n# Create a valid request\nclient = Client('foo', callback_uri='https://c.b/cb', client_secret='bar')\nuri = 'https://example.com/request_token'\n_, headers, _ = client.sign(uri)\n\n# This should return 200 but returns 401\nh, b, s = endpoint.create_request_token_response(uri, headers=headers)\nprint(f\"Status: {s}, Expected: 200\")  # Status: 401, Expected: 200\n```\n\nThe same issue occurs with AccessTokenEndpoint where valid requests return 401 instead of 200.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "oauthlib__oauthlib.1fd52536.combine_module__5r2tdkhc",
+  "environment": "jyangballin/swesmith.x86_64.oauthlib_1776_oauthlib.1fd52536",
+  "fail_to_pass": [
+   "tests/oauth1/rfc5849/endpoints/test_access_token.py::AccessTokenEndpointTest::test_check_request_token",
+   "tests/oauth1/rfc5849/endpoints/test_access_token.py::AccessTokenEndpointTest::test_valid_request",
+   "tests/oauth1/rfc5849/endpoints/test_access_token.py::AccessTokenEndpointTest::test_validate_signature",
+   "tests/oauth1/rfc5849/endpoints/test_request_token.py::RequestTokenEndpointTest::test_uri_provided_realm",
+   "tests/oauth1/rfc5849/endpoints/test_request_token.py::RequestTokenEndpointTest::test_valid_request",
+   "tests/oauth1/rfc5849/endpoints/test_request_token.py::RequestTokenEndpointTest::test_validate_client_key",
+   "tests/oauth1/rfc5849/endpoints/test_request_token.py::RequestTokenEndpointTest::test_validate_realms",
+   "tests/oauth1/rfc5849/endpoints/test_request_token.py::RequestTokenEndpointTest::test_validate_redirect_uri",
+   "tests/oauth1/rfc5849/endpoints/test_request_token.py::RequestTokenEndpointTest::test_validate_signature"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

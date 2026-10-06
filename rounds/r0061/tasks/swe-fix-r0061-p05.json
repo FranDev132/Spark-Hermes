@@ -1,0 +1,31 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0061-p05",
+ "round_id": "r0061",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nResourceEndpoint validate_protected_resource_request returns incorrect results\n\n#### Description\n\nThe `validate_protected_resource_request` method in `ResourceEndpoint` is not working correctly. When validating OAuth1 protected resource requests, the method appears to be using undefined variables and returning unexpected results.\n\n#### Steps/Code to Reproduce\n\n```python\nfrom oauthlib.oauth1.rfc5849.endpoints.resource import ResourceEndpoint\nfrom oauthlib.oauth1.rfc5849 import RequestValidator\n\n# Create a basic validator\nclass TestValidator(RequestValidator):\n    def validate_client_key(self, client_key, request):\n        return True\n    \n    def validate_access_token(self, client_key, resource_owner_key, request):\n        return True\n    \n    def check_access_token(self, resource_owner_key):\n        return True\n    \n    def validate_timestamp_and_nonce(self, client_key, timestamp, nonce, request, access_token=None):\n        return True\n    \n    def validate_realms(self, client_key, resource_owner_key, request, uri=None, realms=None):\n        return True\n\nvalidator = TestValidator()\nendpoint = ResourceEndpoint(validator)\n\n# Try to validate a basic request\nuri = 'http://example.com/resource'\nheaders = {\n    'Authorization': 'OAuth oauth_consumer_key=\"client_key\", oauth_token=\"resource_owner_key\", oauth_signature_method=\"HMAC-SHA1\", oauth_timestamp=\"1234567890\", oauth_nonce=\"abc123\", oauth_version=\"1.0\", oauth_signature=\"signature\"'\n}\n\nvalid, request = endpoint.validate_protected_resource_request(uri, headers=headers)\nprint(f\"Valid: {valid}\")\n```\n\nWhen running this code, the validation fails unexpectedly even with a properly configured validator that should return `True` for all validation checks.\n\nThe issue seems to be related to the internal flow of the validation method where variables are being referenced before they are defined, causing the validation to fail in unexpected ways.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "oauthlib__oauthlib.1fd52536.func_pm_ctrl_shuffle__nqkjrwur",
+  "environment": "jyangballin/swesmith.x86_64.oauthlib_1776_oauthlib.1fd52536",
+  "fail_to_pass": [
+   "tests/oauth1/rfc5849/endpoints/test_resource.py::ResourceEndpointTest::test_check_access_token",
+   "tests/oauth1/rfc5849/endpoints/test_resource.py::ResourceEndpointTest::test_missing_parameters",
+   "tests/oauth1/rfc5849/endpoints/test_resource.py::ResourceEndpointTest::test_valid_request",
+   "tests/oauth1/rfc5849/endpoints/test_resource.py::ResourceEndpointTest::test_validate_access_token",
+   "tests/oauth1/rfc5849/endpoints/test_resource.py::ResourceEndpointTest::test_validate_client_key",
+   "tests/oauth1/rfc5849/endpoints/test_resource.py::ResourceEndpointTest::test_validate_realms",
+   "tests/oauth1/rfc5849/endpoints/test_resource.py::ResourceEndpointTest::test_validate_signature"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

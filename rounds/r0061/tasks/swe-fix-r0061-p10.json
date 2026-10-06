@@ -1,0 +1,25 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0061-p10",
+ "round_id": "r0061",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nJoinedStr inference returns Const even with MISSING_VALUE\n\n#### Description\n\nWhen inferring f-string expressions that contain uninferable values, the JoinedStr node incorrectly returns a Const node containing MISSING_VALUE instead of yielding Uninferable.\n\n#### Steps/Code to Reproduce\n\n```python\nimport astroid\n\ncode = '''\nname = \"John\"\nresult = f\"Hello {name}!\"\n'''\n\nast = astroid.parse(code)\nnode = ast['result']\ninferred = list(node.inferred())\nprint(f\"Number of inferred values: {len(inferred)}\")\nprint(f\"Inferred type: {type(inferred[0])}\")\nprint(f\"Inferred value: {inferred[0].value}\")\n```\n\nExpected behavior: When f-strings contain uninferable parts, the inference should yield `Uninferable` rather than a `Const` node with `MISSING_VALUE`.\n\nThe issue becomes more apparent with f-strings that have format specifiers or other complex expressions that might not be fully inferable at static analysis time.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "pylint-dev__astroid.b114f6b5.func_pm_ctrl_invert_if__uywqn1fp",
+  "environment": "jyangballin/swesmith.x86_64.pylint-dev_1776_astroid.b114f6b5",
+  "fail_to_pass": [
+   "tests/test_inference.py::InferenceTest::test_fstring_inference"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}
