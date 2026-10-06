@@ -6018,6 +6018,169 @@
     "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj": "gold-tree-tech"
    },
    "pr": 496
+  },
+  {
+   "round_id": "r0058",
+   "closed_at": 1791260164.1615403,
+   "window": {
+    "opens_at": 1791243529.159663,
+    "closes_at": 1791250729.159663,
+    "seconds": 7200
+   },
+   "episodes": 60,
+   "king": "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ",
+   "weights": {
+    "5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh": 0.0,
+    "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ": 0.0,
+    "5D4txntYBCZ7dAXuFDHEubK1f84LYzPjBNCtVELenfUPCQzK": 0.0,
+    "5DPhKi77DLciQzNDr6iCZ2cD41oHcV75vLdf82d3crVnERN6": 0.0,
+    "5DSD14t7dACJcd9f8rPdrkMVngRqLUnM3EnM3dHfHLZTHJGf": 0.0,
+    "5Di3Dd8PKn7uQbBc4WrzxkUqqvSL8QS3KVgCPSt3kzPE5KFb": 0.0,
+    "5E4iMWRACSJrnbnCLNVfWXjHc5VRkgzRfaAzBiB1VXfkqPUg": 0.0,
+    "5EwAJCVFUV1UwBqQpT7JqcEGSGBsM3gwxiJNehTeVKqKqkqc": 0.0,
+    "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj": 0.0
+   },
+   "scores": {
+    "5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh": {
+     "score": 0.0,
+     "weight": 0.0,
+     "mean_d": null,
+     "delta_c": 0.0,
+     "n": 6
+    },
+    "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ": {
+     "score": 0.0,
+     "weight": 0.0,
+     "mean_d": null,
+     "delta_c": 0.0,
+     "n": 6
+    },
+    "5D4txntYBCZ7dAXuFDHEubK1f84LYzPjBNCtVELenfUPCQzK": {
+     "score": 0.0,
+     "weight": 0.0,
+     "mean_d": null,
+     "delta_c": 0.0,
+     "n": 6
+    },
+    "5DPhKi77DLciQzNDr6iCZ2cD41oHcV75vLdf82d3crVnERN6": {
+     "score": 0.0,
+     "weight": 0.0,
+     "mean_d": null,
+     "delta_c": 0.0,
+     "n": 6
+    },
+    "5DSD14t7dACJcd9f8rPdrkMVngRqLUnM3EnM3dHfHLZTHJGf": {
+     "score": 0.0,
+     "weight": 0.0,
+     "mean_d": null,
+     "delta_c": 0.0,
+     "n": 6
+    },
+    "5Di3Dd8PKn7uQbBc4WrzxkUqqvSL8QS3KVgCPSt3kzPE5KFb": {
+     "score": 0.0,
+     "weight": 0.0,
+     "mean_d": null,
+     "delta_c": 0.0,
+     "n": 6
+    },
+    "5E4iMWRACSJrnbnCLNVfWXjHc5VRkgzRfaAzBiB1VXfkqPUg": {
+     "score": 0.0,
+     "weight": 0.0,
+     "mean_d": null,
+     "delta_c": 0.0,
+     "n": 6
+    },
+    "5EwAJCVFUV1UwBqQpT7JqcEGSGBsM3gwxiJNehTeVKqKqkqc": {
+     "score": 0.0,
+     "weight": 0.0,
+     "mean_d": null,
+     "delta_c": 0.0,
+     "n": 6
+    },
+    "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj": {
+     "score": 0.0,
+     "weight": 0.0,
+     "mean_d": null,
+     "delta_c": 0.0,
+     "n": 6
+    }
+   },
+   "crown": {
+    "5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh": {
+     "n": 6,
+     "verified": 1,
+     "dq": 0,
+     "credit": 0.483333,
+     "delta": 0.127778,
+     "rank": 6
+    },
+    "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ": {
+     "n": 6,
+     "verified": 2,
+     "dq": 0,
+     "credit": 0.55,
+     "delta": 0.194444,
+     "rank": 1
+    },
+    "5DSD14t7dACJcd9f8rPdrkMVngRqLUnM3EnM3dHfHLZTHJGf": {
+     "n": 6,
+     "verified": 2,
+     "dq": 0,
+     "credit": 0.522222,
+     "delta": 0.166667,
+     "rank": 4
+    },
+    "5Di3Dd8PKn7uQbBc4WrzxkUqqvSL8QS3KVgCPSt3kzPE5KFb": {
+     "n": 6,
+     "verified": 2,
+     "dq": 0,
+     "credit": 0.522222,
+     "delta": 0.166667,
+     "rank": 3
+    },
+    "5E4iMWRACSJrnbnCLNVfWXjHc5VRkgzRfaAzBiB1VXfkqPUg": {
+     "n": 6,
+     "verified": 2,
+     "dq": 0,
+     "credit": 0.516667,
+     "delta": 0.161111,
+     "rank": 5
+    },
+    "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj": {
+     "n": 6,
+     "verified": 2,
+     "dq": 0,
+     "credit": 0.522222,
+     "delta": 0.166667,
+     "rank": 2
+    }
+   },
+   "commitments_ok": true,
+   "sft_rows": 2,
+   "dpo_pairs": 1,
+   "hf": "https://huggingface.co/datasets/gittensor-model-hub/spark-hermes-rounds/tree/main/rounds/r0058",
+   "revealed": [
+    "5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh",
+    "5D4txntYBCZ7dAXuFDHEubK1f84LYzPjBNCtVELenfUPCQzK",
+    "5DPhKi77DLciQzNDr6iCZ2cD41oHcV75vLdf82d3crVnERN6",
+    "5DSD14t7dACJcd9f8rPdrkMVngRqLUnM3EnM3dHfHLZTHJGf",
+    "5Di3Dd8PKn7uQbBc4WrzxkUqqvSL8QS3KVgCPSt3kzPE5KFb",
+    "5E4iMWRACSJrnbnCLNVfWXjHc5VRkgzRfaAzBiB1VXfkqPUg",
+    "5EwAJCVFUV1UwBqQpT7JqcEGSGBsM3gwxiJNehTeVKqKqkqc",
+    "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj"
+   ],
+   "github": {
+    "5Di3Dd8PKn7uQbBc4WrzxkUqqvSL8QS3KVgCPSt3kzPE5KFb": "harrythomasben",
+    "5DSD14t7dACJcd9f8rPdrkMVngRqLUnM3EnM3dHfHLZTHJGf": "FranDev132",
+    "5DPhKi77DLciQzNDr6iCZ2cD41oHcV75vLdf82d3crVnERN6": "kaivaryn",
+    "5EwAJCVFUV1UwBqQpT7JqcEGSGBsM3gwxiJNehTeVKqKqkqc": "K-3-LT",
+    "5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh": "kaivexa",
+    "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj": "gold-tree-tech",
+    "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ": "dato-bitar",
+    "5E4iMWRACSJrnbnCLNVfWXjHc5VRkgzRfaAzBiB1VXfkqPUg": "Tet-9",
+    "5D4txntYBCZ7dAXuFDHEubK1f84LYzPjBNCtVELenfUPCQzK": "widecloud"
+   },
+   "pr": 514
   }
  ]
 }

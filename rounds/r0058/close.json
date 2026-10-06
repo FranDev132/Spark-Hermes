@@ -1,0 +1,192 @@
+{
+ "schema": "sh-round-close-v3",
+ "scoring": "sh-scoring-v3 (credit)",
+ "round_id": "r0058",
+ "era": "e1",
+ "tasks": [
+  "swe-fix-r0058-02",
+  "swe-fix-r0058-08",
+  "swe-fix-r0058-13",
+  "swe-fix-r0058-16",
+  "swe-fix-r0058-20",
+  "swe-fix-r0058-22"
+ ],
+ "episodes": 60,
+ "family_stats": {
+  "swe_fix": {
+   "schema": "sh-family-stats-v2",
+   "family": "swe_fix",
+   "era": "e1",
+   "window": [
+    "r0058"
+   ],
+   "null": {
+    "n": 6,
+    "successes": 1,
+    "p": 0.16666666666666666,
+    "mean_credit": 0.3556,
+    "wilson": [
+     0.0301,
+     0.5635
+    ],
+    "efficiency": {
+     "api_calls": {
+      "median": 11.0,
+      "p25": 11.0,
+      "n": 1
+     },
+     "tool_calls": {
+      "median": 12.0,
+      "p25": 12.0,
+      "n": 1
+     }
+    }
+   },
+   "canon": {
+    "n": 0,
+    "successes": 0,
+    "p": null,
+    "mean_credit": null,
+    "wilson": null,
+    "efficiency": {},
+    "delta_c": null,
+    "delta_e": {},
+    "delta_e_paired_instances": 0
+   },
+   "label": "unknown",
+   "partial_rate": 0.0,
+   "in_rotation": true,
+   "retirement": null
+  }
+ },
+ "scores": {
+  "5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh": {
+   "hotkey": "5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh",
+   "n": 6,
+   "score": 0.0,
+   "delta_c": 0.0,
+   "delta_e": {},
+   "gate": false,
+   "se": null,
+   "overfit_rate": 0.0,
+   "dq": 0,
+   "reason": "6 window episodes < 8"
+  },
+  "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ": {
+   "hotkey": "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ",
+   "n": 6,
+   "score": 0.0,
+   "delta_c": 0.0,
+   "delta_e": {},
+   "gate": false,
+   "se": null,
+   "overfit_rate": 0.0,
+   "dq": 0,
+   "reason": "6 window episodes < 8"
+  },
+  "5D4txntYBCZ7dAXuFDHEubK1f84LYzPjBNCtVELenfUPCQzK": {
+   "hotkey": "5D4txntYBCZ7dAXuFDHEubK1f84LYzPjBNCtVELenfUPCQzK",
+   "n": 6,
+   "score": 0.0,
+   "delta_c": 0.0,
+   "delta_e": {},
+   "gate": false,
+   "se": null,
+   "overfit_rate": 0.0,
+   "dq": 0,
+   "reason": "6 window episodes < 8"
+  },
+  "5DPhKi77DLciQzNDr6iCZ2cD41oHcV75vLdf82d3crVnERN6": {
+   "hotkey": "5DPhKi77DLciQzNDr6iCZ2cD41oHcV75vLdf82d3crVnERN6",
+   "n": 6,
+   "score": 0.0,
+   "delta_c": 0.0,
+   "delta_e": {},
+   "gate": false,
+   "se": null,
+   "overfit_rate": 0.0,
+   "dq": 0,
+   "reason": "6 window episodes < 8"
+  },
+  "5DSD14t7dACJcd9f8rPdrkMVngRqLUnM3EnM3dHfHLZTHJGf": {
+   "hotkey": "5DSD14t7dACJcd9f8rPdrkMVngRqLUnM3EnM3dHfHLZTHJGf",
+   "n": 6,
+   "score": 0.0,
+   "delta_c": 0.0,
+   "delta_e": {},
+   "gate": false,
+   "se": null,
+   "overfit_rate": 0.0,
+   "dq": 0,
+   "reason": "6 window episodes < 8"
+  },
+  "5Di3Dd8PKn7uQbBc4WrzxkUqqvSL8QS3KVgCPSt3kzPE5KFb": {
+   "hotkey": "5Di3Dd8PKn7uQbBc4WrzxkUqqvSL8QS3KVgCPSt3kzPE5KFb",
+   "n": 6,
+   "score": 0.0,
+   "delta_c": 0.0,
+   "delta_e": {},
+   "gate": false,
+   "se": null,
+   "overfit_rate": 0.0,
+   "dq": 0,
+   "reason": "6 window episodes < 8"
+  },
+  "5E4iMWRACSJrnbnCLNVfWXjHc5VRkgzRfaAzBiB1VXfkqPUg": {
+   "hotkey": "5E4iMWRACSJrnbnCLNVfWXjHc5VRkgzRfaAzBiB1VXfkqPUg",
+   "n": 6,
+   "score": 0.0,
+   "delta_c": 0.0,
+   "delta_e": {},
+   "gate": false,
+   "se": null,
+   "overfit_rate": 0.0,
+   "dq": 0,
+   "reason": "6 window episodes < 8"
+  },
+  "5EwAJCVFUV1UwBqQpT7JqcEGSGBsM3gwxiJNehTeVKqKqkqc": {
+   "hotkey": "5EwAJCVFUV1UwBqQpT7JqcEGSGBsM3gwxiJNehTeVKqKqkqc",
+   "n": 6,
+   "score": 0.0,
+   "delta_c": 0.0,
+   "delta_e": {},
+   "gate": false,
+   "se": null,
+   "overfit_rate": 0.0,
+   "dq": 0,
+   "reason": "6 window episodes < 8"
+  },
+  "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj": {
+   "hotkey": "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj",
+   "n": 6,
+   "score": 0.0,
+   "delta_c": 0.0,
+   "delta_e": {},
+   "gate": false,
+   "se": null,
+   "overfit_rate": 0.0,
+   "dq": 0,
+   "reason": "6 window episodes < 8"
+  }
+ },
+ "weights": {
+  "5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh": 0.0,
+  "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ": 0.0,
+  "5D4txntYBCZ7dAXuFDHEubK1f84LYzPjBNCtVELenfUPCQzK": 0.0,
+  "5DPhKi77DLciQzNDr6iCZ2cD41oHcV75vLdf82d3crVnERN6": 0.0,
+  "5DSD14t7dACJcd9f8rPdrkMVngRqLUnM3EnM3dHfHLZTHJGf": 0.0,
+  "5Di3Dd8PKn7uQbBc4WrzxkUqqvSL8QS3KVgCPSt3kzPE5KFb": 0.0,
+  "5E4iMWRACSJrnbnCLNVfWXjHc5VRkgzRfaAzBiB1VXfkqPUg": 0.0,
+  "5EwAJCVFUV1UwBqQpT7JqcEGSGBsM3gwxiJNehTeVKqKqkqc": 0.0,
+  "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj": 0.0
+ },
+ "commitments_verified": {
+  "swe-fix-r0058-02": true,
+  "swe-fix-r0058-08": true,
+  "swe-fix-r0058-13": true,
+  "swe-fix-r0058-16": true,
+  "swe-fix-r0058-20": true,
+  "swe-fix-r0058-22": true
+ },
+ "commitments_ok": true
+}
