@@ -1,0 +1,28 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0060-p19",
+ "round_id": "r0060",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nSubquery merging fails when handling complex expressions in SQL queries\n\nWhen using the subquery merging optimization, it fails to correctly handle certain SQL queries with complex expressions. The issue occurs when replacing columns from the outer query with expressions from the inner query.\n\nHere's a simple example to reproduce the issue:\n\n```sql\nSELECT t.calculated_value + 1 \nFROM (\n  SELECT a * b AS calculated_value \n  FROM my_table\n) AS t\n```\n\nThe optimizer fails to correctly merge this subquery, likely due to issues with how it's handling the expression replacement and parentheses wrapping.\n\nI've also noticed this issue appears in more complex TPC-H and TPC-DS benchmark queries, where the optimizer is unable to properly merge certain subqueries that contain arithmetic operations or other complex expressions.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "tobymao__sqlglot.036601ba.lm_rewrite__aaducvrr",
+  "environment": "jyangballin/swesmith.x86_64.tobymao_1776_sqlglot.036601ba",
+  "fail_to_pass": [
+   "tests/test_optimizer.py::TestOptimizer::test_merge_subqueries",
+   "tests/test_optimizer.py::TestOptimizer::test_optimize",
+   "tests/test_optimizer.py::TestOptimizer::test_tpcds",
+   "tests/test_optimizer.py::TestOptimizer::test_tpch"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

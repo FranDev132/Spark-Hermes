@@ -1,0 +1,25 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0060-p13",
+ "round_id": "r0060",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nSection right_margin property returns incorrect value when pgMar is None\n\n#### Description\n\nWhen accessing the `right_margin` property on a section where the `pgMar` element is `None`, the property returns an incorrect value instead of `None`.\n\n#### Steps/Code to Reproduce\n\n```python\nfrom docx import Document\n\n# Create a new document\ndoc = Document()\n\n# Access the section's right margin\nsection = doc.sections[0]\nprint(f\"Right margin: {section.right_margin}\")\n# Expected: None (when pgMar element is not present)\n# Actual: Returns pgMar.right before checking if pgMar exists\n```\n\nThe issue occurs when the section's page margin element (`pgMar`) is not present in the document, but the code attempts to access `pgMar.right` before verifying that `pgMar` is not `None`.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "python-openxml__python-docx.0cf6d71f.func_pm_ctrl_shuffle__14punspa",
+  "environment": "jyangballin/swesmith.x86_64.python-openxml_1776_python-docx.0cf6d71f",
+  "fail_to_pass": [
+   "tests/test_section.py::DescribeSection::it_knows_its_page_margins[w:sectPr/w:pgMar{w:right=240}-right_margin-152400]"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

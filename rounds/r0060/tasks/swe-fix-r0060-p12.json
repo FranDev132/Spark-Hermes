@@ -1,0 +1,29 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0060-p12",
+ "round_id": "r0060",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nModule special attributes not accessible after recent changes\n\n#### Description\n\nModule special attributes like `__name__`, `__doc__`, `__file__`, etc. are no longer accessible when trying to get them from a module node. This affects code that relies on accessing these standard module attributes.\n\n#### Steps/Code to Reproduce\n\n```python\nimport astroid\n\n# Parse a simple module\nmodule = astroid.parse(\"# test module\", \"test_module\")\n\n# Try to access special attributes\ntry:\n    name_attr = module.getattr('__name__')\n    print(f\"__name__ found: {name_attr}\")\nexcept Exception as e:\n    print(f\"Error accessing __name__: {e}\")\n\ntry:\n    doc_attr = module.getattr('__doc__')\n    print(f\"__doc__ found: {doc_attr}\")\nexcept Exception as e:\n    print(f\"Error accessing __doc__: {e}\")\n```\n\nExpected behavior: Should return the special attributes without raising errors.\nActual behavior: Raises `AttributeInferenceError` for module special attributes.\n\nThis also affects inference of module attributes in more complex scenarios where code tries to access `xml.__name__`, `xml.__doc__`, etc. on imported modules.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "pylint-dev__astroid.b114f6b5.func_pm_remove_assign__xxt20jk4",
+  "environment": "jyangballin/swesmith.x86_64.pylint-dev_1776_astroid.b114f6b5",
+  "fail_to_pass": [
+   "tests/test_lookup.py::LookupTest::test_function_module_special",
+   "tests/test_object_model.py::ModuleModelTest::test_module_model",
+   "tests/test_scoped_nodes.py::FunctionNodeTest::test_special_attributes",
+   "tests/test_scoped_nodes.py::ModuleNodeTest::test_module_getattr",
+   "tests/test_scoped_nodes.py::ModuleNodeTest::test_special_attributes"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

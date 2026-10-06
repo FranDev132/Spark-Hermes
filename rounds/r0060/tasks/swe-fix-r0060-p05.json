@@ -1,0 +1,26 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0060-p05",
+ "round_id": "r0060",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nModule `__path__` attribute returns wrong container type and incorrect path values\n\n#### Description\n\nWhen accessing the `__path__` attribute of a module, astroid returns a `Tuple` instead of a `List`, and for packages with `__init__.py` files, it returns the basename instead of the directory path.\n\n#### Steps/Code to Reproduce\n\n```python\nimport astroid\nfrom astroid import builder\n\n# Test with xml module (a package)\nast_nodes = builder.extract_node('''\nimport xml\nxml.__path__ #@\n''')\n\npath = next(ast_nodes[0].infer())\nprint(f\"Type: {type(path)}\")  # Should be List, but returns Tuple\nprint(f\"Path value: {path.elts[0].value}\")  # Shows incorrect path for __init__.py packages\n```\n\nAlso affects regular module path handling:\n\n```python\nimport astroid\n\n# Load a package module\npack = astroid.MANAGER.ast_from_module_name('xml')\npath_attr = pack.getattr('__path__')[0]\nprint(f\"Container type: {type(path_attr)}\")  # Returns Tuple instead of List\n```\n\nThe `__path__` attribute should always be a `List` according to Python's module system, and for packages with `__init__.py`, it should contain the directory path, not the basename.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "pylint-dev__astroid.b114f6b5.func_basic__c5yr8j87",
+  "environment": "jyangballin/swesmith.x86_64.pylint-dev_1776_astroid.b114f6b5",
+  "fail_to_pass": [
+   "tests/test_object_model.py::ModuleModelTest::test_module_model",
+   "tests/test_scoped_nodes.py::ModuleNodeTest::test_special_attributes"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}
