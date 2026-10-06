@@ -1,0 +1,25 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0062-p02",
+ "round_id": "r0062",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nparams_from_uri doesn't properly handle scope parameter\n\nDescription\n\nThe `params_from_uri` function doesn't properly handle the scope parameter when extracting query parameters from a URI.\n\nConsider the following example:\n\n```python\nfrom oauthlib.oauth2.rfc6749.utils import params_from_uri\n\nuri = 'http://example.com/?foo=bar&g&scope=a+d'\nparams = params_from_uri(uri)\nprint(params)\n```\n\nExpected output:\n```\n{'foo': 'bar', 'g': '', 'scope': ['a', 'd']}\n```\n\nActual output:\n```\n{'foo': 'bar', 'g': '', 'scope': 'a d'}\n```\n\nThe function is not converting the scope parameter to a list using the `scope_to_list` function. This causes issues when working with OAuth2 flows where the scope parameter needs to be properly processed as a list of individual scope values.\n\nThe problem is in the implementation of `params_from_uri` which extracts the query parameters but doesn't apply the special handling for the scope parameter that was present in previous versions.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "oauthlib__oauthlib.1fd52536.lm_rewrite__i1kvgny6",
+  "environment": "jyangballin/swesmith.x86_64.oauthlib_1776_oauthlib.1fd52536",
+  "fail_to_pass": [
+   "tests/oauth2/rfc6749/test_utils.py::UtilsTests::test_params_from_uri"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

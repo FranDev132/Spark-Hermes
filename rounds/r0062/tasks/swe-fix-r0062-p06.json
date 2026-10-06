@@ -1,0 +1,28 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0062-p06",
+ "round_id": "r0062",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\n# Issues with Data class in diagnostics module\n\nThere are multiple problems with the Data class in the diagnostics module that cause tests to fail.\n\nWhen trying to work with diagnostic data objects, I'm encountering several issues:\n\n1. The length calculation is incorrect - it's adding 1 to the length value\n2. The byte order is being inverted (little_endian becomes big_endian and vice versa)\n3. The minimum and maximum values are swapped\n4. The offset value is being incremented by 1\n5. The choices dictionary values are being incremented by 1\n6. The representation string has incorrect ordering of parameters\n\nHere's a simple example to reproduce the issue:\n\n```python\nfrom cantools.database.diagnostics.data import Data\nfrom cantools.database.diagnostics.did import Did\n\n# Create a simple data object\ndata = Data(name='test', start=0, length=8, byte_order='little_endian')\n\n# The length is incorrectly increased by 1\nprint(f\"Length should be 8 but is {data.length}\")\n\n# The byte order is inverted\nprint(f\"Byte order should be 'little_endian' but is '{data.byte_order}'\")\n\n# Create a DID with the data\ndid = Did(identifier=0x01, name='test_did', datas=[data])\n\n# The identifier is incremented by 1\nprint(f\"Identifier should be 1 but is {did.identifier}\")\n```\n\nThis issue affects all diagnostic data processing and causes tests to fail.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "cantools__cantools.0c6a7871.combine_module__smbeygrm",
+  "environment": "jyangballin/swesmith.x86_64.cantools_1776_cantools.0c6a7871",
+  "fail_to_pass": [
+   "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_be_example_cdd",
+   "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_be_example_cdd_repr",
+   "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_le_example_cdd",
+   "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_le_example_cdd_repr"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

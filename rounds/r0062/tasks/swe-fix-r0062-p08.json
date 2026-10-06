@@ -1,0 +1,31 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0062-p08",
+ "round_id": "r0062",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nOAuth1 resource endpoint validation broken after recent changes\n\n#### Description\n\nThe OAuth1 resource endpoint validation is failing for valid requests. When trying to validate protected resource requests, the validation incorrectly returns False even when all parameters are valid.\n\n#### Steps/Code to Reproduce\n\n```python\nfrom oauthlib.oauth1 import Client\nfrom oauthlib.oauth1.rfc5849.endpoints import ResourceEndpoint\nfrom oauthlib.oauth1.rfc5849 import RequestValidator\n\n# Set up a basic validator and endpoint\nvalidator = RequestValidator()\nendpoint = ResourceEndpoint(validator)\n\n# Create a client and sign a request\nclient = Client('foo', resource_owner_key='token', resource_owner_secret='secret')\nuri = 'https://example.com/protected'\n_, headers, _ = client.sign(uri)\n\n# Try to validate the request - this should return True but returns False\nvalid, request = endpoint.validate_protected_resource_request(uri, headers=headers)\nprint(f\"Valid: {valid}\")  # Expected: True, Actual: False\n```\n\nThe validation fails even though the signature and all other parameters are correct. Looking at the validator logs shows that signature validation is returning the opposite of what's expected.\n\n#### Additional Context\n\nThis seems to affect the core OAuth1 flow for accessing protected resources. The issue appears to be related to how the validation logic processes the signature verification results.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "oauthlib__oauthlib.1fd52536.combine_module__2b1wzdnb",
+  "environment": "jyangballin/swesmith.x86_64.oauthlib_1776_oauthlib.1fd52536",
+  "fail_to_pass": [
+   "tests/oauth1/rfc5849/endpoints/test_base.py::BaseEndpointTest::test_duplicate_params",
+   "tests/oauth1/rfc5849/endpoints/test_base.py::BaseEndpointTest::test_enforce_ssl",
+   "tests/oauth1/rfc5849/endpoints/test_base.py::BaseEndpointTest::test_ssl_enforcement",
+   "tests/oauth1/rfc5849/endpoints/test_resource.py::ResourceEndpointTest::test_validate_access_token",
+   "tests/oauth1/rfc5849/endpoints/test_resource.py::ResourceEndpointTest::test_validate_client_key",
+   "tests/oauth1/rfc5849/endpoints/test_resource.py::ResourceEndpointTest::test_validate_realms",
+   "tests/oauth1/rfc5849/endpoints/test_resource.py::ResourceEndpointTest::test_validate_signature"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

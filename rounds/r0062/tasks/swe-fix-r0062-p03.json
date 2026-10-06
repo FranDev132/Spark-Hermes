@@ -1,0 +1,26 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0062-p03",
+ "round_id": "r0062",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\n# SQL statements with UNION, EXCEPT not properly reindented\n\n## Description\n\nI've noticed that when using the reindent feature, SQL statements with UNION or EXCEPT keywords are not being properly formatted. The reindent functionality doesn't seem to recognize these keywords as statement separators that should be placed on their own line.\n\n## To Reproduce\n\nHere's a simple example with UNION:\n\n```python\nimport sqlparse\n\nsql = 'select * from foo union select * from bar;'\nformatted = sqlparse.format(sql, reindent=True)\nprint(formatted)\n```\n\n**Expected output:**\n```\nselect *\nfrom foo\nunion\nselect *\nfrom bar;\n```\n\n**Actual output:**\nThe UNION keyword is not placed on its own line.\n\nSimilarly, with EXCEPT:\n\n```python\nimport sqlparse\n\nsql = 'SELECT 1 FROM foo WHERE 2 = 3 EXCEPT SELECT 2 FROM bar WHERE 1 = 2'\nformatted = sqlparse.format(sql, reindent=True)\nprint(formatted)\n```\n\n**Expected output:**\n```\nSELECT 1\nFROM foo\nWHERE 2 = 3\nEXCEPT\nSELECT 2\nFROM bar\nWHERE 1 = 2\n```\n\n**Actual output:**\nThe EXCEPT keyword is not properly separated onto its own line.\n\nThis seems to be related to how statement separators are identified in the reindent filter. Keywords like UNION and EXCEPT should be treated similarly to other statement separators.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "andialbrecht__sqlparse.e57923b3.lm_rewrite__5shjqo7y",
+  "environment": "jyangballin/swesmith.x86_64.andialbrecht_1776_sqlparse.e57923b3",
+  "fail_to_pass": [
+   "tests/test_format.py::TestFormatReindent::test_keywords",
+   "tests/test_regressions.py::test_except_formatting"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

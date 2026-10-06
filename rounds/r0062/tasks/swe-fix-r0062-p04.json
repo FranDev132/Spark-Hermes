@@ -1,0 +1,31 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0062-p04",
+ "round_id": "r0062",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nMERGE statement parsing broken - incorrect token order\n\n#### Description\n\nThe MERGE statement parser is incorrectly ordering tokens, causing parsing failures. The parser expects `USING` before `INTO` but the correct SQL syntax requires `INTO` before `USING`.\n\n#### Steps/Code to Reproduce\n\n```python\nimport sqlglot\n\n# This should parse correctly but fails\nsql = \"\"\"\nMERGE INTO dataset.Inventory T\nUSING dataset.NewArrivals S ON FALSE\nWHEN NOT MATCHED BY TARGET AND product LIKE '%a%'\nTHEN DELETE\n\"\"\"\n\ntry:\n    parsed = sqlglot.parse_one(sql)\n    print(\"Parsed successfully:\", parsed)\nexcept Exception as e:\n    print(\"Parse error:\", e)\n```\n\nThe parser currently expects tokens in the wrong order and will fail to parse valid MERGE statements that follow the standard SQL syntax of `MERGE INTO target USING source ON condition`.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "tobymao__sqlglot.036601ba.func_pm_ctrl_shuffle__gdz94061",
+  "environment": "jyangballin/swesmith.x86_64.tobymao_1776_sqlglot.036601ba",
+  "fail_to_pass": [
+   "tests/dialects/test_bigquery.py::TestBigQuery::test_bigquery",
+   "tests/dialects/test_bigquery.py::TestBigQuery::test_merge",
+   "tests/dialects/test_dialect.py::TestDialect::test_merge",
+   "tests/dialects/test_postgres.py::TestPostgres::test_postgres",
+   "tests/dialects/test_snowflake.py::TestSnowflake::test_snowflake",
+   "tests/dialects/test_tsql.py::TestTSQL::test_ddl",
+   "tests/dialects/test_tsql.py::TestTSQL::test_tsql"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

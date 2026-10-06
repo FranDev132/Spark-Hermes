@@ -1,0 +1,25 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0062-p01",
+ "round_id": "r0062",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\n# prepare_token_revocation_request returns incorrect format\n\n## Description\nWhen using `prepare_token_revocation_request` to revoke a token, the function returns an incorrect format that breaks client functionality.\n\n## Steps to Reproduce\n\n```python\nfrom oauthlib.oauth2 import Client\nfrom oauthlib.oauth2.rfc6749.parameters import prepare_token_revocation_request\n\n# Example 1: Using the function directly\nurl = \"https://example.com/revoke\"\ntoken = \"abc123\"\nresult = prepare_token_revocation_request(url, token)\n\nprint(result)\n# Current output: 'token=abc123&token_type_hint=access_token'\n# Expected output: (url, headers, body) tuple\n\n# Example 2: Using through a client\nclient = Client('client_id', 'client_secret')\nrevocation_request = client.prepare_token_revocation_request(\n    \"https://example.com/revoke\", \n    \"abc123\"\n)\n# This will fail because the return format is incorrect\n```\n\n## Expected Behavior\nThe function should return a tuple of `(url, headers, body)` as documented in the function's docstring and as expected by client implementations.\n\nCurrently, it only returns the query string parameters without the URL, headers, or proper formatting.\n\n## Additional Information\nThe function should handle the callback parameter correctly and return the appropriate format based on whether a callback is provided or not. The current implementation ignores the callback parameter and doesn't include the required headers in the response.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "oauthlib__oauthlib.1fd52536.lm_rewrite__knw71m02",
+  "environment": "jyangballin/swesmith.x86_64.oauthlib_1776_oauthlib.1fd52536",
+  "fail_to_pass": [
+   "tests/oauth2/rfc6749/clients/test_base.py::ClientTest::test_revocation_request"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}
