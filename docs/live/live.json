@@ -1,8 +1,8 @@
 {
  "schema": "sh-live-v3",
- "updated": 1791283451.749355,
+ "updated": 1791283642.6176028,
  "round_id": "r0060",
- "stage": "window",
+ "stage": "evaluate",
  "stages": [
   "open",
   "window",
@@ -24,6 +24,10 @@
   {
    "stage": "open",
    "t": 1791276416.5189195
+  },
+  {
+   "stage": "window",
+   "t": 1791283617.9333456
   }
  ],
  "window": {
@@ -196,9 +200,113 @@
  },
  "last_round": "r0059",
  "tasks": 6,
- "active": {},
+ "active": {
+  "5DSD14t7dACJcd9f8rPdrkMVngRqLUnM3EnM3dHfHLZTHJGf": {
+   "pr": 535,
+   "head": "4ef26dcc4d4f3d0e6237c1e21c2bc4d239d457d1",
+   "bundle_sha256": "c1d7bfa50b71b9ce617da422091369df6b499843c29c0c221fa4913b1b41e498",
+   "incumbent": true,
+   "was_incumbent": false,
+   "defense": true,
+   "github": "FranDev132"
+  },
+  "5Di3Dd8PKn7uQbBc4WrzxkUqqvSL8QS3KVgCPSt3kzPE5KFb": {
+   "pr": 537,
+   "head": "8c77b61562ff3a0b885a76a423660a754c04b604",
+   "bundle_sha256": "78666392038f46524e84609c4495857dd8f9bc08b9a729f537263ddb88e7f750",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "harrythomasben"
+  },
+  "5Et8zmN8dq4eFvy7grf2fqtf5PE2mgngTdr1WA6ADJJUUCrE": {
+   "pr": 538,
+   "head": "b6ab1f58db15451a938f6e467034ef464a8e7bc7",
+   "bundle_sha256": "d57e929759132893a9d3deddb9246bb1ec65d1f4320dab5c1e3af00b1e508bdc",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "ismayilovibadet802-svg"
+  },
+  "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ": {
+   "pr": 541,
+   "head": "1f34bfa161282269d971004fd53c4f58d3d97966",
+   "bundle_sha256": "bf53c66d9d8941062669d5279a5620dd499561db89b1c88befe2d1b48bc3b25d",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "dato-bitar"
+  },
+  "5D4txntYBCZ7dAXuFDHEubK1f84LYzPjBNCtVELenfUPCQzK": {
+   "pr": 542,
+   "head": "50efb10c4cce15e8c8a13b1d72ac5c4562e2987e",
+   "bundle_sha256": "19287e22be7c4d0d57d72a1f7a003bc3fbfa498f7f1e1d42111b11e82bcd9990",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "widecloud"
+  },
+  "5Dh9YpJeTYKmgh9weSH9j24AtgEwVWoW37xsXakYGcpqVbKJ": {
+   "pr": 543,
+   "head": "5a106f95d587d1ea16aaf0b65493777b675771be",
+   "bundle_sha256": "018441db33e0cccb90538ff528a432ed15122713e147089cb13068eec38c68ad",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "e11734937-beep"
+  },
+  "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj": {
+   "pr": 539,
+   "head": "b2c9c7ed15e9281e0984648cf484760ae24c5d94",
+   "bundle_sha256": "ee329e5944ad650a7f61e7252509ebf04fdd630f0a4b48da347e3dbdf4a949d7",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "gold-tree-tech"
+  },
+  "5EwAJCVFUV1UwBqQpT7JqcEGSGBsM3gwxiJNehTeVKqKqkqc": {
+   "pr": 544,
+   "head": "027d02177b61a7d2ff159b05b896bb4f9111ba67",
+   "bundle_sha256": "10a18bb68617cdf20dd034ab19149a4ca74428d842634b3f487fbf9b8c5d973c",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "K-3-LT"
+  },
+  "5E4iMWRACSJrnbnCLNVfWXjHc5VRkgzRfaAzBiB1VXfkqPUg": {
+   "pr": 545,
+   "head": "8290e109b11ddd5734aab57f81034e375440cc7b",
+   "bundle_sha256": "2ce3b569d986ba934e509e0ad137a4c565301494d8ef7517554d52e7f3d38e7b",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "Tet-9"
+  },
+  "5DPhKi77DLciQzNDr6iCZ2cD41oHcV75vLdf82d3crVnERN6": {
+   "pr": 540,
+   "head": "548f1c7b31f442f7fe2e682fdc8e861f69754433",
+   "bundle_sha256": "7dc74c4fcc9eb6ad937a3a1fac0589c32b4ac07df179abdc8c39a7bfc306538b",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "kaivaryn"
+  },
+  "5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh": {
+   "pr": 536,
+   "head": "201f7cc40ea778dc0f5a668626a629af680c9d06",
+   "bundle_sha256": "3524230ba5bcfd5625b9a50c55460bfbdbe1e39158a1235cec99920be990d37d",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "kaivexa"
+  }
+ },
  "rejected": {},
- "progress": {},
+ "progress": {
+  "done": 0,
+  "total": 0,
+  "by_surface": {}
+ },
  "crown": null,
  "scores": null,
  "queue": [],
