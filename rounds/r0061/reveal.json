@@ -1,0 +1,231 @@
+{
+ "swe-fix-r0061-04": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/test_builder.py::FileBuildTest::test_method_base_props"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_inference.py::InferenceTest::test_classmethod_inferred_by_context"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_inference.py::InferenceTest::test_property"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_inference.py::InferenceTest::test_tupleassign_name_inference"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_nodes.py::ImportNodeTest::test_real_name"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_regrtest.py::NonRegressionTests::test_decorator_names_inference_error_leaking"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_scoped_nodes.py::ClassNodeTest::test_class_extra_decorators"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_scoped_nodes.py::ClassNodeTest::test_classmethod_attributes"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_scoped_nodes.py::ClassNodeTest::test_methods"
+    ]
+   ],
+   "assets_sha256": "bcb4f3c3b26ce15bfedce3507687d5f2f3b83dd973670caa8c525575a1860bfb",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "f497b1a2075c1bcb1a70b683bd1e7b8e9eb9c80ed79cacc28a7254045b620d17",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "pylint-dev__astroid.b114f6b5.combine_module__8xirwm1z",
+   "environment": "jyangballin/swesmith.x86_64.pylint-dev_1776_astroid.b114f6b5"
+  }
+ },
+ "swe-fix-r0061-05": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/clients/test_base.py::ClientTest::test_create_code_verifier_length"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/endpoints/test_error_responses.py::ErrorResponseTest::test_empty_parameter"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/test_server.py::SignedTokenEndpointTest::test_authorization_grant"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/test_server.py::SignedTokenEndpointTest::test_scopes_and_user_id_stored_in_access_token"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_common.py::GeneratorTest::test_generate_client_id"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_common.py::GeneratorTest::test_generate_token"
+    ]
+   ],
+   "assets_sha256": "8e1338436fafde0e2e45ebf118690624c0d2e448f19db15ca60cf82d15b84053",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "4f88ced7ef155633ff661e48fc19607f63e185d1389285a8f5d3a6e55fe9abc2",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "oauthlib__oauthlib.1fd52536.combine_file__dm5bqfwa",
+   "environment": "jyangballin/swesmith.x86_64.oauthlib_1776_oauthlib.1fd52536"
+  }
+ },
+ "swe-fix-r0061-10": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/test_nodes.py::test_correct_function_type_comment_parent"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_nodes.py::test_type_comments_arguments"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_nodes.py::test_type_comments_function"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_nodes.py::test_type_comments_posonly_arguments"
+    ]
+   ],
+   "assets_sha256": "fdcdd9433b173238bf618e31159bc17dac3050e019d21cd75823df6daa524abd",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "27aaa1a0884bde5c255e4fc382576025b0ecc42de4ac050f0bbd8632f7c62a01",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "pylint-dev__astroid.b114f6b5.func_basic__w1sh9kvh",
+   "environment": "jyangballin/swesmith.x86_64.pylint-dev_1776_astroid.b114f6b5"
+  }
+ },
+ "swe-fix-r0061-12": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/endpoints/test_metadata.py::MetadataEndpointTest::test_create_metadata_response"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/endpoints/test_metadata.py::MetadataEndpointTest::test_mandatory_fields"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/endpoints/test_metadata.py::MetadataEndpointTest::test_metadata_validate_issuer"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/endpoints/test_metadata.py::MetadataEndpointTest::test_server_metadata"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/endpoints/test_metadata.py::MetadataEndpointTest::test_token_endpoint_overridden"
+    ]
+   ],
+   "assets_sha256": "35c8421ba740651acf187138302e773c522e7174abf1e9719c79bde537591a2c",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "43e3deff59c6f51a4ad3d8d71ff2267ebcebc53d2eef1fdbd70c23f981c3b2d2",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "oauthlib__oauthlib.1fd52536.func_basic__olaxlnuq",
+   "environment": "jyangballin/swesmith.x86_64.oauthlib_1776_oauthlib.1fd52536"
+  }
+ },
+ "swe-fix-r0061-14": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "test.py::GPXTests::test_horizontal_and_vertical_smooth_remove_extremes"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "test.py::GPXTests::test_moving_stopped_times"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "test.py::GPXTests::test_vertical_smooth_remove_extremes"
+    ]
+   ],
+   "assets_sha256": "1d02de2e40f6ccd40f3379a2be087a9f3bbc217731d29f1c79875116609c2b9a",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "49453a1e6596d70745bf27167bc686a0b5e532d80842fd691cdb15459de60e9a",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "tkrajina__gpxpy.09fc46b3.func_pm_ctrl_invert_if__5d48ok1a",
+   "environment": "jyangballin/swesmith.x86_64.tkrajina_1776_gpxpy.09fc46b3"
+  }
+ },
+ "swe-fix-r0061-21": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/test_inference.py::InferenceTest::test_fstring_inference"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_inference.py::test_empty_format_spec"
+    ]
+   ],
+   "assets_sha256": "c0632304b6f5465a0e6fd114ea6d0ac763ac15794cbd3739e69fe907765bb8f2",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "a2272f69a09e7fb851be6fc7c1a557955f20b2aee651afe4db1d25da85d05564",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "pylint-dev__astroid.b114f6b5.func_pm_class_rm_funcs__cccngbh5",
+   "environment": "jyangballin/swesmith.x86_64.pylint-dev_1776_astroid.b114f6b5"
+  }
+ }
+}

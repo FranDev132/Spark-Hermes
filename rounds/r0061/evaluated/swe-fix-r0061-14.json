@@ -1,0 +1,29 @@
+{
+ "schema": "sh-instance-v2",
+ "task_id": "swe-fix-r0061-14",
+ "family": "swe_fix",
+ "behaviour": "act",
+ "round_id": "r0061",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nGPX smooth with remove_extremes not removing points when both vertical and horizontal smoothing enabled\n\nWhen calling `smooth()` with both `vertical=True` and `horizontal=True` along with `remove_extremes=True`, the method fails to remove extreme points as expected. The point count remains unchanged instead of being reduced.\n\n#### Steps/Code to Reproduce\n\n```python\nimport gpxpy\n\n# Load a GPX file with extreme points\nwith open('track-with-extremes.gpx') as f:\n    gpx = gpxpy.parse(f)\n\npoints_before = gpx.get_track_points_no()\nprint(f\"Points before: {points_before}\")\n\n# This should remove extreme points but doesn't\ngpx.smooth(vertical=True, horizontal=True, remove_extremes=True)\n\npoints_after = gpx.get_track_points_no()\nprint(f\"Points after: {points_after}\")\n\n# Expected: points_after should be less than points_before\n# Actual: points_after equals points_before\n```\n\nThe issue only occurs when both `vertical=True` and `horizontal=True` are set together with `remove_extremes=True`. When using only vertical smoothing with `remove_extremes=True`, points are correctly removed as expected.\n</issue>\n",
+ "fixture": {},
+ "setup_commands": [],
+ "protected_paths": [
+  "setup.py"
+ ],
+ "commands": [],
+ "published": {
+  "predicates": []
+ },
+ "withheld_commitment": "hmac-sha256:0e2c5c1801521287bac05e38f19610ecceed143e262d226af37d2e40e58953c9",
+ "image": "swe-task:0f1ade20b16c5d45",
+ "network": "none",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "workdir": "/testbed",
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "requires_self_check": false
+}
