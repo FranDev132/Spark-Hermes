@@ -1,0 +1,191 @@
+{
+ "swe-fix-r0059-03": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/image/test_jpeg.py::Describe_MarkerParser::it_can_iterate_over_the_jfif_markers_in_its_stream"
+    ]
+   ],
+   "assets_sha256": "58fd15eb01919afe113cb3e1ab4fb4f48cb0f727051e4ca84c9f1701b03e09f4",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "a543ac4a54cd06fec9b2a1f2bb074dd77a5ba9afa69ea1ee76f4e6aa79bc2d0e",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "python-openxml__python-docx.0cf6d71f.func_basic__923nask1",
+   "environment": "jyangballin/swesmith.x86_64.python-openxml_1776_python-docx.0cf6d71f"
+  }
+ },
+ "swe-fix-r0059-07": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/parts/test_story.py::DescribeStoryPart::it_can_create_a_new_pic_inline"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/styles/test_styles.py::DescribeStyles::it_can_get_the_default_style_for_a_type[default_fixture0]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/styles/test_styles.py::DescribeStyles::it_can_get_the_default_style_for_a_type[default_fixture1]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/styles/test_styles.py::DescribeStyles::it_can_get_the_default_style_for_a_type[default_fixture2]"
+    ]
+   ],
+   "assets_sha256": "4ea29669334194f33c2231f2f13b9208630e6fb636bc693568c2296d7b83d289",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "334edf4518925db6d6813793323c7fb543ec24f9f2e6ed74bc59927354ab036f",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "python-openxml__python-docx.0cf6d71f.combine_module__n1c3tg34",
+   "environment": "jyangballin/swesmith.x86_64.python-openxml_1776_python-docx.0cf6d71f"
+  }
+ },
+ "swe-fix-r0059-16": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/test_command_line.py::CanToolsCommandLineTest::test_convert"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_convert.py::CanToolsConvertFullTest::test_kcd_dump_default_sort_signals"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_convert.py::CanToolsConvertFullTest::test_kcd_dump_sort_signals_by_name"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_database.py::CanToolsDatabaseTest::test_as_kcd_string"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_database.py::CanToolsDatabaseTest::test_vehicle"
+    ]
+   ],
+   "assets_sha256": "394e3835a8bc1374547404b3d25178ba98b7f00de3d78fda843129f808b39ea0",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "d030251f5fc7fe34601f8d2a07479ca6a6e1346240b888e584476b8a233597bf",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "cantools__cantools.0c6a7871.combine_file__wpoq4uzr",
+   "environment": "jyangballin/swesmith.x86_64.cantools_1776_cantools.0c6a7871"
+  }
+ },
+ "swe-fix-r0059-17": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/image/test_png.py::Describe_PngParser::it_defaults_image_dpi_to_72[no_dpi_fixture1]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/image/test_png.py::Describe_PngParser::it_defaults_image_dpi_to_72[no_dpi_fixture2]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/image/test_png.py::Describe_PngParser::it_defaults_image_dpi_to_72[no_dpi_fixture3]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/image/test_png.py::Describe_PngParser::it_defaults_image_dpi_to_72[no_dpi_fixture4]"
+    ]
+   ],
+   "assets_sha256": "71dfa41a4c57101b67ac5c7dbb2321430ee65f0650a124718580283ea9b3c450",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "c664391536ec58e97b5546895b60d0eae2e3512ea9a0ea419ac760720d4c7576",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "python-openxml__python-docx.0cf6d71f.func_basic__k0mxg987",
+   "environment": "jyangballin/swesmith.x86_64.python-openxml_1776_python-docx.0cf6d71f"
+  }
+ },
+ "swe-fix-r0059-19": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/dialects/test_dialect.py::TestDialect::test_compare_dialect_versions"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/dialects/test_dialect.py::TestDialect::test_get_or_raise"
+    ]
+   ],
+   "assets_sha256": "93216d160cdbdf4894c9bbdfddb6542ac6a821e0392d6a880bad57784f3e5b2e",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "8e8c1544354b85d522aa43bea8d4a11701871e6d607e8ffe42a96e70b9a1f83c",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "tobymao__sqlglot.036601ba.func_pm_remove_assign__ot4ynxcc",
+   "environment": "jyangballin/swesmith.x86_64.tobymao_1776_sqlglot.036601ba"
+  }
+ },
+ "swe-fix-r0059-20": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/test_optimizer.py::TestOptimizer::test_optimize"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_optimizer.py::TestOptimizer::test_pushdown_predicates"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_optimizer.py::TestOptimizer::test_simplify"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_optimizer.py::TestOptimizer::test_tpcds"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_optimizer.py::TestOptimizer::test_tpch"
+    ]
+   ],
+   "assets_sha256": "6fa2c7746d54bd23f0b763084914861f1df627b1e29baf163f8a8a3c099de9fd",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "3bd708c21d02caa0911146fa6672270e4510c935d85abadae823029534f6f9dd",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "tobymao__sqlglot.036601ba.func_pm_remove_cond__9for4o3n",
+   "environment": "jyangballin/swesmith.x86_64.tobymao_1776_sqlglot.036601ba"
+  }
+ }
+}
