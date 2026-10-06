@@ -1,0 +1,25 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0059-p17",
+ "round_id": "r0059",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nSetting bottom_margin on Section raises NameError\n\n#### Description\n\nWhen trying to set the `bottom_margin` property on a Section object, a `NameError` is raised because `pgMar` is referenced before it's defined.\n\n#### Steps/Code to Reproduce\n\n```python\nfrom docx import Document\nfrom docx.shared import Inches\n\n# Create a new document\ndoc = Document()\n\n# Get the section\nsection = doc.sections[0]\n\n# Try to set bottom margin - this will fail\nsection.bottom_margin = Inches(0.75)\n```\n\nThis raises:\n```\nNameError: name 'pgMar' is not defined\n```\n\nThe same issue occurs when setting the bottom margin to any value, including `None`.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "python-openxml__python-docx.0cf6d71f.func_pm_ctrl_shuffle__ujoyxi4s",
+  "environment": "jyangballin/swesmith.x86_64.python-openxml_1776_python-docx.0cf6d71f",
+  "fail_to_pass": [
+   "tests/test_section.py::DescribeSection::it_can_change_its_page_margins[w:sectPr-bottom_margin-685800-w:sectPr/w:pgMar{w:bottom=1080}]"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

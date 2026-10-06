@@ -1,0 +1,25 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0059-p07",
+ "round_id": "r0059",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nRGBColor repr shows wrong color component order\n\n#### Description\n\nThe `RGBColor.__repr__()` method displays RGB color components in the wrong order. When creating an RGBColor with specific red, green, and blue values, the repr output shows them in a different sequence than expected.\n\n#### Steps/Code to Reproduce\n\n```python\nfrom docx.shared import RGBColor\n\n# Create an RGB color with red=66, green=240, blue=186\nrgb_color = RGBColor(66, 240, 186)\nprint(repr(rgb_color))\n# Expected: RGBColor(0x42, 0xf0, 0xba)\n# Actual: RGBColor(0xba, 0x42, 0xf0)\n```\n\nThe repr output shows the components in BGR order instead of RGB order, which is confusing when debugging or inspecting color values.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "python-openxml__python-docx.0cf6d71f.func_basic__nlvbacgg",
+  "environment": "jyangballin/swesmith.x86_64.python-openxml_1776_python-docx.0cf6d71f",
+  "fail_to_pass": [
+   "tests/test_shared.py::DescribeRGBColor::it_has_a_custom_repr"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

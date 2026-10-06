@@ -1,0 +1,27 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0059-p19",
+ "round_id": "r0059",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nHive schema SQL generation broken after recent changes\n\n#### Description\n\nThe Hive dialect's `schema_sql` method is generating incorrect SQL output. When creating tables with column definitions, the schema is not being properly formatted.\n\n#### Steps/Code to Reproduce\n\n```python\nimport sqlglot\nfrom sqlglot import exp\n\n# Create a simple table schema\nsql = \"CREATE TABLE test (id INT, name STRING)\"\nparsed = sqlglot.parse_one(sql, dialect=\"hive\")\ngenerated = parsed.sql(dialect=\"hive\")\nprint(f\"Generated: {generated}\")\n```\n\nExpected output should include proper table schema formatting, but the current implementation produces malformed SQL.\n\nThe issue appears to affect table creation statements where column definitions need to be properly enclosed and formatted according to Hive syntax requirements.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "tobymao__sqlglot.036601ba.combine_module__qxsd17ky",
+  "environment": "jyangballin/swesmith.x86_64.tobymao_1776_sqlglot.036601ba",
+  "fail_to_pass": [
+   "tests/dialects/test_hive.py::TestHive::test_ddl",
+   "tests/dialects/test_hive.py::TestHive::test_hive",
+   "tests/dialects/test_trino.py::TestTrino::test_trino"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

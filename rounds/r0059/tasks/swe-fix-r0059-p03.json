@@ -1,0 +1,26 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0059-p03",
+ "round_id": "r0059",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nPicture inline creation returns None instead of inline element\n\n#### Description\n\nWhen creating a new picture inline element, the method returns `None` instead of the expected inline element object. This breaks any code that expects to work with the returned inline element.\n\n#### Steps/Code to Reproduce\n\n```python\nfrom docx import Document\nfrom docx.parts.story import StoryPart\n\n# Create a document and try to add an inline picture\ndoc = Document()\nstory_part = doc.part\n\n# This should return an inline element but returns None\ninline = story_part.new_pic_inline('image.png', width=100, height=200)\nprint(f\"Returned value: {inline}\")  # Expected: <CT_Inline object>, Actual: None\n\n# Any subsequent operations on the inline element will fail\nif inline is not None:\n    print(f\"Inline XML: {inline.xml}\")\nelse:\n    print(\"Cannot access inline properties - got None instead\")\n```\n\nAlso noticed that picture dimensions seem to be swapped when setting inline shape dimensions:\n\n```python\nfrom docx import Document\n\ndoc = Document()\n# Add a picture and set dimensions\ninline_shape = doc.add_picture('image.png', width=100, height=200)\n\n# The width and height appear to be swapped\nprint(f\"Expected width: 100, Actual width: {inline_shape.width}\")\nprint(f\"Expected height: 200, Actual height: {inline_shape.height}\")\n```\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "python-openxml__python-docx.0cf6d71f.combine_file__t9c3y9wl",
+  "environment": "jyangballin/swesmith.x86_64.python-openxml_1776_python-docx.0cf6d71f",
+  "fail_to_pass": [
+   "tests/parts/test_story.py::DescribeStoryPart::it_can_create_a_new_pic_inline",
+   "tests/test_shape.py::DescribeInlineShape::it_can_change_its_display_dimensions"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

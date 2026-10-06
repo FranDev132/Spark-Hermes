@@ -1,0 +1,28 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0059-p20",
+ "round_id": "r0059",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nBigQuery array indexing with SAFE_ORDINAL and SAFE_OFFSET not working correctly\n\nWhen using BigQuery's `SAFE_ORDINAL` and `SAFE_OFFSET` functions for array indexing, the generated SQL is missing the `SAFE_` prefix, causing potential runtime errors when accessing array elements that may be out of bounds.\n\n#### Steps to Reproduce\n\n```python\nimport sqlglot\n\n# Test SAFE_ORDINAL - should use SAFE_ORDINAL but generates ORDINAL\nsql = \"SELECT arr[SAFE_ORDINAL(1)] FROM table\"\nresult = sqlglot.transpile(sql, read=\"bigquery\", write=\"bigquery\")[0]\nprint(\"SAFE_ORDINAL result:\", result)\n\n# Test SAFE_OFFSET - should use SAFE_OFFSET but generates OFFSET  \nsql = \"SELECT arr[SAFE_OFFSET(0)] FROM table\"\nresult = sqlglot.transpile(sql, read=\"bigquery\", write=\"bigquery\")[0]\nprint(\"SAFE_OFFSET result:\", result)\n```\n\n**Expected Output:**\n```\nSAFE_ORDINAL result: SELECT arr[SAFE_ORDINAL(1)] FROM table\nSAFE_OFFSET result: SELECT arr[SAFE_OFFSET(0)] FROM table\n```\n\n**Actual Output:**\n```\nSAFE_ORDINAL result: SELECT arr[ORDINAL(1)] FROM table\nSAFE_OFFSET result: SELECT arr[OFFSET(0)] FROM table\n```\n\nThe `SAFE_` prefix is being stripped during SQL generation, which changes the behavior from safe array access (returns NULL for out-of-bounds) to unsafe access (throws an error for out-of-bounds).\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "tobymao__sqlglot.036601ba.func_pm_remove_cond__jyjoaiwl",
+  "environment": "jyangballin/swesmith.x86_64.tobymao_1776_sqlglot.036601ba",
+  "fail_to_pass": [
+   "tests/dialects/test_bigquery.py::TestBigQuery::test_bigquery",
+   "tests/dialects/test_bigquery.py::TestBigQuery::test_warnings",
+   "tests/dialects/test_duckdb.py::TestDuckDB::test_duckdb",
+   "tests/dialects/test_presto.py::TestPresto::test_presto"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}
