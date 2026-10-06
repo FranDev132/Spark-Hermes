@@ -1,0 +1,107 @@
+{
+ "schema": "sh-seal-v3",
+ "round_id": "r0061",
+ "sealed_at": 1791306846.614851,
+ "active": {
+  "5D4txntYBCZ7dAXuFDHEubK1f84LYzPjBNCtVELenfUPCQzK": {
+   "pr": 547,
+   "head": "bf7778b5c05c7900bfcf452dc6042e1c9ac28fca",
+   "bundle_sha256": "19287e22be7c4d0d57d72a1f7a003bc3fbfa498f7f1e1d42111b11e82bcd9990",
+   "incumbent": true,
+   "was_incumbent": false,
+   "defense": true,
+   "github": "widecloud"
+  },
+  "5Di3Dd8PKn7uQbBc4WrzxkUqqvSL8QS3KVgCPSt3kzPE5KFb": {
+   "pr": 546,
+   "head": "ab24d60e256a682ec6eb86abfff965fcf9c5c90d",
+   "bundle_sha256": "6c7442259bc07019e973cd4cc6c6559948ba143c4f12b50c095e90ad6b04a564",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "harrythomasben"
+  },
+  "5DPhKi77DLciQzNDr6iCZ2cD41oHcV75vLdf82d3crVnERN6": {
+   "pr": 548,
+   "head": "ffe3a362ab269d689dfe86c4eb48614bf88f6656",
+   "bundle_sha256": "7dc74c4fcc9eb6ad937a3a1fac0589c32b4ac07df179abdc8c39a7bfc306538b",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "kaivaryn"
+  },
+  "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ": {
+   "pr": 549,
+   "head": "f8b098979e8835e93903b2b17a55526170614f33",
+   "bundle_sha256": "bf53c66d9d8941062669d5279a5620dd499561db89b1c88befe2d1b48bc3b25d",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "dato-bitar"
+  },
+  "5Et8zmN8dq4eFvy7grf2fqtf5PE2mgngTdr1WA6ADJJUUCrE": {
+   "pr": 551,
+   "head": "d00d9cf7df69be1a16a831894af7e320f7236394",
+   "bundle_sha256": "8797b9c9a8e16938096d99a00c3b0089d1cfdd72f8145b424de288ed053a6c50",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "ismayilovibadet802-svg"
+  },
+  "5Dh9YpJeTYKmgh9weSH9j24AtgEwVWoW37xsXakYGcpqVbKJ": {
+   "pr": 553,
+   "head": "cec6188c64ecd7e48a8dc282a99d45868ff0887f",
+   "bundle_sha256": "9286da3e592ae67141d9d4f39322e7e2936d787ca1aae864b2bff6d2674d2740",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "e11734937-beep"
+  },
+  "5E4iMWRACSJrnbnCLNVfWXjHc5VRkgzRfaAzBiB1VXfkqPUg": {
+   "pr": 554,
+   "head": "f4aca5a0ad4e7da2f65d64d49fd14bf4b74c5132",
+   "bundle_sha256": "5688cfff9abcd88ec2762a62cd7b3fb0d2a67d3577a88686318298961c5671cc",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "Tet-9"
+  },
+  "5DSD14t7dACJcd9f8rPdrkMVngRqLUnM3EnM3dHfHLZTHJGf": {
+   "pr": 552,
+   "head": "f734b539875200e78145074e362faaaecce1ce5e",
+   "bundle_sha256": "3010839935366420db65a3fbc4953138688e5c272363a3094ce2de0bbccf3e91",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "FranDev132"
+  },
+  "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj": {
+   "pr": 550,
+   "head": "5614f271831004f0a21ccfb9035d8266823d9df1",
+   "bundle_sha256": "cabbbc2ed009e8634c5627ceaa033c4673dab5702cfceab4d392a327c7ec7652",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "gold-tree-tech"
+  },
+  "5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh": {
+   "pr": 555,
+   "head": "c47b1dabeea36e0adda41e2e484b22fb78db29c0",
+   "bundle_sha256": "81d6efd64636930ffffdd4c6a5982697eddcf2780c39b392c0ce504800350f4c",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "kaivexa"
+  },
+  "5EwAJCVFUV1UwBqQpT7JqcEGSGBsM3gwxiJNehTeVKqKqkqc": {
+   "pr": 556,
+   "head": "35866d03932534d3e11aff0be36f949535150f12",
+   "bundle_sha256": "10a18bb68617cdf20dd034ab19149a4ca74428d842634b3f487fbf9b8c5d973c",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "K-3-LT"
+  }
+ },
+ "rejected": {}
+}
