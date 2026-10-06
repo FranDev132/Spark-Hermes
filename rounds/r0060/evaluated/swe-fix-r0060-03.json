@@ -1,0 +1,46 @@
+{
+ "schema": "sh-instance-v2",
+ "task_id": "swe-fix-r0060-03",
+ "family": "swe_fix",
+ "behaviour": "act",
+ "round_id": "r0060",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nNested field invalid input type error\n\nWhen using the `Nested` field with the `many=True` option, an error occurs if the input is not a collection. The error message raised is a `ValidationError`, but it references an `invalid` key that does not exist in the `error_messages` dictionary.\n\nTo reproduce:\n```python\nfrom marshmallow import Schema, fields, ValidationError\n\nclass ChildSchema(Schema):\n    name = fields.Str()\n\nclass ParentSchema(Schema):\n    children = fields.Nested(ChildSchema, many=True)\n\ntry:\n    ParentSchema().load({\"children\": \"not_a_list\"})\nexcept ValidationError as err:\n    print(err.messages)\n```\n\nExpected behavior: A clear error message indicating the input type issue.\nActual behavior: Raises a `ValidationError` with a missing `invalid` key in the error messages.\n</issue>\n",
+ "fixture": {},
+ "setup_commands": [],
+ "protected_paths": [
+  "pyproject.toml",
+  "tests/__init__.py",
+  "tests/base.py",
+  "tests/conftest.py",
+  "tests/foo_serializer.py",
+  "tests/mypy_test_cases/test_validation_error.py",
+  "tests/test_decorators.py",
+  "tests/test_deserialization.py",
+  "tests/test_error_store.py",
+  "tests/test_exceptions.py",
+  "tests/test_fields.py",
+  "tests/test_options.py",
+  "tests/test_registry.py",
+  "tests/test_serialization.py",
+  "tests/test_utils.py",
+  "tests/test_validate.py",
+  "tests/test_version_attributes.py",
+  "tox.ini"
+ ],
+ "commands": [],
+ "published": {
+  "predicates": []
+ },
+ "withheld_commitment": "hmac-sha256:7b97fb4f26f5759616c4a6a2d50c8d65856538f0a13755336815d54ee6a98241",
+ "image": "swe-task:0f6752af431b8147",
+ "network": "none",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "workdir": "/testbed",
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "requires_self_check": false
+}

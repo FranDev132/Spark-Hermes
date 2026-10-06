@@ -1,0 +1,211 @@
+{
+ "swe-fix-r0060-03": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/test_schema.py::TestNestedSchema::test_invalid_type_passed_to_nested_field"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_schema.py::test_load_many_in_nested_invalid_input_type[1.2]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_schema.py::test_load_many_in_nested_invalid_input_type[1]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_schema.py::test_load_many_in_nested_invalid_input_type[False]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_schema.py::test_load_many_in_nested_invalid_input_type[lol]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_schema.py::test_load_many_in_nested_invalid_input_type[val3]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_schema.py::test_load_many_in_nested_invalid_input_type[val4]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_schema.py::test_load_many_in_nested_invalid_input_type[val5]"
+    ]
+   ],
+   "assets_sha256": "4889c6077ace0d09dd23c89432036d22d3102699879fa8edfea7d9528bbe19b4",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "ea5ff2e9f9f0f2dc7aa75e696b09f84c66048ada1f71636de9abeba569c2c1ef",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "marshmallow-code__marshmallow.9716fc62.lm_rewrite__zlhsjbno",
+   "environment": "jyangballin/swesmith.x86_64.marshmallow-code_1776_marshmallow.9716fc62"
+  }
+ },
+ "swe-fix-r0060-05": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/test_inference.py::InferenceTest::test_for_dict"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_inference.py::InferenceTest::test_simple_for"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_inference.py::InferenceTest::test_simple_for_genexpr"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_protocols.py::ProtocolTests::test_assigned_stmts_nested_for_dict"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_protocols.py::ProtocolTests::test_assigned_stmts_nested_for_tuple"
+    ]
+   ],
+   "assets_sha256": "56b17e359404bd3e2f68338fb372a66a45de948cb8d6e391f3c5a9004d00489a",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "9e1b61947c462443c36a701121e8298698ece45cf21133ec902a3ba38cad1c20",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "pylint-dev__astroid.b114f6b5.lm_rewrite__93fwu6eo",
+   "environment": "jyangballin/swesmith.x86_64.pylint-dev_1776_astroid.b114f6b5"
+  }
+ },
+ "swe-fix-r0060-12": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/brain/test_brain.py::ModuleExtenderTest::test_extension_modules"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/brain/test_six.py::SixBrainTest::test_attribute_access"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/brain/test_six.py::SixBrainTest::test_attribute_access_with_six_moves_imported"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/brain/test_six.py::SixBrainTest::test_from_imports"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/brain/test_six.py::SixBrainTest::test_from_submodule_imports"
+    ]
+   ],
+   "assets_sha256": "cb50b181e602e4dbcb58d108e030262e28ea69ec9756af6390dd71478a204c0e",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "05885bb08c583abc96f6a06c7748f0d17a3a45a896379847e9d0e5f9341cfc28",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "pylint-dev__astroid.b114f6b5.combine_file__s7m79zng",
+   "environment": "jyangballin/swesmith.x86_64.pylint-dev_1776_astroid.b114f6b5"
+  }
+ },
+ "swe-fix-r0060-13": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/parts/test_story.py::DescribeStoryPart::it_can_create_a_new_pic_inline"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/styles/test_style.py::DescribeBaseStyle::it_knows_whether_its_hidden[hidden_get_fixture0]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/styles/test_style.py::DescribeBaseStyle::it_knows_whether_its_hidden[hidden_get_fixture1]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/styles/test_style.py::DescribeBaseStyle::it_knows_whether_its_hidden[hidden_get_fixture2]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/styles/test_style.py::DescribeBaseStyle::it_knows_whether_its_hidden[hidden_get_fixture3]"
+    ]
+   ],
+   "assets_sha256": "aa57f5f942560e925dced2d94bb9229f7c35d0b5b225d617c5d2b4af56d013fb",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "3155e63d8c8bb3b896059b54588073eff12ad633e80544e9021aa43d67c798db",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "python-openxml__python-docx.0cf6d71f.combine_module__8dpeyxeg",
+   "environment": "jyangballin/swesmith.x86_64.python-openxml_1776_python-docx.0cf6d71f"
+  }
+ },
+ "swe-fix-r0060-18": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/opc/test_rel.py::DescribeRelationships::it_can_find_or_add_a_relationship"
+    ]
+   ],
+   "assets_sha256": "7fa691cbd25d77cd1b71fbbcc5f05fc49d5163a0053cba45ab7aa2c39a4753f9",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "c5ee38bbb18e422dfab4cd33def8fd1cdac876ca1ecf694ce011e7b7629bd14e",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "python-openxml__python-docx.0cf6d71f.func_pm_ctrl_shuffle__rjs57w3n",
+   "environment": "jyangballin/swesmith.x86_64.python-openxml_1776_python-docx.0cf6d71f"
+  }
+ },
+ "swe-fix-r0060-19": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/test_diff.py::TestDiff::test_pre_matchings"
+    ]
+   ],
+   "assets_sha256": "55773b0f0bd8a1cc1833a69dc294f8b136600f8fc180ece6626938c0f8af7850",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "62e292ee3d7d560083637db32c6a85de6a03da53abd2e0ba2bcbd2b8c031eea7",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "tobymao__sqlglot.036601ba.lm_rewrite__du7msnhk",
+   "environment": "jyangballin/swesmith.x86_64.tobymao_1776_sqlglot.036601ba"
+  }
+ }
+}
