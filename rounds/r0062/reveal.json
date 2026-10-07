@@ -1,0 +1,191 @@
+{
+ "swe-fix-r0062-01": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/clients/test_base.py::ClientTest::test_add_mac_token"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/test_tokens.py::TokenTest::test_prepare_mac_header"
+    ]
+   ],
+   "assets_sha256": "11971ff2f0cd2d5fd3b02914ae760bfddc0a9f863af0050e2e7159b70a8da3bb",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "003cbc80eddacc9463f1ba1d0a59ea59d0d7372bd39439d00378cb0a67d43e1a",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "oauthlib__oauthlib.1fd52536.lm_rewrite__6g73itv9",
+   "environment": "jyangballin/swesmith.x86_64.oauthlib_1776_oauthlib.1fd52536"
+  }
+ },
+ "swe-fix-r0062-02": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth1/rfc5849/test_request_validator.py::RequestValidatorTests::test_not_implemented"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth1/rfc5849/test_signatures.py::SignatureTests::test_hmac_false_positives"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth1/rfc5849/test_signatures.py::SignatureTests::test_sign_hmac_sha256_with_client"
+    ]
+   ],
+   "assets_sha256": "4463fdaf346183cb4f10e07199ec264c33ceebfb8ee0b5150578663102bb635f",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "255af3413a947a2648d1fe1ad8dc567ab0429fc68a630c4ed22b9751ff6e187a",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "oauthlib__oauthlib.1fd52536.combine_module__bazpipkm",
+   "environment": "jyangballin/swesmith.x86_64.oauthlib_1776_oauthlib.1fd52536"
+  }
+ },
+ "swe-fix-r0062-03": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/test_format.py::TestFormat::test_identifiercase"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_format.py::TestFormat::test_identifiercase_quotes"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_format.py::TestFormat::test_keywordcase"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_format.py::test_truncate_strings"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_regressions.py::test_issue469_copy_as_psql_command"
+    ]
+   ],
+   "assets_sha256": "1936f11ea47f9ca8e508c140bfa93d525a06a08027f47b3e8b9f55fd17d4b018",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "653d9b73de6907387eae1d5b304dbc9711727dbc44bc8c7c59c8281badc85e67",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "andialbrecht__sqlparse.e57923b3.combine_file__41rrr227",
+   "environment": "jyangballin/swesmith.x86_64.andialbrecht_1776_sqlparse.e57923b3"
+  }
+ },
+ "swe-fix-r0062-04": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/test_optimizer.py::TestOptimizer::test_simplify"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_optimizer.py::TestOptimizer::test_tpcds"
+    ]
+   ],
+   "assets_sha256": "fead85b91b4c4819a63c5f2221187a776b1f40271b3dcd38f385db8ab64a9a39",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "f0319a9a56140902b4c956b4100a293b6ca90dccdbedc8b314f7409449152e95",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "tobymao__sqlglot.036601ba.func_pm_remove_assign__4qyelle2",
+   "environment": "jyangballin/swesmith.x86_64.tobymao_1776_sqlglot.036601ba"
+  }
+ },
+ "swe-fix-r0062-06": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/test_logreader.py::TestLogreaderFormats::test_candump_log_ascii_timestamped"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_logreader.py::TestLogreaderFormats::test_timestamped_candump"
+    ]
+   ],
+   "assets_sha256": "b515441d7a4bfcf4eb95d477efc10f0acce824f7fa877771ac15daa186a7c0ab",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "b4b3c6de9e45e1e6b58f355190c31ac18610bc2f9d4589ebabea5d142ee3932a",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "cantools__cantools.0c6a7871.lm_rewrite__rl02thh5",
+   "environment": "jyangballin/swesmith.x86_64.cantools_1776_cantools.0c6a7871"
+  }
+ },
+ "swe-fix-r0062-08": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/clients/test_backend_application.py::BackendApplicationClientTest::test_parse_token_response"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/clients/test_legacy_application.py::LegacyApplicationClientTest::test_parse_token_response"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/clients/test_mobile_application.py::MobileApplicationClientTest::test_parse_token_response"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/clients/test_service_application.py::ServiceApplicationClientTest::test_parse_token_response"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/clients/test_web_application.py::WebApplicationClientTest::test_parse_token_response"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/test_parameters.py::ParameterTests::test_json_token_response"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/test_parameters.py::ParameterTests::test_url_encoded_token_response"
+    ]
+   ],
+   "assets_sha256": "b2ecc34b52e5895ab1b5229af0c025a914a278d9e1f303958491e280a6259daa",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "92a23de3c969657ce38d21b8437e7aaac542f031a8cbf667cd373f4134898b30",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "oauthlib__oauthlib.1fd52536.func_basic__m6knx949",
+   "environment": "jyangballin/swesmith.x86_64.oauthlib_1776_oauthlib.1fd52536"
+  }
+ }
+}
