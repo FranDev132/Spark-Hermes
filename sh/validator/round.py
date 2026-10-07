@@ -79,12 +79,16 @@ def close(
     era: str = "e0",
     params=PARAMS_V2,
     window: list[str] | None = None,
+    copies: dict | None = None,
 ) -> dict:
     """Score the round and publish everything needed to check it.
 
     `window` is the list of round ids whose episodes are pooled — for the reference arms *and* the miners. The
     two must see the same window: a miner scored over eight rounds against a baseline measured on one would be
-    compared to the wrong denominator. The reveal and the commitment check cover only this round's tasks."""
+    compared to the wrong denominator. The reveal and the commitment check cover only this round's tasks.
+
+    `copies` is `sh.validator.copies.assess_round` for this round: each sealed strategy's share of text other authors
+    sealed first. It sets the score's near-duplicate and prior-copy terms and is published with each score."""
     out.mkdir(parents=True, exist_ok=True)
     tasks = {p.stem: json.loads(p.read_text()) for p in sorted((round_dir / "tasks").glob("*.json"))}
     if not tasks:
@@ -107,7 +111,14 @@ def close(
         ):
             continue
         miners.setdefault(surface, MinerWindow(surface)).episodes.append(e)
+    copies = copies or {}
+    for h, m in miners.items():
+        if c := copies.get(h):
+            m.near_dup, m.prior_copy = bool(c.get("near_dup")), float(c.get("prior_copy") or 0.0)
     scores = {h: score(m, refs, params) for h, m in miners.items()}
+    for h, s in scores.items():
+        if c := copies.get(h):
+            s["copy"] = {k: c.get(k) for k in ("share", "source", "first_seen")}
     w = weights({h: s["score"] for h, s in scores.items()})
 
     # The reveal: the withheld half, its salt, and a public re-verification of every commitment.
