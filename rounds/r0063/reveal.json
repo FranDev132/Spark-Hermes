@@ -1,0 +1,261 @@
+{
+ "swe-fix-r0063-04": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/test_format.py::TestFormatReindent::test_case"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_format.py::TestFormatReindent::test_case2"
+    ]
+   ],
+   "assets_sha256": "486786d3d7882ce1f00054278e5b8c392d3ab5d17e6235d10fbabb5aa38e0624",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "f266d9b4961c53355bcb5608b2d1db6cb33729cb5617ebe90ef1761e0dfdeb26",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "andialbrecht__sqlparse.e57923b3.lm_rewrite__5jtbeco8",
+   "environment": "jyangballin/swesmith.x86_64.andialbrecht_1776_sqlparse.e57923b3"
+  }
+ },
+ "swe-fix-r0063-09": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/endpoints/test_introspect_endpoint.py::IntrospectEndpointTest::test_introspect_token_client_authentication_failed"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/endpoints/test_introspect_endpoint.py::IntrospectEndpointTest::test_introspect_token_public_client_authentication_failed"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py::RevocationEndpointTest::test_revoke_token_client_authentication_failed"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py::RevocationEndpointTest::test_revoke_token_public_client_authentication_failed"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc8628/test_server.py::DeviceAuthorizationEndpointTest::test_device_authorization_grant"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc8628/test_server.py::DeviceAuthorizationEndpointTest::test_device_authorization_grant_interval"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc8628/test_server.py::DeviceAuthorizationEndpointTest::test_device_authorization_grant_interval_with_zero"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc8628/test_server.py::DeviceAuthorizationEndpointTest::test_device_authorization_grant_user_gode_generator"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc8628/test_server.py::DeviceAuthorizationEndpointTest::test_device_authorization_grant_verify_url_complete_callable"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc8628/test_server.py::DeviceAuthorizationEndpointTest::test_device_authorization_grant_verify_url_complete_string"
+    ]
+   ],
+   "assets_sha256": "e80902db42bb2841d19321e4577546d582d17ff30cf6e95ac3a793b58e2c686b",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "4a215b38f99be73b9a4bef5df5f2fb331e8e1550c1057bc3f8b0759086975f40",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "oauthlib__oauthlib.1fd52536.lm_rewrite__b61bpmd5",
+   "environment": "jyangballin/swesmith.x86_64.oauthlib_1776_oauthlib.1fd52536"
+  }
+ },
+ "swe-fix-r0063-10": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "test.py::GPXTests::test_garmin_extension"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "test.py::GPXTests::test_xml_chars_encode_decode_extensions"
+    ]
+   ],
+   "assets_sha256": "97cd725a5d2bc1ffe03ebcf357128327514a9c25094c558c55fb6fb8e3955a5e",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "cd5688a4db490e5b2e5587a73f510e1f59989dcc5f9e2b442cbab8cc6645fefb",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "tkrajina__gpxpy.09fc46b3.lm_rewrite__d1xlosux",
+   "environment": "jyangballin/swesmith.x86_64.tkrajina_1776_gpxpy.09fc46b3"
+  }
+ },
+ "swe-fix-r0063-13": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/endpoints/test_introspect_endpoint.py::IntrospectEndpointTest::test_introspect_bad_post_request"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/endpoints/test_introspect_endpoint.py::IntrospectEndpointTest::test_introspect_invalid_request_method"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/endpoints/test_introspect_endpoint.py::IntrospectEndpointTest::test_introspect_token_client_authentication_failed"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/endpoints/test_introspect_endpoint.py::IntrospectEndpointTest::test_introspect_token_public_client_authentication_failed"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/endpoints/test_introspect_endpoint.py::IntrospectEndpointTest::test_introspect_unsupported_token"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py::RevocationEndpointTest::test_revoke_bad_post_request"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py::RevocationEndpointTest::test_revoke_invalid_request_method"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py::RevocationEndpointTest::test_revoke_token_client_authentication_failed"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py::RevocationEndpointTest::test_revoke_token_public_client_authentication_failed"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oauth2/rfc6749/endpoints/test_revocation_endpoint.py::RevocationEndpointTest::test_revoke_unsupported_token"
+    ]
+   ],
+   "assets_sha256": "a5d4bb3a6a8447cf6ef88d6f9a84a00feef390e3672920a3f1ec32873a95b5e5",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "aa5e168847096179ffc7c897deb3d2976d30d7e3250f464a8e5a213271879f49",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "oauthlib__oauthlib.1fd52536.func_basic__ommycgnc",
+   "environment": "jyangballin/swesmith.x86_64.oauthlib_1776_oauthlib.1fd52536"
+  }
+ },
+ "swe-fix-r0063-17": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_be_cdd_add"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_be_example_cdd"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_be_example_cdd_repr"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_le_cdd_add"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_le_example_cdd"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_le_example_cdd_repr"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_unknown_byteorder"
+    ]
+   ],
+   "assets_sha256": "49192d7ece0b7b0d5a24120a5e1b0b5f0232f7876fdeb331972cbf9662931120",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "9bb6e441c81b9ef02fdd01fc7ddb5fa44cfd13d52bc068c65d40ebd22bcd79b6",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "cantools__cantools.0c6a7871.combine_file__vhk6s1al",
+   "environment": "jyangballin/swesmith.x86_64.cantools_1776_cantools.0c6a7871"
+  }
+ },
+ "swe-fix-r0063-18": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "test.py::GPXTests::test_dst_in_SimpleTZ"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "test.py::GPXTests::test_format_time"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "test.py::GPXTests::test_timestamp_with_single_digits"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "test.py::GPXTests::test_timezone_from_timestamp"
+    ]
+   ],
+   "assets_sha256": "752a7fa194c7e9c320c4049c48e3602860396717cfe179f997c4dcc694e5abca",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "a7155fafad2dcb67fc73749f0148f03c1d4ce3244436812062908e64f235e42e",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "tkrajina__gpxpy.09fc46b3.func_pm_remove_cond__kcvrhszd",
+   "environment": "jyangballin/swesmith.x86_64.tkrajina_1776_gpxpy.09fc46b3"
+  }
+ }
+}
