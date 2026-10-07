@@ -1,0 +1,26 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0065-p01",
+ "round_id": "r0065",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nRun.iter_inner_content() returns empty list when run contains text elements\n\n#### Description\n\nWhen iterating over inner content items in a run that contains text elements, the method returns an empty list instead of the expected content items.\n\n#### Steps/Code to Reproduce\n\n```python\nfrom docx import Document\nfrom docx.text.run import Run\n\n# Create a document with a run containing text and other elements\ndoc = Document()\nparagraph = doc.add_paragraph()\nrun = paragraph.add_run(\"foo\")\n\n# Try to iterate over inner content\ninner_content = list(run.iter_inner_content())\nprint(f\"Inner content items: {len(inner_content)}\")\nprint(f\"Content types: {[type(item).__name__ for item in inner_content]}\")\n\n# Expected: Should return content items including text\n# Actual: Returns empty list\n```\n\nThe issue occurs specifically when runs contain text elements mixed with other content like line breaks or page breaks. The method should return the text content as string items along with other elements, but instead returns nothing.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "python-openxml__python-docx.0cf6d71f.func_pm_ctrl_shuffle__zhl7y084",
+  "environment": "jyangballin/swesmith.x86_64.python-openxml_1776_python-docx.0cf6d71f",
+  "fail_to_pass": [
+   "tests/text/test_run.py::DescribeRun::it_can_iterate_its_inner_content_items[w:r/(w:t\"abc\",w:br,w:lastRenderedPageBreak,w:noBreakHyphen,w:t\"def\")-expected2]",
+   "tests/text/test_run.py::DescribeRun::it_can_iterate_its_inner_content_items[w:r/(w:t\"foo\",w:cr,w:t\"bar\")-expected1]"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

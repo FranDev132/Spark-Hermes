@@ -1,0 +1,32 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0065-p13",
+ "round_id": "r0065",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nAlias detection broken for SQL statements without AS keyword\n\n#### Description\n\nWhen parsing SQL statements that use aliases without the explicit `AS` keyword, the alias detection is not working correctly. This affects various SQL constructs including column aliases, function aliases, and table aliases.\n\n#### Steps/Code to Reproduce\n\n```python\nimport sqlparse\n\n# Column alias without AS\np = sqlparse.parse('col[1] x')[0].tokens\nprint(f\"Expected alias: 'x', Got: {p[0].get_alias()}\")\n\n# Literal alias without AS  \np = sqlparse.parse('1 foo')[0].tokens\nprint(f\"Expected alias: 'foo', Got: {p[0].get_alias()}\")\n\n# Function alias without AS\np = sqlparse.parse('foo() bar')[0].tokens[0]\nprint(f\"Expected alias: 'bar', Got: {p.get_alias()}\")\n\n# Table alias in UPDATE statement\ns = 'update a t set t.b=1'\nstmts = sqlparse.parse(s)\nprint(f\"Expected alias: 't', Got: {stmts[0].tokens[2].get_alias()}\")\n```\n\nAll of these should return the expected alias names but currently return `None` or incorrect values.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "andialbrecht__sqlparse.e57923b3.func_basic__sbt2ztom",
+  "environment": "jyangballin/swesmith.x86_64.andialbrecht_1776_sqlparse.e57923b3",
+  "fail_to_pass": [
+   "tests/test_grouping.py::test_aliased_column_without_as",
+   "tests/test_grouping.py::test_aliased_function_without_as",
+   "tests/test_grouping.py::test_aliased_literal_without_as",
+   "tests/test_grouping.py::test_grouping_alias",
+   "tests/test_grouping.py::test_grouping_alias_case",
+   "tests/test_parse.py::test_aliased_array_index",
+   "tests/test_parse.py::test_get_real_name",
+   "tests/test_parse.py::test_schema_qualified_array_index"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

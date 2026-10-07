@@ -1,0 +1,31 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0065-p19",
+ "round_id": "r0065",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nNameError when generating C source with signal choices\n\n#### Description\n\nWhen generating C source code from DBC files that contain signals with choices, a `NameError: name 'items' is not defined` error occurs.\n\n#### Steps/Code to Reproduce\n\n```python\nimport cantools\n\n# Load a DBC file with signal choices and generate C source\ndb = cantools.database.load_file('tests/files/dbc/choices.dbc')\nc_source = db.as_c_source()\n```\n\nOr using the command line:\n\n```bash\ncantools generate_c_source tests/files/dbc/choices.dbc\n```\n\n#### Expected behavior\n\nC source code should be generated successfully without errors.\n\n#### Actual behavior\n\n```\nNameError: name 'items' is not defined\n```\n\nThe error occurs when processing signals that have choices defined in the DBC file. The code generation process fails completely when encountering such signals.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "cantools__cantools.0c6a7871.func_pm_remove_assign__oub22w49",
+  "environment": "jyangballin/swesmith.x86_64.cantools_1776_cantools.0c6a7871",
+  "fail_to_pass": [
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source",
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source_bit_fields",
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source_database_name",
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source_no_signal_encode_decode",
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source_sender_node",
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source_sender_node_no_signal_encode_decode",
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source_working_directory"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

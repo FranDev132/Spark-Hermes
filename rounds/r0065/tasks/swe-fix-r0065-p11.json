@@ -1,0 +1,26 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0065-p11",
+ "round_id": "r0065",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\n# Request token endpoint returns malformed response\n\nI've discovered an issue with the request token endpoint in the OAuth1 implementation. When creating a request token, the response is malformed and doesn't follow the OAuth 1.0 specification.\n\n## Steps to reproduce\n\n1. Create a request token endpoint\n2. Make a valid request to the endpoint\n\n```python\nfrom oauthlib.oauth1 import RequestTokenEndpoint\nfrom oauthlib.oauth1.rfc5849 import RequestValidator\n\n# Create a validator and endpoint\nvalidator = RequestValidator()\nendpoint = RequestTokenEndpoint(validator)\n\n# Make a request\nuri = 'https://example.com/request_token'\nheaders = {'Authorization': 'OAuth oauth_consumer_key=\"key\",oauth_signature_method=\"PLAINTEXT\",oauth_signature=\"secret&\",oauth_timestamp=\"1234567890\",oauth_nonce=\"abc123\",oauth_version=\"1.0\",oauth_callback=\"https://client.example.com/callback\"'}\n\n# This should return a properly formatted response\nresp_headers, body, status = endpoint.create_request_token_response(uri, headers=headers)\nprint(body)\n```\n\n## Expected behavior\n\nThe response should be a properly formatted URL-encoded string with key-value pairs like:\n```\noauth_token=token&oauth_token_secret=secret&oauth_callback_confirmed=true\n```\n\n## Actual behavior\n\nThe response is malformed and contains only the values without their corresponding keys:\n```\ntoken&secret&false\n```\n\nAdditionally, the `oauth_callback_confirmed` value is set to 'false' instead of 'true' as required by the OAuth 1.0a specification.\n\nThis makes it impossible for clients to parse the response correctly since they can't identify which value corresponds to which parameter.\n\n## Additional information\n\nThis appears to be an issue with how the token response is being generated. The `urlencode` function is being called with the wrong arguments, and the callback confirmation flag is set incorrectly.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "oauthlib__oauthlib.1fd52536.func_basic__rt3vaecp",
+  "environment": "jyangballin/swesmith.x86_64.oauthlib_1776_oauthlib.1fd52536",
+  "fail_to_pass": [
+   "tests/oauth1/rfc5849/endpoints/test_request_token.py::RequestTokenEndpointTest::test_uri_provided_realm",
+   "tests/oauth1/rfc5849/endpoints/test_request_token.py::RequestTokenEndpointTest::test_valid_request"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

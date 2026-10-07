@@ -1,0 +1,25 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0065-p09",
+ "round_id": "r0065",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nLatentStyle quick_style property inverts boolean values\n\n#### Description\n\nWhen setting the `quick_style` property on a `_LatentStyle` object, boolean values are being inverted. Setting `quick_style = True` results in the underlying XML attribute being set to false, and vice versa.\n\n#### Steps/Code to Reproduce\n\n```python\nfrom docx.styles.latent import _LatentStyle\n\n# Create a latent style instance (assuming proper setup)\nlatent_style = _LatentStyle(element)\n\n# Setting quick_style to True should set qFormat to true in XML\nlatent_style.quick_style = True\n# But the actual XML shows qFormat=\"0\" (false) instead of qFormat=\"1\" (true)\n\n# Setting quick_style to False should set qFormat to false in XML  \nlatent_style.quick_style = False\n# But the actual XML shows qFormat=\"1\" (true) instead of qFormat=\"0\" (false)\n```\n\nThe expected behavior is that `quick_style = True` should result in `qFormat=\"1\"` in the XML, and `quick_style = False` should result in `qFormat=\"0\"`.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "python-openxml__python-docx.0cf6d71f.func_basic__scerpa1f",
+  "environment": "jyangballin/swesmith.x86_64.python-openxml_1776_python-docx.0cf6d71f",
+  "fail_to_pass": [
+   "tests/styles/test_latent.py::DescribeLatentStyle::it_can_change_its_on_off_properties[on_off_set_fixture4]"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

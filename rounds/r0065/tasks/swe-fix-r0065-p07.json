@@ -1,0 +1,25 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0065-p07",
+ "round_id": "r0065",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nProfile5 CRC computation fails when passing Message object\n\n#### Description\n\nWhen calling `compute_profile5_crc` with a Message object, the function incorrectly treats the Message as a data_id integer, causing an AttributeError when trying to access the `autosar` attribute.\n\n#### Steps/Code to Reproduce\n\n```python\nimport cantools\n\n# Load AUTOSAR database\ndb = cantools.db.load_file('tests/files/arxml/system-4.2.arxml')\nmsg = db.get_message_by_name('Message3')\n\n# This should work but fails\nresult = cantools.autosar.compute_profile5_crc(b'\\xff\\xff\\x11\"3DU', msg)\n```\n\nThe error occurs because the function logic is reversed - it checks if the parameter is a Message instance but then assigns it to `data_id` instead of using it as a message object.\n\n#### Expected Behavior\n\nThe function should properly handle Message objects by extracting the E2E configuration from `msg.autosar.e2e` and use the appropriate payload length and data ID.\n\n#### Actual Behavior\n\n```\nAttributeError: 'int' object has no attribute 'autosar'\n```\n\nThe Message object gets incorrectly assigned to `data_id` and then the code tries to access `.autosar` on what it thinks is a Message but is actually an integer.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "cantools__cantools.0c6a7871.func_pm_ctrl_invert_if__5dou9fga",
+  "environment": "jyangballin/swesmith.x86_64.cantools_1776_cantools.0c6a7871",
+  "fail_to_pass": [
+   "tests/test_autosar.py::CanToolsAutosarTest::test_autosar4_e2e_profile5"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}
