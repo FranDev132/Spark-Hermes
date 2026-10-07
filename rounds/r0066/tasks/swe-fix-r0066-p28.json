@@ -1,0 +1,26 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0066-p28",
+ "round_id": "r0066",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nDot notation parsing fails for table-valued functions with schema prefixes\n\n#### Description\n\nWhen parsing SQL with dot notation that includes table-valued functions with schema prefixes (like `a.b.tvfTest()`), the parser incorrectly prioritizes function parsing over identifier parsing, causing issues with multi-part identifiers.\n\n#### Steps/Code to Reproduce\n\n```python\nimport sqlglot\n\n# This should parse correctly but fails\nsql = \"SELECT t.x, y.z FROM x OUTER APPLY a.b.tvfTest(t.x) AS y(z)\"\nparsed = sqlglot.parse_one(sql, dialect=\"tsql\")\nprint(parsed)\n\n# Expected: Should handle a.b.tvfTest as a schema-prefixed function\n# Actual: Parser fails to correctly identify the multi-part function name\n```\n\nThe issue occurs specifically with table-valued functions that have schema prefixes in TSQL dialect, where the dot notation parsing doesn't correctly handle the precedence between function calls and identifier resolution.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "tobymao__sqlglot.036601ba.func_pm_op_swap__bc0ro2pr",
+  "environment": "jyangballin/swesmith.x86_64.tobymao_1776_sqlglot.036601ba",
+  "fail_to_pass": [
+   "tests/dialects/test_tsql.py::TestTSQL::test_lateral_table_valued_function",
+   "tests/dialects/test_tsql.py::TestTSQL::test_tsql"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

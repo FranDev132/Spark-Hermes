@@ -1,0 +1,29 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0066-p06",
+ "round_id": "r0066",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\n# NameError in simplify_not function when handling NOT expressions\n\nHi everyone,\n\nI discovered a bug in the `simplify_not` function in the optimizer module. When trying to run SQL queries that use NOT expressions with certain subquery predicates, the code crashes with a NameError.\n\n## Description\n\nThe issue occurs in the `simplify_not` function when processing NOT expressions that contain subquery predicates. The function tries to access a variable that doesn't exist in the current scope, causing a NameError.\n\n## Reproduction\n\nYou can reproduce this by running SQL queries that use NOT with subquery predicates, like:\n\n```sql\nSELECT * FROM table WHERE NOT (x IN (SELECT y FROM table2))\n```\n\nWhen the optimizer tries to simplify this expression, it crashes with:\n\n```\nNameError: name 'this' is not defined\n```\n\nI noticed this happens specifically in the section of code that handles complement subquery predicates. The issue seems to be related to variable scoping, where a variable is being referenced but wasn't properly defined in that context.\n\nThis affects several optimization paths including normalize, simplify, and the TPC-DS/TPC-H benchmarks.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "tobymao__sqlglot.036601ba.func_pm_remove_assign__9a4u83h2",
+  "environment": "jyangballin/swesmith.x86_64.tobymao_1776_sqlglot.036601ba",
+  "fail_to_pass": [
+   "tests/test_optimizer.py::TestOptimizer::test_normalize",
+   "tests/test_optimizer.py::TestOptimizer::test_optimize",
+   "tests/test_optimizer.py::TestOptimizer::test_simplify",
+   "tests/test_optimizer.py::TestOptimizer::test_tpcds",
+   "tests/test_optimizer.py::TestOptimizer::test_tpch"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

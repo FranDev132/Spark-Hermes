@@ -1,0 +1,26 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0066-p18",
+ "round_id": "r0066",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nMonitor filter reset doesn't clear filtered message list properly\n\n#### Description\n\nWhen using the monitor subcommand and resetting the display with 'r', the filtered message list is not properly cleared, causing duplicate messages to appear in the display.\n\n#### Steps/Code to Reproduce\n\n```python\nimport can\nfrom cantools.subparsers.monitor import Monitor\n\n# Create a monitor instance\nmonitor = Monitor(stdscr, args)\n\n# Add some messages\nmonitor.on_message_received(can.Message(arbitration_id=496, data=b'\\xc0\\x06\\xe0\\x00\\x00\\x00\\x00\\x00', timestamp=3))\n\n# Apply a filter (press 'f', then 'E', then enter)\n# Then reset (press 'r')\n# Messages appear duplicated in the display\n```\n\nThe issue occurs when:\n1. Messages are received and displayed\n2. A filter is applied using the 'f' key\n3. The display is reset using the 'r' key\n4. Messages that were previously filtered now appear multiple times\n\nExpected behavior: After reset, each message should appear only once in the display.\nActual behavior: Messages appear duplicated, with the same message showing multiple times.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "cantools__cantools.0c6a7871.func_pm_remove_assign__dl1gca1d",
+  "environment": "jyangballin/swesmith.x86_64.cantools_1776_cantools.0c6a7871",
+  "fail_to_pass": [
+   "tests/test_monitor.py::CanToolsMonitorTest::test_filter",
+   "tests/test_monitor.py::CanToolsMonitorTest::test_reset"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

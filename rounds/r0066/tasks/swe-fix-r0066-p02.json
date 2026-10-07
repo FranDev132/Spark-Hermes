@@ -1,0 +1,25 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0066-p02",
+ "round_id": "r0066",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nAugAssign node as_string output has incorrect operand order\n\n#### Description\n\nWhen converting an AugAssign node to string representation, the operands are in the wrong order. The target and value are swapped, resulting in incorrect string output.\n\n#### Steps/Code to Reproduce\n\n```python\nimport astroid\n\ncode = \"\"\"\nx += 5\n\"\"\"\n\nmodule = astroid.parse(code)\naugassign_node = module.body[0]\nprint(augassign_node.as_string())\n```\n\nExpected output: `x += 5`\nActual output: `5 += x`\n\nThe issue affects all augmented assignment operations (+=, -=, *=, /=, etc.) where the string representation shows the value on the left side and target on the right side, which is syntactically incorrect.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "pylint-dev__astroid.b114f6b5.func_basic__tx493pid",
+  "environment": "jyangballin/swesmith.x86_64.pylint-dev_1776_astroid.b114f6b5",
+  "fail_to_pass": [
+   "tests/test_nodes.py::AsStringTest::test_module_as_string"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

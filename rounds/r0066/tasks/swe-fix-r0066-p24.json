@@ -1,0 +1,28 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0066-p24",
+ "round_id": "r0066",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nWebApplicationClient constructor arguments swapped causing incorrect client_id assignment\n\n#### Description\n\nWhen creating a WebApplicationClient instance, the client_id and code parameters appear to be swapped internally, causing the client_id to be stored as the code and vice versa. This results in incorrect behavior when preparing authorization requests and token requests.\n\n#### Steps/Code to Reproduce\n\n```python\nfrom oauthlib.oauth2 import WebApplicationClient\n\n# Create a client with a specific client_id\nclient = WebApplicationClient('my_client_id')\n\n# Try to prepare a request URI - this should include the client_id in the URL\nuri = client.prepare_request_uri('https://example.com/auth')\nprint(\"Generated URI:\", uri)\n# Expected: https://example.com/auth?client_id=my_client_id&response_type=code\n# Actual: Incorrect client_id value appears\n\n# Check what's actually stored\nprint(\"Client ID:\", client.client_id)\nprint(\"Code:\", client.code)\n# Expected: Client ID: my_client_id, Code: None\n# Actual: Values are swapped\n```\n\nThe issue also affects token request preparation where the wrong values are used for authentication and authorization code exchange.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "oauthlib__oauthlib.1fd52536.combine_file__vn256c4e",
+  "environment": "jyangballin/swesmith.x86_64.oauthlib_1776_oauthlib.1fd52536",
+  "fail_to_pass": [
+   "tests/oauth2/rfc6749/clients/test_web_application.py::WebApplicationClientTest::test_auth_grant_uri",
+   "tests/oauth2/rfc6749/clients/test_web_application.py::WebApplicationClientTest::test_prepare_authorization_requeset",
+   "tests/oauth2/rfc6749/clients/test_web_application.py::WebApplicationClientTest::test_prepare_request_body",
+   "tests/oauth2/rfc6749/clients/test_web_application.py::WebApplicationClientTest::test_request_body"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}
