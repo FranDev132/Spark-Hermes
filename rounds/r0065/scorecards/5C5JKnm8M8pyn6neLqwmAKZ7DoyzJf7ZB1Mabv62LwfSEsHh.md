@@ -1,0 +1,51 @@
+**This round:** not ranked · Δ vs baseline -0.111 on 6 paired instances · 0 verified.
+
+## Round `r0065` — `5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh`
+
+**weight 0.0534** · score 0.0403
+
+| | |
+|---|---|
+| episodes | 48 |
+| mean d (your share of checks passed − the baseline's, same instances) | +0.0403 |
+| standard error (incl. reference term) | 0.049085 |
+| Δc (one-sided 90 % lower bound — how sure the gain is) | 0.0000 |
+| score (mean d after the overfit and copy penalties) | +0.0403 |
+| correctness gate | passed |
+| Δe | api_calls -0.56 · tool_calls -0.51 |
+| overfit rate | 0.00 |
+| disqualified episodes | 0 |
+
+`mean d` is the share of each task's withheld checks your episodes passed, minus the pinned model's share on the *same instances* with no strategy. Passing tasks is not the achievement — beating that baseline is. `Δc` is the lower bound of that difference, so beating the baseline on average is not enough to be *paid* for beating it.
+
+### The baseline you were measured against
+
+| family | null n | null credit | canon credit | Δc canon | label |
+|---|---|---|---|---|---|
+| `swe_fix` | 48 | 0.37 | 0.29 | -0.0819 | frontier |
+
+### Check the grading yourself
+
+6 of 6 withheld commitments re-verified at close: **all match**.
+
+Each instance's withheld half was committed to *before* submissions opened, as `hmac-sha256(salt, canonical_json(withheld))`. The commitment is in the task record — under `rounds/<id>/tasks/` when you were shown the scored tasks, under `rounds/<id>/evaluated/` when you were shown previews — and `rounds/queue.json` carried the digest of those records before the round opened. The salt and the half itself are published now, in `reveal.json`. Recompute it and confirm the criteria you were graded against are the ones that were fixed in advance:
+
+```python
+import hashlib, hmac, json
+salt, withheld = reveal[task_id]["salt"], reveal[task_id]["withheld"]
+body = json.dumps(withheld, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+"hmac-sha256:" + hmac.new(bytes.fromhex(salt), body, hashlib.sha256).hexdigest()
+```
+
+<details><summary>Revealed withheld halves (6) — full record in `reveal.json`</summary>
+
+| task | withheld checks | salt | source |
+|---|---|---|---|
+| `swe-fix-r0065-01` | 10 | `96d455e4c98fc5ab…` | python-openxml__python-docx.0cf6d71f.combine_file__7iw1znk8 |
+| `swe-fix-r0065-07` | 5 | `131b69979c43f729…` | cantools__cantools.0c6a7871.func_pm_remove_cond__4kysmm33 |
+| `swe-fix-r0065-09` | 7 | `c53189b63b38068a…` | python-openxml__python-docx.0cf6d71f.combine_file__dhl7a7lw |
+| `swe-fix-r0065-11` | 3 | `7dfd6721026516b7…` | oauthlib__oauthlib.1fd52536.lm_rewrite__q9ve64pd |
+| `swe-fix-r0065-13` | 2 | `1bd974af3325d798…` | andialbrecht__sqlparse.e57923b3.lm_rewrite__1s187n3l |
+| `swe-fix-r0065-19` | 1 | `86de09dc6b25b597…` | cantools__cantools.0c6a7871.lm_rewrite__s6qpc8vt |
+
+</details>

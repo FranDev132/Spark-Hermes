@@ -1,0 +1,226 @@
+{
+ "swe-fix-r0065-01": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/oxml/parts/test_document.py::DescribeCT_Body::it_can_clear_all_its_content[clear_fixture0]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oxml/parts/test_document.py::DescribeCT_Body::it_can_clear_all_its_content[clear_fixture1]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oxml/parts/test_document.py::DescribeCT_Body::it_can_clear_all_its_content[clear_fixture2]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oxml/parts/test_document.py::DescribeCT_Body::it_can_clear_all_its_content[clear_fixture3]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/oxml/parts/test_document.py::DescribeCT_Body::it_can_clear_all_its_content[clear_fixture4]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_blkcntnr.py::DescribeBlockItemContainer::it_can_iterate_its_inner_content"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_document.py::Describe_Body::it_can_clear_itself_of_all_content_it_holds[clear_fixture0]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_document.py::Describe_Body::it_can_clear_itself_of_all_content_it_holds[clear_fixture1]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_document.py::Describe_Body::it_can_clear_itself_of_all_content_it_holds[clear_fixture2]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_document.py::Describe_Body::it_can_clear_itself_of_all_content_it_holds[clear_fixture3]"
+    ]
+   ],
+   "assets_sha256": "3680a1e679a4fccf4e5aa00add4a15281fb216d8e54af08e38268113b9521742",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "96d455e4c98fc5ab1cca9b19e4f7596c13c82dd74f0abae47ec4393100292694",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "python-openxml__python-docx.0cf6d71f.combine_file__7iw1znk8",
+   "environment": "jyangballin/swesmith.x86_64.python-openxml_1776_python-docx.0cf6d71f"
+  }
+ },
+ "swe-fix-r0065-07": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/test_autosar.py::CanToolsAutosarTest::test_autosar3_e2e_profile2"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_autosar.py::CanToolsAutosarTest::test_autosar4_e2e_profile5"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_database.py::CanToolsDatabaseTest::test_gather_signals"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_database.py::CanToolsDatabaseTest::test_system_3_arxml"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_list.py::CanToolsListTest::test_arxml3"
+    ]
+   ],
+   "assets_sha256": "a849025dd2b1d0fad0c3f80d685c389545a514f7d14a371ae1606a53144c096f",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "131b69979c43f729a8d4ddd3d6c41ac3e0a363705e71d49f3d2525bc2f17b0c0",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "cantools__cantools.0c6a7871.func_pm_remove_cond__4kysmm33",
+   "environment": "jyangballin/swesmith.x86_64.cantools_1776_cantools.0c6a7871"
+  }
+ },
+ "swe-fix-r0065-09": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/opc/test_pkgwriter.py::Describe_ContentTypesItem::it_can_compose_content_types_element[xml_for_fixture0]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/opc/test_pkgwriter.py::Describe_ContentTypesItem::it_can_compose_content_types_element[xml_for_fixture1]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/opc/test_pkgwriter.py::Describe_ContentTypesItem::it_can_compose_content_types_element[xml_for_fixture2]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/opc/test_pkgwriter.py::Describe_ContentTypesItem::it_can_compose_content_types_element[xml_for_fixture3]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/opc/test_pkgwriter.py::Describe_ContentTypesItem::it_can_compose_content_types_element[xml_for_fixture4]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/opc/test_pkgwriter.py::Describe_ContentTypesItem::it_can_compose_content_types_element[xml_for_fixture5]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/opc/test_pkgwriter.py::Describe_ContentTypesItem::it_can_compose_content_types_element[xml_for_fixture6]"
+    ]
+   ],
+   "assets_sha256": "8b375d72ea62991608a3f16e6a707468336ca061d46d33925c19d98f999a6346",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "c53189b63b38068a5dd1b4f0dc5ab75a80d74519817996cb7b7a4b3d3e5b8ab8",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "python-openxml__python-docx.0cf6d71f.combine_file__dhl7a7lw",
+   "environment": "jyangballin/swesmith.x86_64.python-openxml_1776_python-docx.0cf6d71f"
+  }
+ },
+ "swe-fix-r0065-11": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/openid/connect/core/endpoints/test_userinfo_endpoint.py::UserInfoEndpointTest::test_userinfo_json_response"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/openid/connect/core/endpoints/test_userinfo_endpoint.py::UserInfoEndpointTest::test_userinfo_jwt_response"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/openid/connect/core/endpoints/test_userinfo_endpoint.py::UserInfoEndpointTest::test_userinfo_token_no_openid_scope"
+    ]
+   ],
+   "assets_sha256": "36267a28a58eddf6673626c5b53b0fc82e03ef9e881cbbdf7aa06ec811607288",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "7dfd6721026516b7ee4498f48116990cc3187f9331294deb07a7184ca07d0e0d",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "oauthlib__oauthlib.1fd52536.lm_rewrite__q9ve64pd",
+   "environment": "jyangballin/swesmith.x86_64.oauthlib_1776_oauthlib.1fd52536"
+  }
+ },
+ "swe-fix-r0065-13": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/test_format.py::TestFormatReindentAligned::test_group_by"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_format.py::TestFormatReindentAligned::test_group_by_subquery"
+    ]
+   ],
+   "assets_sha256": "ef35a861cdfb5f3007c918f43de5cee99c7926b93a78c07f6f7067108a7cb709",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "1bd974af3325d798fe850ebf8372d5b51e120f516f988a3493d92ff7ee7b814c",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "andialbrecht__sqlparse.e57923b3.lm_rewrite__1s187n3l",
+   "environment": "jyangballin/swesmith.x86_64.andialbrecht_1776_sqlparse.e57923b3"
+  }
+ },
+ "swe-fix-r0065-19": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/test_monitor.py::CanToolsMonitorTest::test_filter"
+    ]
+   ],
+   "assets_sha256": "3e5a0cabe4f9bb6331ca6b843e656f9a6af8aefa7f73af804a26e5b5f49c8b00",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "86de09dc6b25b5977c55c13e4f5f70fb333da9dfe593ac0038317b4af637c6c4",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "cantools__cantools.0c6a7871.lm_rewrite__s6qpc8vt",
+   "environment": "jyangballin/swesmith.x86_64.cantools_1776_cantools.0c6a7871"
+  }
+ }
+}
