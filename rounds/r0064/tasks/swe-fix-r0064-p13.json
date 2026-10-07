@@ -1,0 +1,33 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0064-p13",
+ "round_id": "r0064",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\ncamel_to_snake_case function produces incorrect output for C source generation\n\n#### Description\n\nThe `camel_to_snake_case` function in `c_source.py` is not converting camelCase strings to snake_case correctly. Instead of producing lowercase snake_case identifiers, it's generating uppercase identifiers with double underscores.\n\n#### Steps/Code to Reproduce\n\n```python\nfrom cantools.database.can.c_source import camel_to_snake_case\n\n# Expected behavior\nresult = camel_to_snake_case(\"ExampleMessage\")\nprint(f\"Got: {result}\")\nprint(f\"Expected: example_message\")\n\n# This affects C source generation\nresult2 = camel_to_snake_case(\"AverageRadius\") \nprint(f\"Got: {result2}\")\nprint(f\"Expected: average_radius\")\n```\n\nThe function should convert camelCase/PascalCase strings to lowercase snake_case format, but instead it's producing uppercase strings with double underscores where single underscores should be.\n\nThis breaks C source code generation as function names and struct names become malformed, causing compilation issues and inconsistent naming conventions in the generated C code.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "cantools__cantools.0c6a7871.func_basic__khmcw6sf",
+  "environment": "jyangballin/swesmith.x86_64.cantools_1776_cantools.0c6a7871",
+  "fail_to_pass": [
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source",
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source_bit_fields",
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source_database_name",
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source_generate_fuzzer",
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source_no_signal_encode_decode",
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source_sender_node",
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source_sender_node_no_signal_encode_decode",
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source_sym",
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source_working_directory"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

@@ -1,0 +1,30 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0064-p03",
+ "round_id": "r0064",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nSignal range validation not working properly in message encoding\n\nWhen encoding CAN messages with signals that have minimum/maximum range constraints, the validation is not working as expected. Values that should trigger EncodeError exceptions for being out of range are being silently accepted instead.\n\n#### Steps/Code to Reproduce\n\n```python\nimport cantools\n\n# Load a database with signal range constraints\ndb = cantools.database.load_file('tests/files/kcd/signal_range.kcd')\n\n# This should raise an EncodeError but doesn't\ntry:\n    db.encode_message('Message1', {'Signal1': 0})  # Signal1 has minimum=1\n    print(\"ERROR: Should have raised EncodeError for value below minimum\")\nexcept cantools.database.EncodeError as e:\n    print(f\"Correctly caught: {e}\")\n\ntry:\n    db.encode_message('Message1', {'Signal1': 3})  # Signal1 has maximum=2  \n    print(\"ERROR: Should have raised EncodeError for value above maximum\")\nexcept cantools.database.EncodeError as e:\n    print(f\"Correctly caught: {e}\")\n```\n\nThe encoding succeeds when it should fail with range validation errors. Expected behavior is that values outside the defined signal minimum/maximum ranges should raise EncodeError exceptions with descriptive messages about the constraint violations.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "cantools__cantools.0c6a7871.func_basic__gq2qh7na",
+  "environment": "jyangballin/swesmith.x86_64.cantools_1776_cantools.0c6a7871",
+  "fail_to_pass": [
+   "tests/test_database.py::CanToolsDatabaseTest::test_encode_signal_strict",
+   "tests/test_database.py::CanToolsDatabaseTest::test_encode_signal_strict_negative_scaling_05",
+   "tests/test_database.py::CanToolsDatabaseTest::test_encode_signal_strict_negative_scaling_09",
+   "tests/test_database.py::CanToolsDatabaseTest::test_encode_signal_strict_negative_scaling_11",
+   "tests/test_database.py::CanToolsDatabaseTest::test_encode_signal_strict_negative_scaling_17",
+   "tests/test_database.py::CanToolsDatabaseTest::test_encode_signal_strict_negative_scaling_18"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

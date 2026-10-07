@@ -1,0 +1,27 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0064-p07",
+ "round_id": "r0064",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nLatentStyle.locked property returns inverted boolean value\n\n#### Description\n\nThe `locked` property on `_LatentStyle` objects is returning the opposite boolean value of what it should. When a latent style is actually locked, the property returns `False`, and when it's unlocked, it returns `True`.\n\n#### Steps/Code to Reproduce\n\n```python\nfrom docx import Document\nfrom docx.styles.latent import _LatentStyle\n\n# Create a document and access latent styles\ndoc = Document()\nlatent_styles = doc.styles.latent_styles\n\n# Get a latent style that should be locked\nlatent_style = latent_styles['Heading 1']\n\n# Check the locked property - this will return the wrong value\nprint(f\"Locked property: {latent_style.locked}\")\n# Expected: True (if the style is actually locked)\n# Actual: False (inverted result)\n```\n\nThe issue affects any code that relies on the `locked` property to determine whether a latent style is locked for formatting protection purposes.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "python-openxml__python-docx.0cf6d71f.func_basic__llntaziv",
+  "environment": "jyangballin/swesmith.x86_64.python-openxml_1776_python-docx.0cf6d71f",
+  "fail_to_pass": [
+   "tests/styles/test_latent.py::DescribeLatentStyle::it_knows_its_on_off_properties[on_off_get_fixture1]",
+   "tests/styles/test_latent.py::DescribeLatentStyle::it_knows_its_on_off_properties[on_off_get_fixture5]",
+   "tests/styles/test_latent.py::DescribeLatentStyle::it_knows_its_on_off_properties[on_off_get_fixture9]"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

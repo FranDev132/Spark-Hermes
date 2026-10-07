@@ -1,0 +1,26 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0064-p05",
+ "round_id": "r0064",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nDocument creation fails with FileNotFoundError when loading default settings\n\n#### Description\n\nWhen creating a new document, the library fails to load the default settings template file, causing document creation to fail with a FileNotFoundError.\n\n#### Steps/Code to Reproduce\n\n```python\nfrom docx import Document\n\n# This should create a new document but fails\ndoc = Document()\n```\n\nThe error occurs during the initialization process when the library tries to load the default settings XML template. The issue appears to be related to incorrect path construction for locating the template file.\n\n#### Expected Behavior\n\nCreating a new Document should work without errors and produce a valid document object.\n\n#### Actual Behavior\n\nDocument creation fails with a FileNotFoundError when trying to read the default settings template.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "python-openxml__python-docx.0cf6d71f.combine_module__jf6l9p40",
+  "environment": "jyangballin/swesmith.x86_64.python-openxml_1776_python-docx.0cf6d71f",
+  "fail_to_pass": [
+   "tests/parts/test_document.py::DescribeDocumentPart::it_can_get_the_id_of_a_style",
+   "tests/parts/test_settings.py::DescribeSettingsPart::it_constructs_a_default_settings_part_to_help"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

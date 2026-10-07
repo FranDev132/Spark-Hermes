@@ -1,0 +1,33 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0064-p02",
+ "round_id": "r0064",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nC source generation produces incorrect struct for messages with signals\n\n#### Description\n\nWhen generating C source code from DBC files, the struct generation logic is inverted. Messages that contain signals are being treated as empty messages and get a dummy field, while empty messages are incorrectly getting signal fields. Additionally, message comments are being handled incorrectly - messages with comments are not getting their comments included in the generated code.\n\n#### Steps/Code to Reproduce\n\n```python\nimport cantools\n\n# Load a DBC file with a message that has signals\ndb = cantools.database.load_file('tests/files/dbc/motohawk.dbc')\n\n# Generate C source code\nheader, source = cantools.database.can.c_source.generate_c_source(db)\n\n# The generated struct should contain the actual signal fields, not a dummy field\nprint(header)\n```\n\nThe generated struct incorrectly shows:\n```c\nstruct motohawk_example_message_t {\n    /**\n     * Dummy signal in empty message.\n     */\n    uint8_t dummy;\n};\n```\n\nBut should show the actual signal fields:\n```c\nstruct motohawk_example_message_t {\n    uint8_t enable;\n    uint8_t average_radius;\n    int16_t temperature;\n};\n```\n\n#### Expected Behavior\n\nMessages with signals should generate structs containing the signal fields, and messages without signals should get the dummy field. Message comments should be included in the generated code when present.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "cantools__cantools.0c6a7871.func_basic__jsu29ma5",
+  "environment": "jyangballin/swesmith.x86_64.cantools_1776_cantools.0c6a7871",
+  "fail_to_pass": [
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source",
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source_bit_fields",
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source_database_name",
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source_generate_fuzzer",
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source_no_signal_encode_decode",
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source_sender_node",
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source_sender_node_no_signal_encode_decode",
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source_sym",
+   "tests/test_command_line.py::CanToolsCommandLineTest::test_generate_c_source_working_directory"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

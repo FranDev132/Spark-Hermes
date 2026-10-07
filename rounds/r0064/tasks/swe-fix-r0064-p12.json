@@ -1,0 +1,25 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0064-p12",
+ "round_id": "r0064",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nParagraph parent reference broken after adding paragraph to container\n\n#### Description\n\nWhen adding a new paragraph to a block container using `_add_paragraph()`, the paragraph's parent reference is not set correctly. The paragraph's `_parent` attribute becomes `None` instead of referencing the container that created it.\n\n#### Steps/Code to Reproduce\n\n```python\nfrom docx import Document\nfrom docx.text.paragraph import Paragraph\n\n# Create a document and get a container\ndoc = Document()\ncontainer = doc._body\n\n# Add a paragraph to the container\nnew_paragraph = container._add_paragraph()\n\n# Check the parent reference\nprint(f\"Paragraph parent: {new_paragraph._parent}\")\nprint(f\"Expected parent: {container}\")\nprint(f\"Parent is None: {new_paragraph._parent is None}\")\n```\n\nExpected output:\n```\nParagraph parent: <docx.blkcntnr.BlockItemContainer object at 0x...>\nExpected parent: <docx.blkcntnr.BlockItemContainer object at 0x...>\nParent is None: False\n```\n\nActual output:\n```\nParagraph parent: None\nExpected parent: <docx.blkcntnr.BlockItemContainer object at 0x...>\nParent is None: True\n```\n\nThis breaks the parent-child relationship that should exist between containers and their paragraphs.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "python-openxml__python-docx.0cf6d71f.func_basic__yzrx3zrv",
+  "environment": "jyangballin/swesmith.x86_64.python-openxml_1776_python-docx.0cf6d71f",
+  "fail_to_pass": [
+   "tests/test_blkcntnr.py::DescribeBlockItemContainer::it_adds_a_paragraph_to_help"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}
