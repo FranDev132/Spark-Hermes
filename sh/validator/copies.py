@@ -84,7 +84,8 @@ def assess(round_id: str, current: list[Sealed], past: list[Sealed]) -> dict[str
     out = {}
     for c in current:
         mine = lambda b: b.hotkey == c.hotkey or (c.github and b.github and b.github == c.github)  # noqa: E731
-        copied, by_source = 0, {}
+        copied = 0
+        by_source: dict[str, int] = {}
         for sh in c.shingles:
             users = seen.get(sh, ())
             own = min((b.round_id for b in users if mine(b)), default=round_id)
@@ -98,7 +99,7 @@ def assess(round_id: str, current: list[Sealed], past: list[Sealed]) -> dict[str
         first = min((b.round_id for b in own_past if _share(c.shingles, b.shingles) >= SAME_STRATEGY), default=round_id)
         out[c.hotkey] = {
             "share": round(share, 4),
-            "source": max(by_source, key=by_source.get) if by_source else None,
+            "source": max(by_source.items(), key=lambda kv: kv[1])[0] if by_source else None,
             "first_seen": first,
             "near_dup": share >= NEAR_DUP,
             "prior_copy": round(share, 4) if COPY_FROM <= share < NEAR_DUP else 0.0,
