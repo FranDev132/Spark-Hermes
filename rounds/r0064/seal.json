@@ -1,0 +1,89 @@
+{
+ "schema": "sh-seal-v3",
+ "round_id": "r0064",
+ "sealed_at": 1791369222.7277064,
+ "active": {
+  "5DPhKi77DLciQzNDr6iCZ2cD41oHcV75vLdf82d3crVnERN6": {
+   "pr": 579,
+   "head": "4fd6a275580091e41b03612ff89b4a3157287207",
+   "bundle_sha256": "249cce8a62d101df4efaa07c2fa82325eb2025fb3f665c61378e51004ec09bb6",
+   "incumbent": true,
+   "was_incumbent": false,
+   "defense": true,
+   "github": "kaivaryn"
+  },
+  "5Di3Dd8PKn7uQbBc4WrzxkUqqvSL8QS3KVgCPSt3kzPE5KFb": {
+   "pr": 573,
+   "head": "3511f4b58fe76b20ae0d3e8ef94b0bba7a4ebacf",
+   "bundle_sha256": "1c2f3c7d26f94db8ae5170d3aa93fdfd34ffc442c3f42756714aec4be95c91c0",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "harrythomasben"
+  },
+  "5DSD14t7dACJcd9f8rPdrkMVngRqLUnM3EnM3dHfHLZTHJGf": {
+   "pr": 574,
+   "head": "935bee6f4d2358405ce056b67bd79f2ec24f8562",
+   "bundle_sha256": "3010839935366420db65a3fbc4953138688e5c272363a3094ce2de0bbccf3e91",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "FranDev132"
+  },
+  "5Et8zmN8dq4eFvy7grf2fqtf5PE2mgngTdr1WA6ADJJUUCrE": {
+   "pr": 575,
+   "head": "32af8b03232eb4f9560990bdf6578062dd0a0de6",
+   "bundle_sha256": "8797b9c9a8e16938096d99a00c3b0089d1cfdd72f8145b424de288ed053a6c50",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "ismayilovibadet802-svg"
+  },
+  "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ": {
+   "pr": 576,
+   "head": "43656d9583218b3643e7cc5b80d9b7fbcd8746a1",
+   "bundle_sha256": "615631349f5e2737db8e587fe6ffb2def7c8c3c5f6b23e6a0771b11eb57a21e5",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "dato-bitar"
+  },
+  "5Dh9YpJeTYKmgh9weSH9j24AtgEwVWoW37xsXakYGcpqVbKJ": {
+   "pr": 577,
+   "head": "12011c3512924daf88cf6aade10673df98f183ad",
+   "bundle_sha256": "9286da3e592ae67141d9d4f39322e7e2936d787ca1aae864b2bff6d2674d2740",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "e11734937-beep"
+  },
+  "5D4txntYBCZ7dAXuFDHEubK1f84LYzPjBNCtVELenfUPCQzK": {
+   "pr": 578,
+   "head": "b1c91c7149afd4835251d135996d4c7335cba8db",
+   "bundle_sha256": "f23189d8c6429ddc0e1fb474c1128d6a9207983aed2a2231070b17a66781b445",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "widecloud"
+  },
+  "5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh": {
+   "pr": 581,
+   "head": "f9a2b9c8e9e7484f848f4371a745da6a9afb4277",
+   "bundle_sha256": "87d2e89f68a3fd0a626860d5044c18788a7618b5eba9ce73aa41df48b8aa56a3",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "kaivexa"
+  },
+  "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj": {
+   "pr": 580,
+   "head": "651006a7205f4f7a02cec2f663636bf851153632",
+   "bundle_sha256": "51ff78a9df6749cb153b7161e798a8b981f33afeefe3e76863601eeba55cdad7",
+   "incumbent": false,
+   "was_incumbent": false,
+   "defense": false,
+   "github": "gold-tree-tech"
+  }
+ },
+ "rejected": {}
+}
