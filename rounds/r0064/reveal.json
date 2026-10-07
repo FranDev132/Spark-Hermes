@@ -1,0 +1,316 @@
+{
+ "swe-fix-r0064-02": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/test_autosar.py::CanToolsAutosarTest::test_autosar3_e2e_profile2"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_autosar.py::CanToolsAutosarTest::test_autosar4_e2e"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_autosar.py::CanToolsAutosarTest::test_autosar4_e2e_profile5"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_autosar.py::CanToolsAutosarTest::test_autosar4_secoc"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_database.py::CanToolsDatabaseTest::test_encode_decode_containers"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_database.py::CanToolsDatabaseTest::test_encode_mixed_signal"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_database.py::CanToolsDatabaseTest::test_gather_signals"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_database.py::CanToolsDatabaseTest::test_system_4_arxml"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_database.py::CanToolsDatabaseTest::test_unused_bit_pattern"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_list.py::CanToolsListTest::test_arxml4"
+    ]
+   ],
+   "assets_sha256": "b18e4ad99abe0c83b3ed419efe8a8872d6157d0765c96dc56cd124b0518d7957",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "82d5166002438de4a591398c44d654e9148a237ce61f48701ae2e151484d6817",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "cantools__cantools.0c6a7871.pr_701",
+   "environment": "jyangballin/swesmith.x86_64.cantools_1776_cantools.0c6a7871"
+  }
+ },
+ "swe-fix-r0064-03": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/test_plot.py::CanToolsPlotTest::test_start_absolute_seconds"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_plot.py::CanToolsPlotTest::test_stop_is_based_on_start_and_xlabel_shows_start"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_plot_unittests.py::CanToolsPlotUnittests::test_parse_user_input_absolute_time"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_plot_unittests.py::CanToolsPlotUnittests::test_parse_user_input_absolute_time_invalid_input"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_plot_unittests.py::CanToolsPlotUnittests::test_parse_user_input_absolute_time_output_formats"
+    ]
+   ],
+   "assets_sha256": "a8d42ae3852f5a7cfb37d0a88da07bfe6bd7f74ebe16b8dbd219d0d9a2fc07bc",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "655823add5bc4159eac7d50b4b768bbe392d0233f4b860842da221bf7557dd39",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "cantools__cantools.0c6a7871.lm_rewrite__z8sdi30b",
+   "environment": "jyangballin/swesmith.x86_64.cantools_1776_cantools.0c6a7871"
+  }
+ },
+ "swe-fix-r0064-05": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/image/test_image.py::DescribeBaseImageHeader::it_defines_content_type_as_an_abstract_property"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/image/test_image.py::DescribeImage::it_can_construct_from_an_image_file_like"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/image/test_image.py::DescribeImage::it_can_construct_from_an_image_path"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/image/test_image.py::DescribeImage::it_can_scale_its_dimensions[scale_fixture2]"
+    ]
+   ],
+   "assets_sha256": "1cec3cf5b8be3fedd245105c8ad69139d9233f984796000456847a52adb0e55a",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "7b214172cb6ae5e8f7fd1b8e5f9c06cac868e2d767e6d1adf503b5e0fa353369",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "python-openxml__python-docx.0cf6d71f.combine_file__cn9bvgsu",
+   "environment": "jyangballin/swesmith.x86_64.python-openxml_1776_python-docx.0cf6d71f"
+  }
+ },
+ "swe-fix-r0064-07": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/parts/test_story.py::DescribeStoryPart::it_can_create_a_new_pic_inline"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/styles/test_style.py::DescribeBaseStyle::it_can_change_whether_its_hidden[hidden_set_fixture1]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/styles/test_style.py::DescribeBaseStyle::it_can_change_whether_its_hidden[hidden_set_fixture2]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/styles/test_style.py::DescribeBaseStyle::it_can_change_whether_its_hidden[hidden_set_fixture3]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/styles/test_style.py::DescribeBaseStyle::it_can_change_whether_its_hidden[hidden_set_fixture4]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/styles/test_style.py::DescribeBaseStyle::it_can_change_whether_its_hidden[hidden_set_fixture5]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/styles/test_style.py::DescribeCharacterStyle::it_knows_which_style_it_is_based_on[base_get_fixture0]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/styles/test_style.py::DescribeCharacterStyle::it_knows_which_style_it_is_based_on[base_get_fixture1]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/styles/test_style.py::DescribeCharacterStyle::it_knows_which_style_it_is_based_on[base_get_fixture2]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_shape.py::DescribeInlineShape::it_can_change_its_display_dimensions"
+    ]
+   ],
+   "assets_sha256": "24f1da6df338292be30a960206927c0792f0cfd3bb600cff8546bcfceb220ee3",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "e28b9111562e1e0144fce27d9b0771742b8f9ce030d5d7f1c7f2638d8a81f13d",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "python-openxml__python-docx.0cf6d71f.combine_module__age1vw5u",
+   "environment": "jyangballin/swesmith.x86_64.python-openxml_1776_python-docx.0cf6d71f"
+  }
+ },
+ "swe-fix-r0064-12": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/text/test_parfmt.py::DescribeParagraphFormat::it_can_change_its_line_spacing[line_spacing_set_fixture0]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/text/test_parfmt.py::DescribeParagraphFormat::it_can_change_its_line_spacing[line_spacing_set_fixture1]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/text/test_parfmt.py::DescribeParagraphFormat::it_can_change_its_line_spacing[line_spacing_set_fixture2]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/text/test_parfmt.py::DescribeParagraphFormat::it_can_change_its_line_spacing[line_spacing_set_fixture3]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/text/test_parfmt.py::DescribeParagraphFormat::it_can_change_its_line_spacing[line_spacing_set_fixture4]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/text/test_parfmt.py::DescribeParagraphFormat::it_can_change_its_line_spacing[line_spacing_set_fixture5]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/text/test_parfmt.py::DescribeParagraphFormat::it_can_change_its_line_spacing[line_spacing_set_fixture7]"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/text/test_parfmt.py::DescribeParagraphFormat::it_can_change_its_line_spacing[line_spacing_set_fixture8]"
+    ]
+   ],
+   "assets_sha256": "0e9fc7926ecf73d5b76b8883151f34f7babd7315a5382be5ce1968c57bad8d5d",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "709edee75abfc57006e8fd0e1dbc9e2da6c2e867462c9d9fd63ddf83b21f1f59",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "python-openxml__python-docx.0cf6d71f.func_basic__zfwyrelp",
+   "environment": "jyangballin/swesmith.x86_64.python-openxml_1776_python-docx.0cf6d71f"
+  }
+ },
+ "swe-fix-r0064-13": {
+  "withheld": {
+   "predicates": [
+    [
+     "custom",
+     "swe_test",
+     "tests/test_command_line.py::CanToolsCommandLineTest::test_decode"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_command_line.py::CanToolsCommandLineTest::test_decode_can_fd"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_command_line.py::CanToolsCommandLineTest::test_decode_log_format"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_command_line.py::CanToolsCommandLineTest::test_decode_muxed_data"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_command_line.py::CanToolsCommandLineTest::test_decode_single_line_muxed_data"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_command_line.py::CanToolsCommandLineTest::test_decode_timestamp_absolute"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_command_line.py::CanToolsCommandLineTest::test_decode_timestamp_zero"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_command_line.py::CanToolsCommandLineTest::test_single_line_decode"
+    ],
+    [
+     "custom",
+     "swe_test",
+     "tests/test_command_line.py::CanToolsCommandLineTest::test_single_line_decode_log_format"
+    ]
+   ],
+   "assets_sha256": "abda8fd501ffb64ec0c9838b59e964e389273f3ddf3d5822e6e6d1e772c51ead",
+   "checks_sha256": "403d3351fb14b2b302689c398daf0d6d3d2c240cf4f57276e5184634be68f0b2"
+  },
+  "salt": "29e9d0c1d46d7ba51409710444a41ead977495856f1fa50b89a1189930faeeee",
+  "source": {
+   "dataset": "SWE-bench/SWE-smith",
+   "instance_id": "cantools__cantools.0c6a7871.func_basic__k4kx588u",
+   "environment": "jyangballin/swesmith.x86_64.cantools_1776_cantools.0c6a7871"
+  }
+ }
+}
