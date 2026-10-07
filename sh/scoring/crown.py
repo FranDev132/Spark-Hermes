@@ -3,8 +3,9 @@
 Payment is the pooled window's lower bound: it needs many instances and rewards consistency. The crown is a
 different question — which strategy the repository should carry next — and it is answered on *this round's*
 instances alone: among the sealed strategies, the one with the highest paired delta against the baseline on
-these tasks (by credit: the share of withheld checks that hold), provided it actually beat the baseline here. Ties fall to the pooled Δc, then to the name, so the
-verdict is total and recomputable from the published episodes.
+these tasks (by credit: the share of withheld checks that hold), provided it actually beat the baseline here. The
+incumbent keeps a tie; other ties go to the strategy that first appeared earliest, then to a round-keyed hash, so
+the verdict is total and recomputable from the published episodes and seals.
 
 A hotkey needs `min_paired` instances shared with the baseline to be a candidate; a round where nobody beat
 the baseline crowns nobody.
@@ -63,26 +64,36 @@ def crown(
     hotkeys: set[str],
     *,
     round_id: str,
-    pooled_delta_c: dict[str, float],
+    pooled_delta_c: dict[str, float] | None = None,
     min_paired: int = 4,
     incumbent: str | None = None,
+    first_seen: dict[str, str] | None = None,
+    near_dup: set[str] | frozenset = frozenset(),
 ) -> dict:
     """The king of this round, with the standings that decided it. Among the eligible, a tie does not dethrone: the
-    incumbent keeps the crown unless a challenger *strictly* beats it, and among challengers a tie falls to a hash
-    of the round and the hotkey. A strategy disqualified on any of this round's instances cannot be crowned. A
-    round where nobody is eligible crowns nobody; whether the incumbent then stays in `submissions/` is decided
-    by `sh.validator.orchestrate.dethroned` (a challenger crowned over it, the pooled gate failing, or three
-    rounds without the crown), not here."""
+    incumbent keeps the crown unless a challenger *strictly* beats it, and among challengers a tie goes to the
+    strategy that first appeared earliest (`first_seen`, `sh.validator.copies`: the round its author first sealed
+    essentially this bundle), then to a hash of the round and the hotkey. A near-duplicate of another author's
+    earlier bundle cannot be crowned, nor can a strategy disqualified on any of this round's instances. A round
+    where nobody is eligible crowns nobody; whether the incumbent then stays in `submissions/` is decided by
+    `sh.validator.orchestrate.dethroned` (a challenger crowned over it, the pooled gate failing, or three rounds
+    without the crown), not here. `pooled_delta_c` is accepted for older callers and no longer orders ties: a
+    pooled lead is already paid through the weights, and an earlier original should not lose a tie to it."""
     st = standings(episodes, hotkeys, round_id=round_id)
     eligible = [
-        h for h, s in st.items() if s["n"] >= min_paired and s["delta"] is not None and s["delta"] > 0 and not s["dq"]
+        h
+        for h, s in st.items()
+        if s["n"] >= min_paired and s["delta"] is not None and s["delta"] > 0 and not s["dq"] and h not in near_dup
     ]
-    # The incumbent wins ties: on the same delta it sorts ahead of every challenger, whatever their pooled Δc — the
-    # pooled figure only orders challengers among themselves. (It came first once, so a challenger with a better
-    # pooled window outranked the incumbent on a tie, which the rule forbids.)
+    for h in near_dup & set(st):
+        st[h]["near_dup"] = True
+    first_seen = first_seen or {}
+    # The incumbent wins ties: on the same delta it sorts ahead of every challenger, whatever their first appearance;
+    # first appearance only orders challengers among themselves. (A tie-order key once came first, so a challenger
+    # outranked the incumbent on a tie, which the rule forbids.)
     ranked = sorted(
         eligible,
-        key=lambda h: (-st[h]["delta"], h != incumbent, -pooled_delta_c.get(h, 0.0), _tiebreak(round_id, h)),
+        key=lambda h: (-st[h]["delta"], h != incumbent, first_seen.get(h, round_id), _tiebreak(round_id, h)),
     )
     for i, h in enumerate(ranked, 1):
         st[h]["rank"] = i
@@ -92,5 +103,6 @@ def crown(
         "king": ranked[0] if ranked else None,
         "standings": st,
         "rule": f"highest paired delta vs baseline on this round's instances, > 0, ≥ {min_paired} paired, not "
-        "disqualified; a tie does not dethrone the incumbent; other ties by pooled Δc then a round-keyed hash",
+        "disqualified, not a near-duplicate of another author's earlier bundle; a tie does not dethrone the incumbent; "
+        "other ties go to the strategy that first appeared earliest, then a round-keyed hash",
     }

@@ -29,30 +29,41 @@ def test_nobody_is_crowned_when_nobody_beat_the_baseline():
     assert crown(eps, {"A", "B"}, round_id="r0002", pooled_delta_c={"A": 0.5})["king"] is None
 
 
-def test_ties_fall_to_the_pooled_lower_bound_then_a_hash_and_the_incumbent_keeps_the_crown():
+def test_ties_fall_to_the_earliest_original_then_a_hash_and_the_incumbent_keeps_the_crown():
     eps = _round("11110000", {"A": "11111000", "B": "11111000"})
-    assert crown(eps, {"A", "B"}, round_id="r0002", pooled_delta_c={"A": 0.0, "B": 0.1})["king"] == "B"
-    # no pooled edge: a round-keyed hash decides, not the name (so a low-sorting ss58 cannot grind ties)
+    # the strategy that first appeared earlier takes the tie; a pooled lead no longer does (it is paid by weight)
+    assert crown(eps, {"A", "B"}, round_id="r0002", first_seen={"A": "r0001", "B": "r0002"})["king"] == "A"
+    assert (
+        crown(eps, {"A", "B"}, round_id="r0002", pooled_delta_c={"A": 0.0, "B": 0.9}, first_seen={"A": "r0001"})["king"]
+        == "A"
+    )
+    # same first appearance: a round-keyed hash decides, not the name (so a low-sorting ss58 cannot grind ties)
     import hashlib
 
     hashed = min(("A", "B"), key=lambda h: hashlib.sha256(f"r0002:{h}".encode()).hexdigest())
-    assert crown(eps, {"A", "B"}, round_id="r0002", pooled_delta_c={})["king"] == hashed
-    # a tie does not dethrone: the incumbent keeps the crown over an equal challenger
-    assert crown(eps, {"A", "B"}, round_id="r0002", pooled_delta_c={}, incumbent="A")["king"] == "A"
-    assert crown(eps, {"A", "B"}, round_id="r0002", pooled_delta_c={}, incumbent="B")["king"] == "B"
+    assert crown(eps, {"A", "B"}, round_id="r0002")["king"] == hashed
+    # a tie does not dethrone: the incumbent keeps the crown over an equal challenger, even an older one
+    assert crown(eps, {"A", "B"}, round_id="r0002", incumbent="A", first_seen={"B": "r0001"})["king"] == "A"
+    assert crown(eps, {"A", "B"}, round_id="r0002", incumbent="B")["king"] == "B"
 
 
-def test_a_better_pooled_window_does_not_let_a_challenger_take_a_tie_from_the_incumbent():
-    """The pooled figure orders challengers among themselves; it never outranks the incumbent on a tie. It did once:
-    it came before the incumbent in the sort key, so r0006's incumbent kept its tie only because its pooled Δc
-    happened to be the higher one."""
+def test_first_appearance_does_not_let_a_challenger_take_a_tie_from_the_incumbent():
+    """First appearance orders challengers among themselves; it never outranks the incumbent on a tie."""
     eps = _round("11110000", {"A": "11111000", "B": "11111000", "C": "11111000"})
-    c = crown(eps, {"A", "B", "C"}, round_id="r0002", pooled_delta_c={"A": 0.0, "B": 0.5, "C": 0.3}, incumbent="A")
+    c = crown(
+        eps, {"A", "B", "C"}, round_id="r0002", incumbent="A", first_seen={"A": "r0002", "B": "r0001", "C": "r0000"}
+    )
     assert c["king"] == "A"
-    assert [c["standings"][h]["rank"] for h in ("A", "B", "C")] == [1, 2, 3]  # challengers still by pooled Δc
+    assert [c["standings"][h]["rank"] for h in ("A", "C", "B")] == [1, 2, 3]  # challengers by first appearance
     # a challenger that strictly beats the incumbent still takes the crown
     eps = _round("11110000", {"A": "11111000", "B": "11111100"})
-    assert crown(eps, {"A", "B"}, round_id="r0002", pooled_delta_c={"A": 0.9}, incumbent="A")["king"] == "B"
+    assert crown(eps, {"A", "B"}, round_id="r0002", incumbent="A")["king"] == "B"
+
+
+def test_a_near_duplicate_of_an_earlier_bundle_cannot_be_crowned():
+    eps = _round("11110000", {"A": "11111000", "B": "11111111"})
+    c = crown(eps, {"A", "B"}, round_id="r0002", near_dup={"B"})
+    assert c["king"] == "A" and c["standings"]["B"].get("near_dup") and "rank" not in c["standings"]["B"]
 
 
 def test_a_strategy_disqualified_this_round_cannot_be_crowned():

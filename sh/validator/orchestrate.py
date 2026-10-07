@@ -47,6 +47,7 @@ from sh.exports.build import build as build_exports
 from sh.exports.upload import upload as upload_exports
 from sh.scoring.crown import crown as crown_rule
 from sh.validator import similarity
+from sh.validator.copies import assess_round as assess_copies
 from sh.validator.round import close as close_round
 from sh.validator.stats import load_episodes
 from sh.web.build import render as render_leaderboard
@@ -1069,30 +1070,38 @@ def evaluate(cfg: Config, rd: Path, sealed: dict) -> None:
     # second one; if it is not running, launching is safe — `batch` resumes on its own episode records. A batch
     # that ends short (episodes the provider voided past its own retries) is launched again, a bounded number of
     # times, so a busy engine costs time rather than evidence.
-    def wait_for_screen() -> None:
-        # Bounded: a screen left by a dead daemon is a process nobody else will end. The board keeps moving.
-        waited = 0.0
-        if screening():
-            log(rd, "evaluate_wait", note="a baseline screen holds the engine; launching when it ends")
-        while screening() and waited < 5400:
-            live(cfg, rd, "evaluate", progress=_progress(cfg, remote, total))
-            time.sleep(60)
-            waited += 60
-        if waited >= 5400:
-            log(rd, "evaluate_wait", note="screen still running after 90 min; ending it")
-            _worker(cfg, f"pkill -f 'batch --round {cfg.worker_root}/screen/' ; true")
+    def preempt_screen() -> None:
+        # Evaluation goes first: a round's miners are waiting on it, while a screen only decides whether a future
+        # round admits one more candidate. A screen with its void retries can hold the engine for hours (r0060
+        # waited 4.4 h, r0064 ~2 h behind one), so it is ended at once; the daemon keeps the candidate buffered
+        # and screens it again later (an interrupted screen counts as a void, supply.mint). The screen's own
+        # episode and grade containers go too, or they would keep the engine slot the batch needs.
+        if not screening():
+            return
+        log(rd, "evaluate_preempt", note="a baseline screen held the engine; ended it so the round evaluates now")
+        _worker(
+            cfg,
+            f"pkill -f 'batch --round {cfg.worker_root}/screen/'; "
+            f"for t in $(ls {cfg.worker_root}/screen 2>/dev/null); do "
+            f"docker ps -q --filter name=ep-$t- --filter name=grade-$t- | xargs -r docker rm -f >/dev/null 2>&1; done; true",
+        )
+        for _ in range(24):
+            if not screening():
+                break
+            time.sleep(5)
 
     def launch_batch() -> None:
         # Claim the engine first. The daemon screens buffered candidates back to back, seconds apart, and a poll
         # alone would rarely see the engine free between two of them; the claim makes the daemon stop starting
         # screens (supply.baseline.Screen.evaluating). The grace lets a screen started just before the claim show
-        # up; the claim is held until the batch is visible, so the daemon always sees one or the other. A claim
+        # up, and any screen still running is then ended (preempt_screen); the claim is held until the batch is
+        # visible, so the daemon always sees one or the other. A claim
         # left by a killed loop goes stale after 2 h.
         claim = f"{cfg.worker_root}/state/engine-claim"
         _worker(cfg, f"mkdir -p {cfg.worker_root}/state && touch {claim}")
         try:
             time.sleep(CLAIM_GRACE_S)
-            wait_for_screen()
+            preempt_screen()
             _worker_launch(cfg, launch)
             for _ in range(12):
                 if running():
@@ -1188,7 +1197,11 @@ def _reclaim_disk(cfg: Config, keep_recent: int = 2) -> None:
 def close(cfg: Config, round_id: str, rd: Path) -> dict:
     pooled = window_archive(cfg, round_id)
     window = json.loads((pooled / "rounds.json").read_text())
-    record = close_round(rd, pooled, rd / "close", reveal_dir=rd / "withheld", era=cfg.era, window=window)
+    copies = assess_copies(cfg.rounds, rd)  # each sealed strategy's share of text other authors sealed first
+    record = close_round(
+        rd, pooled, rd / "close", reveal_dir=rd / "withheld", era=cfg.era, window=window, copies=copies
+    )
+    (rd / "close" / "copies.json").write_text(json.dumps(copies, indent=1))
     # A family FamilyStats.retirement() has already flagged (in_rotation=False) is written to close.json but
     # never surfaced while the loop runs — an operator only sees it by reading JSON after the fact. Log it now,
     # once per close, so a collapsed or retired family is visible immediately, not discovered days later.
@@ -1209,6 +1222,7 @@ def close(cfg: Config, round_id: str, rd: Path) -> dict:
 def crown_round(cfg: Config, rd: Path, record: dict, sealed: dict) -> dict:
     """This round's king, from this round's episodes alone (spec: the crown is a merge, not a payment)."""
     pooled = {h: s.get("delta_c", 0.0) for h, s in record.get("scores", {}).items()}
+    copies = _read(rd / "close" / "copies.json", {})
     incumbent = next((h for h, info in sealed["active"].items() if info.get("incumbent")), None)
     result = crown_rule(
         load_episodes(rd / "episodes"),
@@ -1217,6 +1231,8 @@ def crown_round(cfg: Config, rd: Path, record: dict, sealed: dict) -> dict:
         pooled_delta_c=pooled,
         min_paired=cfg.min_paired,
         incumbent=incumbent,  # a tie does not dethrone
+        first_seen={h: c.get("first_seen") for h, c in copies.items() if c.get("first_seen")},
+        near_dup={h for h, c in copies.items() if c.get("near_dup")},
     )
     (rd / "close" / "crown.json").write_text(json.dumps(result, indent=1))
     ranked = sorted((s["rank"], h) for h, s in result["standings"].items() if "rank" in s)
