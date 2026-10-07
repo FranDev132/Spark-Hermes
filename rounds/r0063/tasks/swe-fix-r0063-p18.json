@@ -1,0 +1,25 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0063-p18",
+ "round_id": "r0063",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nGPX track segment duration calculation returns negative values\n\n#### Description\n\nWhen calculating the duration of a GPX track segment, the `get_duration()` method returns negative values instead of positive durations.\n\n#### Steps/Code to Reproduce\n\n```python\nimport gpxpy\nimport datetime\n\n# Create a simple GPX track with two points\ngpx = gpxpy.GPX()\ngpx.tracks.append(gpxpy.GPXTrack())\ngpx.tracks[0].segments.append(gpxpy.GPXTrackSegment())\n\n# Add two points with a 1 minute time difference\ngpx.tracks[0].segments[0].points.append(\n    gpxpy.GPXTrackPoint(\n        latitude=12, \n        longitude=13, \n        time=datetime.datetime(2013, 1, 1, 12, 30)\n    )\n)\ngpx.tracks[0].segments[0].points.append(\n    gpxpy.GPXTrackPoint(\n        latitude=12, \n        longitude=13, \n        time=datetime.datetime(2013, 1, 1, 12, 31)\n    )\n)\n\n# This should return 60 seconds but returns -60 instead\nduration = gpx.get_duration()\nprint(f\"Duration: {duration}\")  # Expected: 60, Actual: -60\n```\n\nThe duration calculation is returning negative values when it should return positive durations representing the time elapsed between the first and last points in the track.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "tkrajina__gpxpy.09fc46b3.func_pm_op_swap__4pdx1uk0",
+  "environment": "jyangballin/swesmith.x86_64.tkrajina_1776_gpxpy.09fc46b3",
+  "fail_to_pass": [
+   "test.py::GPXTests::test_get_duration"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

@@ -1,0 +1,31 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0063-p04",
+ "round_id": "r0063",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nGrouping of SQL tokens fails with nested structures\n\nIt seems there's an issue with how SQL tokens are being grouped, especially when dealing with nested structures. The problem arises when parsing SQL statements with nested functions or subqueries. For instance, when parsing a query like:\n\n```sql\nSELECT *, sum_b + 2 AS mod_sum\nFROM (\n  SELECT a, sum(b) AS sum_b\n  FROM table\n  GROUP BY a, z\n)\nORDER BY 1, 2\n```\n\nThe expected output should maintain the structure and aliasing as defined in the query. However, the current implementation seems to misinterpret or fail to correctly group tokens, leading to unexpected results.\n\nAnother example is with nested loops in SQL, such as:\n\n```sql\nFOR foo LOOP\n  FOR bar LOOP\n  END LOOP\nEND LOOP\n```\n\nThe parser should recognize the nested loops correctly, but it appears to be failing to do so, resulting in incorrect token lengths and structure.\n\nAdditionally, when parsing nested functions like `foo(bar(5))`, the function parameters are not being correctly identified, which is crucial for accurate SQL parsing.\n\nThis issue affects the ability to correctly parse and format SQL queries with complex nested structures, which is a common requirement in SQL processing.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "andialbrecht__sqlparse.e57923b3.lm_rewrite__83l75vxh",
+  "environment": "jyangballin/swesmith.x86_64.andialbrecht_1776_sqlparse.e57923b3",
+  "fail_to_pass": [
+   "tests/test_format.py::TestFormatReindentAligned::test_group_by_subquery",
+   "tests/test_grouping.py::test_grouping_alias",
+   "tests/test_grouping.py::test_grouping_parenthesis",
+   "tests/test_grouping.py::test_nested_begin",
+   "tests/test_grouping.py::test_nested_for",
+   "tests/test_parse.py::test_parse_nested_function",
+   "tests/test_regressions.py::test_max_recursion"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

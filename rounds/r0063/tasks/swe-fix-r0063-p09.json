@@ -1,0 +1,25 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0063-p09",
+ "round_id": "r0063",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nRequestValidator methods return hardcoded values instead of raising NotImplementedError\n\n#### Description\n\nSeveral methods in the OpenID Connect RequestValidator class are returning hardcoded boolean values instead of raising NotImplementedError as expected. This breaks the contract that subclasses must implement these methods.\n\n#### Steps/Code to Reproduce\n\n```python\nfrom oauthlib.openid.connect.core.request_validator import RequestValidator\n\nv = RequestValidator()\n\n# These should raise NotImplementedError but don't\nprint(v.validate_jwt_bearer_token('token', 'scopes', 'request'))  # Returns True\nprint(v.validate_id_token('token', 'scopes', 'request'))  # Returns True  \nprint(v.validate_user_match('id_token_hint', 'scopes', 'claims', 'request'))  # Returns False\n```\n\nExpected behavior: All three calls should raise NotImplementedError to force subclass implementation.\nActual behavior: Methods return hardcoded boolean values.\n\nThis affects the following methods:\n- `validate_jwt_bearer_token`\n- `validate_id_token` \n- `validate_user_match`\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "oauthlib__oauthlib.1fd52536.combine_file__qwi5zr0u",
+  "environment": "jyangballin/swesmith.x86_64.oauthlib_1776_oauthlib.1fd52536",
+  "fail_to_pass": [
+   "tests/openid/connect/core/test_request_validator.py::RequestValidatorTest::test_method_contracts"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

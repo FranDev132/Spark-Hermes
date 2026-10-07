@@ -1,0 +1,32 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0063-p17",
+ "round_id": "r0063",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nCDD diagnostics database fails to load with \"'int' object is not iterable\" error\n\n#### Description\n\nWhen loading CDD files, the diagnostics database throws an error \"'int' object is not iterable\" during parsing. This affects all CDD file loading operations.\n\n#### Steps/Code to Reproduce\n\n```python\nimport cantools\n\n# This will fail with \"'int' object is not iterable\"\ndb = cantools.db.load_file('tests/files/cdd/example.cdd', encoding='iso-8859-1')\n```\n\nThe error occurs when trying to load any CDD file format, preventing access to diagnostic data identifiers (DIDs) and their associated data structures.\n\n#### Expected Behavior\n\nThe CDD file should load successfully, allowing access to DIDs and their properties like:\n- `db.dids` should return a list of DID objects\n- Individual DIDs should be accessible via `db.get_did_by_name()` or `db.get_did_by_identifier()`\n- DID encoding/decoding operations should work properly\n\n#### Actual Behavior\n\nLoading fails with `cantools.database.UnsupportedDatabaseFormatError: CDD: \"'int' object is not iterable\"`\n\nThis prevents any CDD diagnostic database functionality from working, including DID enumeration, data encoding/decoding, and database representation.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "cantools__cantools.0c6a7871.combine_module__3bjiz1f4",
+  "environment": "jyangballin/swesmith.x86_64.cantools_1776_cantools.0c6a7871",
+  "fail_to_pass": [
+   "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_be_cdd_add",
+   "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_be_example_cdd",
+   "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_be_example_cdd_repr",
+   "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_datarefs",
+   "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_le_cdd_add",
+   "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_le_example_cdd",
+   "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_le_example_cdd_repr",
+   "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_unknown_byteorder"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}
