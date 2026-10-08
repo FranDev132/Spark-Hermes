@@ -1,0 +1,31 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0068-p02",
+ "round_id": "r0068",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nUnboundLocalError in _get_interval_distances_ratios method\n\n#### Description\n\nWhen calling methods that use `_get_interval_distances_ratios` (like `add_missing_times`, `add_missing_elevations`, `add_missing_speeds`, etc.), an `UnboundLocalError` is raised for local variables that are referenced before assignment.\n\n#### Steps/Code to Reproduce\n\n```python\nimport gpxpy\nimport datetime\n\n# Create a simple GPX with missing time data\ngpx = gpxpy.GPX()\ngpx.tracks.append(gpxpy.GPXTrack())\ngpx.tracks[0].segments.append(gpxpy.GPXTrackSegment())\ngpx.tracks[0].segments[0].points.append(gpxpy.GPXTrackPoint(latitude=13, longitude=12, time=datetime.datetime(2013, 1, 2, 12, 0)))\ngpx.tracks[0].segments[0].points.append(gpxpy.GPXTrackPoint(latitude=13.25, longitude=12))\ngpx.tracks[0].segments[0].points.append(gpxpy.GPXTrackPoint(latitude=13.5, longitude=12))\ngpx.tracks[0].segments[0].points.append(gpxpy.GPXTrackPoint(latitude=14, longitude=12, time=datetime.datetime(2013, 1, 2, 13, 0)))\n\n# This will raise UnboundLocalError\ngpx.add_missing_times()\n```\n\nThe error occurs because variables like `distances`, `dist`, and `previous_point` are being used before they are properly initialized in the `_get_interval_distances_ratios` method.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "tkrajina__gpxpy.09fc46b3.func_pm_ctrl_shuffle__d0hurohz",
+  "environment": "jyangballin/swesmith.x86_64.tkrajina_1776_gpxpy.09fc46b3",
+  "fail_to_pass": [
+   "test.py::GPXTests::test_add_missing_data_one_interval",
+   "test.py::GPXTests::test_add_missing_data_one_interval_and_empty_points_on_start_and_end",
+   "test.py::GPXTests::test_add_missing_elevations",
+   "test.py::GPXTests::test_add_missing_elevations_without_ele",
+   "test.py::GPXTests::test_add_missing_speeds",
+   "test.py::GPXTests::test_add_missing_times",
+   "test.py::GPXTests::test_add_missing_times_2"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

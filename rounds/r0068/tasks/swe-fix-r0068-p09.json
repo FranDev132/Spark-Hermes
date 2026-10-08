@@ -1,0 +1,28 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0068-p09",
+ "round_id": "r0068",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\n### Issue: Incorrect Column Qualification in SQL Queries\n\nIt appears that the recent changes have introduced an issue with how columns are being qualified in SQL queries. Specifically, when dealing with complex queries involving struct fields and unnest operations, the expected column qualification is not being applied correctly.\n\n### Code Example\n\nHere's a simplified example to illustrate the problem:\n\n```sql\nSELECT a.b:c FROM d\n```\n\n### Current Behavior\n\nWhen running the optimizer on the above query, the column `a.b:c` is not being qualified as expected. This results in incorrect SQL generation and potential runtime errors.\n\n### Expected Behavior\n\nThe column should be correctly qualified, maintaining the expected alias and structure, such as:\n\n```sql\nSELECT d.a.b.c AS c FROM d\n```\n\n### Steps to Reproduce\n\n1. Parse the query `SELECT a.b:c FROM d` using the optimizer.\n2. Observe the output SQL and note the incorrect column qualification.\n3. Compare with the expected output to see the discrepancy.\n\nThis issue affects queries that rely on precise column qualification, especially in environments like BigQuery where struct fields and unnest operations are common.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "tobymao__sqlglot.036601ba.lm_rewrite__kliw2vdv",
+  "environment": "jyangballin/swesmith.x86_64.tobymao_1776_sqlglot.036601ba",
+  "fail_to_pass": [
+   "tests/test_optimizer.py::TestOptimizer::test_optimize",
+   "tests/test_optimizer.py::TestOptimizer::test_qualify_columns",
+   "tests/test_optimizer.py::TestOptimizer::test_semistructured",
+   "tests/test_optimizer.py::TestOptimizer::test_unnest_annotation"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

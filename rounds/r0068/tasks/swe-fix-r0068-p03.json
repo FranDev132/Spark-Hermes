@@ -1,0 +1,29 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0068-p03",
+ "round_id": "r0068",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nClassDef.local_attr_ancestors returns wrong ancestors when attribute not found\n\n#### Description\n\nThe `local_attr_ancestors` method in `ClassDef` is returning ancestors that don't actually define the given attribute name. It appears to be yielding ancestors that do NOT contain the attribute instead of those that do.\n\n#### Steps/Code to Reproduce\n\n```python\nfrom astroid import builder\n\nmodule = builder.parse('''\nclass A():\n    def __init__(self): pass\nclass B(A): pass\nclass C(B): pass\n''')\n\nklass = module['C']\nancestors = list(klass.local_attr_ancestors('__init__'))\nprint(f\"Ancestors that define '__init__': {[a.name for a in ancestors]}\")\n# Expected: ['A', 'object'] (classes that actually have __init__)\n# Actual: ['B'] (class that doesn't have __init__)\n```\n\nThis also affects other methods that rely on `local_attr_ancestors`, causing issues when trying to find methods or attributes in class hierarchies.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "pylint-dev__astroid.b114f6b5.func_basic__pwwte4x8",
+  "environment": "jyangballin/swesmith.x86_64.pylint-dev_1776_astroid.b114f6b5",
+  "fail_to_pass": [
+   "tests/test_scoped_nodes.py::ClassNodeTest::test_local_attr_ancestors",
+   "tests/test_scoped_nodes.py::ClassNodeTest::test_local_attr_invalid_mro",
+   "tests/test_scoped_nodes.py::ClassNodeTest::test_local_attr_mro",
+   "tests/test_scoped_nodes.py::ClassNodeTest::test_metaclass_generator_hack_enum_base",
+   "tests/test_scoped_nodes.py::ClassNodeTest::test_methods"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

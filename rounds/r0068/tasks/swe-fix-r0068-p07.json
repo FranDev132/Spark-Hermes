@@ -1,0 +1,26 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0068-p07",
+ "round_id": "r0068",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nPython output format now uses double quotes instead of single quotes\n\nWhen using the Python output format, the SQL statements are now wrapped in double quotes instead of single quotes. This breaks compatibility with existing code that expects single quotes.\n\nExample:\n\n```python\nimport sqlparse\n\n# Before:\n# sqlparse.format('select * from foo;', output_format='python')\n# Output: \"sql = 'select * from foo;'\"\n\n# Now:\nsqlparse.format('select * from foo;', output_format='python')\n# Output: 'sql = \"select * from foo;\"'\n```\n\nThe issue also affects multiline SQL statements. Previously, multiline statements would be formatted with single quotes and parentheses, but now they use triple double quotes:\n\n```python\n# Before:\n# sqlparse.format('select *\\nfrom foo;', output_format='python', reindent=True)\n# Output: \"sql = ('select * '\\n       'from foo;')\"\n\n# Now:\nsqlparse.format('select *\\nfrom foo;', output_format='python', reindent=True)\n# Output: 'sql = \"\"\"select *\\nfrom foo;\"\"\"'\n```\n\nThis change breaks backward compatibility and could cause issues for users who rely on the previous output format.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "andialbrecht__sqlparse.e57923b3.lm_rewrite__3i3o5sl5",
+  "environment": "jyangballin/swesmith.x86_64.andialbrecht_1776_sqlparse.e57923b3",
+  "fail_to_pass": [
+   "tests/test_format.py::TestOutputFormat::test_python",
+   "tests/test_format.py::TestOutputFormat::test_python_multiple_statements"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}
