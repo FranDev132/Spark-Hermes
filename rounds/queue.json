@@ -1,12 +1,12 @@
 {
  "schema": "sh-queue-v1",
- "published_at": 1791449371.1996255,
+ "published_at": 1791485657.2679193,
  "ready": [
   {
-   "round_id": "r0069",
-   "tasks_sha256": "bd342b95a7fedb77c022bd37ba91c7f7556b2a84d01c2707b019de084af88607",
+   "round_id": "r0070",
+   "tasks_sha256": "a71b153df366d2cb3e22cf0afa51e8ae17bf917b63d0173329a7ec099b68e728",
    "tasks": 8,
-   "minted_at": 1791429276.0338998
+   "minted_at": 1791454318.5931048
   }
  ]
 }

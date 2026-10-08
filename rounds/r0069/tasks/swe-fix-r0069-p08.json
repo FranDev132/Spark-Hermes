@@ -1,0 +1,27 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0069-p08",
+ "round_id": "r0069",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nOracle hint generation produces empty hint comments\n\n#### Description\n\nWhen generating SQL for Oracle hints, the hint expressions are being collected into an empty list, resulting in empty hint comments like `/*+  */` instead of the expected hint content.\n\n#### Steps/Code to Reproduce\n\n```python\nimport sqlglot\n\n# Parse a query with Oracle hints\nsql = \"SELECT /*+ USE_NL(A B) */ A.COL_TEST FROM TABLE_A A, TABLE_B B\"\nparsed = sqlglot.parse_one(sql, dialect=\"oracle\")\n\n# Generate SQL back - should preserve the hint\nresult = parsed.sql(dialect=\"oracle\")\nprint(f\"Expected: {sql}\")\nprint(f\"Actual: {result}\")\n```\n\nThe above code will show that hints are not being preserved correctly in the generated SQL output.\n\n#### Expected Behavior\n\nOracle hints should be properly preserved and generated in the SQL output, maintaining their original content like `/*+ USE_NL(A B) */`.\n\n#### Actual Behavior\n\nOracle hints are generated as empty comments `/*+  */`, losing all hint content during SQL generation.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "tobymao__sqlglot.036601ba.combine_module__x0lzmpj4",
+  "environment": "jyangballin/swesmith.x86_64.tobymao_1776_sqlglot.036601ba",
+  "fail_to_pass": [
+   "tests/dialects/test_oracle.py::TestOracle::test_hints",
+   "tests/dialects/test_oracle.py::TestOracle::test_oracle",
+   "tests/dialects/test_prql.py::TestPRQL::test_prql"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

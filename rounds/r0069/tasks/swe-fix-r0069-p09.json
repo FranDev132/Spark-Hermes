@@ -1,0 +1,29 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0069-p09",
+ "round_id": "r0069",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nNameError in context manager inference when decorator variable is undefined\n\n#### Description\n\nWhen inferring context managers decorated with `@contextlib.contextmanager`, astroid fails with a `NameError` because it tries to access an undefined variable `func` and `decorator`.\n\n#### Steps/Code to Reproduce\n\n```python\nimport astroid\nfrom contextlib import contextmanager\n\ncode = \"\"\"\nimport contextlib\n\n@contextlib.contextmanager\ndef my_manager():\n    yield 42\n\nwith my_manager() as value:\n    pass\n\"\"\"\n\nmodule = astroid.parse(code)\n# This will raise NameError: name 'func' is not defined\nlist(module['value'].infer())\n```\n\nThe error occurs when trying to infer the type of variables assigned in `with` statements that use generators decorated with `@contextlib.contextmanager`.\n\n#### Expected Behavior\n\nThe inference should work correctly and return the yielded value (42 in this case) without raising a NameError.\n\n#### Actual Behavior\n\n```\nNameError: name 'func' is not defined\n```\n\nThis happens because the code references `func` and `decorator` variables that are not defined in the current scope after some recent changes to the context manager inference logic.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "pylint-dev__astroid.b114f6b5.func_pm_remove_assign__pf58lyvo",
+  "environment": "jyangballin/swesmith.x86_64.pylint-dev_1776_astroid.b114f6b5",
+  "fail_to_pass": [
+   "tests/test_inference.py::InferenceTest::test_inferring_context_manager_unpacking_inference_error",
+   "tests/test_inference.py::InferenceTest::test_inferring_with_contextlib_contextmanager",
+   "tests/test_inference.py::InferenceTest::test_inferring_with_contextlib_contextmanager_failures",
+   "tests/test_inference.py::InferenceTest::test_nested_contextmanager",
+   "tests/test_inference.py::test_issue_1090_infer_yield_type_base_class"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

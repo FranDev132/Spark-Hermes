@@ -1,0 +1,25 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0069-p05",
+ "round_id": "r0069",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\n# MAKE_TIMESTAMP with single argument not working correctly\n\nWhen using MAKE_TIMESTAMP with a single argument (timestamp in microseconds), it fails to convert it properly.\n\n#### MCVE Code Sample\n\n```python\nimport sqlglot\n\n# This works fine\nsqlglot.parse_one(\"MAKE_TIMESTAMP(1992, 9, 20, 13, 34, 27.123456)\", dialect=\"duckdb\")\n\n# This fails\nsqlglot.parse_one(\"MAKE_TIMESTAMP(1667810584123456)\", dialect=\"duckdb\")\n```\n\n#### Problem Description\n\nThe DuckDB dialect in sqlglot should support both forms of MAKE_TIMESTAMP:\n1. MAKE_TIMESTAMP(year, month, day, hour, minute, second) - works correctly\n2. MAKE_TIMESTAMP(microseconds) - fails because the code that handles this case was removed\n\nWhen passing a single argument to MAKE_TIMESTAMP, it should be interpreted as a Unix timestamp in microseconds and converted to a timestamp, but this functionality is broken.\n\n#### Expected Output\nThe parser should correctly handle both forms of the MAKE_TIMESTAMP function.\n\n#### Reproduction\nYou can also see this by trying to transpile a query with the single-argument form:\n\n```python\nsqlglot.transpile(\"SELECT MAKE_TIMESTAMP(1667810584123456) AS t\", read=\"duckdb\", write=\"duckdb\")\n```\n\nThis fails because the code no longer handles the single-argument case.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "tobymao__sqlglot.036601ba.lm_rewrite__jfvfb7en",
+  "environment": "jyangballin/swesmith.x86_64.tobymao_1776_sqlglot.036601ba",
+  "fail_to_pass": [
+   "tests/dialects/test_duckdb.py::TestDuckDB::test_duckdb"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

@@ -1,0 +1,26 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0069-p06",
+ "round_id": "r0069",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nDocument._body property returns None instead of _Body instance\n\n#### Description\n\nWhen accessing the `_body` property on a Document instance, it returns `None` instead of the expected `_Body` instance. This breaks functionality that depends on accessing the document body.\n\n#### Steps/Code to Reproduce\n\n```python\nfrom docx import Document\n\n# Create a new document\ndoc = Document()\n\n# Try to access the document body\nbody = doc._body\nprint(f\"Body: {body}\")  # Expected: <_Body instance>, Actual: None\n\n# This will fail when trying to iterate content\ntry:\n    content = list(doc.iter_inner_content())\n    print(f\"Content: {content}\")\nexcept AttributeError as e:\n    print(f\"Error: {e}\")\n```\n\nThe `_body` property should return a `_Body` instance but instead returns `None`, causing downstream operations that depend on the document body to fail.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "python-openxml__python-docx.0cf6d71f.func_pm_ctrl_shuffle__8hfhl78r",
+  "environment": "jyangballin/swesmith.x86_64.python-openxml_1776_python-docx.0cf6d71f",
+  "fail_to_pass": [
+   "tests/test_blkcntnr.py::DescribeBlockItemContainer::it_can_iterate_its_inner_content",
+   "tests/test_document.py::DescribeDocument::it_provides_access_to_the_document_body"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

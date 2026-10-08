@@ -1,0 +1,25 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0069-p18",
+ "round_id": "r0069",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nConstraint logic inverted for if-else branches\n\n#### Description\n\nWhen analyzing if-else statements, the constraint logic appears to be applying constraints to the wrong branches. Variables that should be constrained in the if body are being constrained in the else body and vice versa.\n\n#### Steps/Code to Reproduce\n\n```python\nimport astroid\n\n# Case 1: Variable constrained to None in if body should infer None\ncode1 = '''\nx = None\nif x is None:\n    x  # Should infer None, but doesn't\n'''\n\nnode = astroid.extract_node(code1)\ninferred = node.inferred()\nprint(f\"Expected: [None], Got: {inferred}\")\n\n# Case 2: Variable in else branch should be constrained \ncode2 = '''\nx = 1\nif x is not None:\n    pass\nelse:\n    x  # Should infer Uninferable (impossible case), but infers 1\n'''\n\nnode = astroid.extract_node(code2)\ninferred = node.inferred()\nprint(f\"Expected: [Uninferable], Got: {inferred}\")\n```\n\nThe constraint system seems to be backwards - constraints that should apply to the if body are being applied to the else body, and constraints for the else body are being applied to the if body.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "pylint-dev__astroid.b114f6b5.func_basic__zpwlsthx",
+  "environment": "jyangballin/swesmith.x86_64.pylint-dev_1776_astroid.b114f6b5",
+  "fail_to_pass": [
+   "tests/test_constraint.py::test_if_uninferable"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

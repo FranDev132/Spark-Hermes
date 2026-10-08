@@ -1,0 +1,27 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0069-p23",
+ "round_id": "r0069",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\n# Relative imports broken in file_info_from_modpath\n\nI'm having an issue with relative imports in my project after updating to the latest version. When trying to use relative imports, I'm getting an ImportError.\n\n## Description\n\nI have a package structure where I'm using relative imports (like `from . import module`). This was working fine before, but now I'm getting errors like:\n\n```\nImportError: No module path specified\n```\n\nor \n\n```\nImportError: Relative import with no known parent package\n```\n\nIt seems like the handling of relative imports in `file_info_from_modpath` is not working correctly. The issue appears to be in how the function processes the empty strings at the beginning of the module path that represent relative imports.\n\n## Reproduction\n\nHere's a simple example that demonstrates the issue:\n\n```python\n# package/__init__.py\n# empty file\n\n# package/module1.py\ndef func():\n    return \"module1\"\n\n# package/subpackage/__init__.py\n# empty file\n\n# package/subpackage/module2.py\nfrom .. import module1  # This relative import fails\n\nprint(module1.func())\n```\n\nWhen running `python -m package.subpackage.module2`, I get:\n```\nImportError: Relative import with no known parent package\n```\n\nThis used to work fine in previous versions. I think the issue is related to how the modpath is processed when it contains empty strings at the beginning (which represent relative imports).\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "pylint-dev__astroid.b114f6b5.lm_rewrite__khksnqm7",
+  "environment": "jyangballin/swesmith.x86_64.pylint-dev_1776_astroid.b114f6b5",
+  "fail_to_pass": [
+   "tests/test_inference.py::InferenceTest::test_import_as",
+   "tests/test_modutils.py::FileFromModPathTest::test_std_lib",
+   "tests/test_nodes.py::ImportNodeTest::test_from_self_resolve"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

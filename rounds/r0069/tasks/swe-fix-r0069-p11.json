@@ -1,0 +1,27 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0069-p11",
+ "round_id": "r0069",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nBoolean operations with 'or' operator return incorrect values\n\n#### Description\n\nWhen evaluating boolean expressions with the `or` operator, the inference logic is returning incorrect values. The `or` operator should return the first truthy value or the last value if all are falsy, but it's currently behaving like the `and` operator.\n\n#### Steps/Code to Reproduce\n\n```python\nimport astroid\n\n# Test basic or operations\ncode = \"0 or 2\"\nnode = astroid.extract_node(code)\ninferred = next(node.infer())\nprint(f\"Expected: 2, Got: {inferred.value}\")\n\ncode = \"1 or 2\" \nnode = astroid.extract_node(code)\ninferred = next(node.infer())\nprint(f\"Expected: 1, Got: {inferred.value}\")\n\ncode = \"0 or 0 or 1\"\nnode = astroid.extract_node(code)\ninferred = next(node.infer())\nprint(f\"Expected: 1, Got: {inferred.value}\")\n```\n\nThe above code should output:\n```\nExpected: 2, Got: 2\nExpected: 1, Got: 1  \nExpected: 1, Got: 1\n```\n\nBut instead produces incorrect results where `or` operations are evaluated using `and` logic.\n\nThis affects boolean expression evaluation in static analysis tools that rely on astroid for inference.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "pylint-dev__astroid.b114f6b5.func_pm_ctrl_invert_if__v7h06rov",
+  "environment": "jyangballin/swesmith.x86_64.pylint-dev_1776_astroid.b114f6b5",
+  "fail_to_pass": [
+   "tests/test_inference.py::BoolOpTest::test_bool_ops",
+   "tests/test_inference.py::BoolOpTest::test_other_nodes",
+   "tests/test_inference.py::InferenceTest::test_unary_empty_type_errors"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}
