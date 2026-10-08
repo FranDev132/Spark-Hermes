@@ -7615,6 +7615,204 @@
     "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj": "gold-tree-tech"
    },
    "pr": 595
+  },
+  {
+   "round_id": "r0067",
+   "closed_at": 1791449363.946556,
+   "window": {
+    "opens_at": 1791425144.1299899,
+    "closes_at": 1791432344.1299899,
+    "seconds": 7200
+   },
+   "episodes": 538,
+   "king": "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ",
+   "weights": {
+    "5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh": 0.11328180176803523,
+    "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ": 0.20092415573590514,
+    "5D4txntYBCZ7dAXuFDHEubK1f84LYzPjBNCtVELenfUPCQzK": 0.11957523519959276,
+    "5DPhKi77DLciQzNDr6iCZ2cD41oHcV75vLdf82d3crVnERN6": 0.0940350837935698,
+    "5DSD14t7dACJcd9f8rPdrkMVngRqLUnM3EnM3dHfHLZTHJGf": 0.09929639414235186,
+    "5Dh9YpJeTYKmgh9weSH9j24AtgEwVWoW37xsXakYGcpqVbKJ": 0.04171147824360063,
+    "5Di3Dd8PKn7uQbBc4WrzxkUqqvSL8QS3KVgCPSt3kzPE5KFb": 0.01631677507688478,
+    "5E4iMWRACSJrnbnCLNVfWXjHc5VRkgzRfaAzBiB1VXfkqPUg": 0.0768134528433033,
+    "5Et8zmN8dq4eFvy7grf2fqtf5PE2mgngTdr1WA6ADJJUUCrE": 0.024535999138498892,
+    "5EwAJCVFUV1UwBqQpT7JqcEGSGBsM3gwxiJNehTeVKqKqkqc": 0.11654459736710718,
+    "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj": 0.09696502669115047
+   },
+   "scores": {
+    "5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh": {
+     "score": 0.081,
+     "weight": 0.11328180176803523,
+     "mean_d": 0.081,
+     "delta_c": 0.017439754951813782,
+     "n": 50
+    },
+    "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ": {
+     "score": 0.143667,
+     "weight": 0.20092415573590514,
+     "mean_d": 0.143667,
+     "delta_c": 0.07283881370896227,
+     "n": 50
+    },
+    "5D4txntYBCZ7dAXuFDHEubK1f84LYzPjBNCtVELenfUPCQzK": {
+     "score": 0.0855,
+     "weight": 0.11957523519959276,
+     "mean_d": 0.0855,
+     "delta_c": 0.017587438933688554,
+     "n": 50
+    },
+    "5DPhKi77DLciQzNDr6iCZ2cD41oHcV75vLdf82d3crVnERN6": {
+     "score": 0.067238,
+     "weight": 0.0940350837935698,
+     "mean_d": 0.067238,
+     "delta_c": 0.002208107611748694,
+     "n": 50
+    },
+    "5DSD14t7dACJcd9f8rPdrkMVngRqLUnM3EnM3dHfHLZTHJGf": {
+     "score": 0.071,
+     "weight": 0.09929639414235186,
+     "mean_d": 0.071,
+     "delta_c": 0.0037288610298548547,
+     "n": 50
+    },
+    "5Dh9YpJeTYKmgh9weSH9j24AtgEwVWoW37xsXakYGcpqVbKJ": {
+     "score": 0.029825,
+     "weight": 0.04171147824360063,
+     "mean_d": 0.029825,
+     "delta_c": 0.0,
+     "n": 38
+    },
+    "5Di3Dd8PKn7uQbBc4WrzxkUqqvSL8QS3KVgCPSt3kzPE5KFb": {
+     "score": 0.011667,
+     "weight": 0.01631677507688478,
+     "mean_d": 0.011667,
+     "delta_c": 0.0,
+     "n": 50
+    },
+    "5E4iMWRACSJrnbnCLNVfWXjHc5VRkgzRfaAzBiB1VXfkqPUg": {
+     "score": 0.054924,
+     "weight": 0.0768134528433033,
+     "mean_d": 0.054924,
+     "delta_c": 0.0,
+     "n": 44
+    },
+    "5Et8zmN8dq4eFvy7grf2fqtf5PE2mgngTdr1WA6ADJJUUCrE": {
+     "score": 0.017544,
+     "weight": 0.024535999138498892,
+     "mean_d": 0.017544,
+     "delta_c": 0.0,
+     "n": 38
+    },
+    "5EwAJCVFUV1UwBqQpT7JqcEGSGBsM3gwxiJNehTeVKqKqkqc": {
+     "score": 0.083333,
+     "weight": 0.11654459736710718,
+     "mean_d": 0.083333,
+     "delta_c": 0.0,
+     "n": 12
+    },
+    "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj": {
+     "score": 0.069333,
+     "weight": 0.09696502669115047,
+     "mean_d": 0.069333,
+     "delta_c": 0.0029110139607512464,
+     "n": 50
+    }
+   },
+   "crown": {
+    "5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh": {
+     "n": 8,
+     "verified": 4,
+     "dq": 0,
+     "credit": 0.692708,
+     "delta": 0.197917,
+     "rank": 2
+    },
+    "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ": {
+     "n": 8,
+     "verified": 5,
+     "dq": 0,
+     "credit": 0.776042,
+     "delta": 0.28125,
+     "rank": 1
+    },
+    "5D4txntYBCZ7dAXuFDHEubK1f84LYzPjBNCtVELenfUPCQzK": {
+     "n": 8,
+     "verified": 2,
+     "dq": 0,
+     "credit": 0.536458,
+     "delta": 0.041667,
+     "rank": 8
+    },
+    "5DPhKi77DLciQzNDr6iCZ2cD41oHcV75vLdf82d3crVnERN6": {
+     "n": 8,
+     "verified": 3,
+     "dq": 0,
+     "credit": 0.567708,
+     "delta": 0.072917,
+     "rank": 7
+    },
+    "5DSD14t7dACJcd9f8rPdrkMVngRqLUnM3EnM3dHfHLZTHJGf": {
+     "n": 8,
+     "verified": 3,
+     "dq": 0,
+     "credit": 0.567708,
+     "delta": 0.072917,
+     "rank": 5
+    },
+    "5Dh9YpJeTYKmgh9weSH9j24AtgEwVWoW37xsXakYGcpqVbKJ": {
+     "n": 8,
+     "verified": 3,
+     "dq": 0,
+     "credit": 0.619792,
+     "delta": 0.125,
+     "rank": 4
+    },
+    "5Di3Dd8PKn7uQbBc4WrzxkUqqvSL8QS3KVgCPSt3kzPE5KFb": {
+     "n": 8,
+     "verified": 3,
+     "dq": 0,
+     "credit": 0.567708,
+     "delta": 0.072917,
+     "rank": 6
+    },
+    "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj": {
+     "n": 8,
+     "verified": 3,
+     "dq": 0,
+     "credit": 0.661458,
+     "delta": 0.166667,
+     "rank": 3
+    }
+   },
+   "commitments_ok": true,
+   "sft_rows": 5,
+   "dpo_pairs": 2,
+   "hf": "https://huggingface.co/datasets/gittensor-model-hub/spark-hermes-rounds/tree/main/rounds/r0067",
+   "revealed": [
+    "5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh",
+    "5D4txntYBCZ7dAXuFDHEubK1f84LYzPjBNCtVELenfUPCQzK",
+    "5DPhKi77DLciQzNDr6iCZ2cD41oHcV75vLdf82d3crVnERN6",
+    "5DSD14t7dACJcd9f8rPdrkMVngRqLUnM3EnM3dHfHLZTHJGf",
+    "5Dh9YpJeTYKmgh9weSH9j24AtgEwVWoW37xsXakYGcpqVbKJ",
+    "5Di3Dd8PKn7uQbBc4WrzxkUqqvSL8QS3KVgCPSt3kzPE5KFb",
+    "5E4iMWRACSJrnbnCLNVfWXjHc5VRkgzRfaAzBiB1VXfkqPUg",
+    "5Et8zmN8dq4eFvy7grf2fqtf5PE2mgngTdr1WA6ADJJUUCrE",
+    "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj"
+   ],
+   "github": {
+    "5D4txntYBCZ7dAXuFDHEubK1f84LYzPjBNCtVELenfUPCQzK": "widecloud",
+    "5E4iMWRACSJrnbnCLNVfWXjHc5VRkgzRfaAzBiB1VXfkqPUg": "Tet-9",
+    "5EwAJCVFUV1UwBqQpT7JqcEGSGBsM3gwxiJNehTeVKqKqkqc": "K-3-LT",
+    "5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh": "kaivexa",
+    "5Et8zmN8dq4eFvy7grf2fqtf5PE2mgngTdr1WA6ADJJUUCrE": "ismayilovibadet802-svg",
+    "5Di3Dd8PKn7uQbBc4WrzxkUqqvSL8QS3KVgCPSt3kzPE5KFb": "harrythomasben",
+    "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ": "dato-bitar",
+    "5DPhKi77DLciQzNDr6iCZ2cD41oHcV75vLdf82d3crVnERN6": "kaivaryn",
+    "5DSD14t7dACJcd9f8rPdrkMVngRqLUnM3EnM3dHfHLZTHJGf": "FranDev132",
+    "5Dh9YpJeTYKmgh9weSH9j24AtgEwVWoW37xsXakYGcpqVbKJ": "e11734937-beep",
+    "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj": "gold-tree-tech"
+   },
+   "pr": 607
   }
  ]
 }

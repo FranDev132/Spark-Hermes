@@ -1,0 +1,29 @@
+{
+ "schema": "sh-instance-v2",
+ "task_id": "swe-fix-r0067-16",
+ "family": "swe_fix",
+ "behaviour": "act",
+ "round_id": "r0067",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nSpeed calculation produces division by zero error\n\n#### Description\n\nWhen adding missing speed data to GPX tracks, the speed calculation fails with a ZeroDivisionError. This happens when the time difference between consecutive points becomes zero.\n\n#### Steps/Code to Reproduce\n\n```python\nimport gpxpy\n\n# Create a simple GPX with points that have the same timestamp\ngpx_content = '''<?xml version=\"1.0\"?>\n<gpx version=\"1.1\" creator=\"test\">\n  <trk>\n    <trkseg>\n      <trkpt lat=\"45.0\" lon=\"0.0\">\n        <time>2023-01-01T12:00:00Z</time>\n      </trkpt>\n      <trkpt lat=\"45.001\" lon=\"0.001\">\n        <time>2023-01-01T12:00:00Z</time>\n      </trkpt>\n      <trkpt lat=\"45.002\" lon=\"0.002\">\n        <time>2023-01-01T12:00:01Z</time>\n      </trkpt>\n    </trkseg>\n  </trk>\n</gpx>'''\n\ngpx = gpxpy.parse(gpx_content)\ngpx.add_missing_speeds()  # This raises ZeroDivisionError\n```\n\nThe error occurs because when two consecutive points have identical timestamps, the time difference becomes zero, leading to division by zero in the speed calculation formula.\n</issue>\n",
+ "fixture": {},
+ "setup_commands": [],
+ "protected_paths": [
+  "setup.py"
+ ],
+ "commands": [],
+ "published": {
+  "predicates": []
+ },
+ "withheld_commitment": "hmac-sha256:065f7ea02e8bc17477a5acf1eae76fd7003bc4904b3cfa515fc92b978cb3963c",
+ "image": "swe-task:c3a4243822a00fb9",
+ "network": "none",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "workdir": "/testbed",
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "requires_self_check": false
+}

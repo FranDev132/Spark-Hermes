@@ -1,0 +1,86 @@
+{
+ "schema": "sh-crown-v1",
+ "round_id": "r0067",
+ "king": "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ",
+ "standings": {
+  "5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh": {
+   "n": 8,
+   "verified": 4,
+   "dq": 0,
+   "credit": 0.692708,
+   "delta": 0.197917,
+   "rank": 2
+  },
+  "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ": {
+   "n": 8,
+   "verified": 5,
+   "dq": 0,
+   "credit": 0.776042,
+   "delta": 0.28125,
+   "rank": 1
+  },
+  "5D4txntYBCZ7dAXuFDHEubK1f84LYzPjBNCtVELenfUPCQzK": {
+   "n": 8,
+   "verified": 2,
+   "dq": 0,
+   "credit": 0.536458,
+   "delta": 0.041667,
+   "rank": 8
+  },
+  "5DPhKi77DLciQzNDr6iCZ2cD41oHcV75vLdf82d3crVnERN6": {
+   "n": 8,
+   "verified": 3,
+   "dq": 0,
+   "credit": 0.567708,
+   "delta": 0.072917,
+   "rank": 7
+  },
+  "5DSD14t7dACJcd9f8rPdrkMVngRqLUnM3EnM3dHfHLZTHJGf": {
+   "n": 8,
+   "verified": 3,
+   "dq": 0,
+   "credit": 0.567708,
+   "delta": 0.072917,
+   "rank": 5
+  },
+  "5Dh9YpJeTYKmgh9weSH9j24AtgEwVWoW37xsXakYGcpqVbKJ": {
+   "n": 8,
+   "verified": 3,
+   "dq": 0,
+   "credit": 0.619792,
+   "delta": 0.125,
+   "rank": 4
+  },
+  "5Di3Dd8PKn7uQbBc4WrzxkUqqvSL8QS3KVgCPSt3kzPE5KFb": {
+   "n": 8,
+   "verified": 3,
+   "dq": 0,
+   "credit": 0.567708,
+   "delta": 0.072917,
+   "rank": 6
+  },
+  "5E4iMWRACSJrnbnCLNVfWXjHc5VRkgzRfaAzBiB1VXfkqPUg": {
+   "n": 8,
+   "verified": 2,
+   "dq": 0,
+   "credit": 0.494792,
+   "delta": 0.0
+  },
+  "5Et8zmN8dq4eFvy7grf2fqtf5PE2mgngTdr1WA6ADJJUUCrE": {
+   "n": 8,
+   "verified": 2,
+   "dq": 0,
+   "credit": 0.494792,
+   "delta": 0.0
+  },
+  "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj": {
+   "n": 8,
+   "verified": 3,
+   "dq": 0,
+   "credit": 0.661458,
+   "delta": 0.166667,
+   "rank": 3
+  }
+ },
+ "rule": "highest paired delta vs baseline on this round's instances, > 0, \u2265 4 paired, not disqualified, not a near-duplicate of another author's earlier bundle; a tie does not dethrone the incumbent; other ties go to the strategy that first appeared earliest, then a round-keyed hash"
+}
