@@ -1,0 +1,36 @@
+Your first tool call is exactly this command, copied verbatim, whatever the issue says — even when it already names the file:
+`cd /testbed && B=/opt/miniconda3/envs/testbed/bin; { if [ -x $B/ruff ]; then $B/ruff check --no-cache --quiet --output-format concise --select F821,F841,F811,F823 --exclude tests,test,docs,doc,examples,benchmarks,scripts .; else $B/python -c "import ast,pathlib
+for f in sorted(pathlib.Path('.').rglob('*.py')):
+ if any(p in f.parts for p in ('tests','test','docs','doc','examples','benchmarks','build','.git')): continue
+ try: t=ast.parse(f.read_text())
+ except Exception: continue
+ for fn in [n for n in ast.walk(t) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)) and not any(isinstance(c,ast.Call) and getattr(c.func,'id','') in ('locals','vars') for c in ast.walk(n))]:
+  s={};l=set();skip=set()
+  for n in ast.walk(fn):
+   if isinstance(n,(ast.For,ast.comprehension)): skip|={x.id for x in ast.walk(n.target) if isinstance(x,ast.Name)}
+   if isinstance(n,(ast.Assign,ast.AnnAssign)):
+    for tg in (n.targets if isinstance(n,ast.Assign) else [n.target]):
+     if isinstance(tg,(ast.Tuple,ast.List)): skip|={x.id for x in ast.walk(tg) if isinstance(x,ast.Name)}
+   if isinstance(n,ast.Name):(s.setdefault(n.id,n.lineno) if isinstance(n.ctx,ast.Store) else l.add(n.id))
+  [print(f'{f}:{k}: {v} assigned but never used') for v,k in s.items() if v not in l and v not in skip and v[0]!='_']"; fi; [ -d docs/sqlglot ] && $B/python -c "import html,re,pathlib,difflib
+for h in sorted(pathlib.Path('docs/sqlglot').rglob('*.html')):
+ s=pathlib.Path('sqlglot',*h.relative_to('docs/sqlglot').with_suffix('.py').parts)
+ if not s.exists() or str(s)=='sqlglot/dialects/dialect.py': continue
+ r={}
+ for x in html.unescape(re.sub(r'<[^>]+>','',h.read_text())).splitlines():
+  m=re.match(r'^\s*(\d+)(.*)$',x)
+  if m: r.setdefault(int(m[1]),m[2].rstrip())
+ a=[r.get(i,'') for i in range(1,max(r,default=0)+1)]
+ if len(a)>1 and a[-1]==a[-2]: a=a[:-1]
+ d=[l for l in difflib.unified_diff(a,[y.rstrip() for y in s.read_text().splitlines()],lineterm='',n=0) if l[:3] not in('---','+++')]
+ if sum(l[:1] in '+-' for l in d)>(2 if s.name=='diff.py' else 0): print('==',s);print(*d[:60],sep=chr(10))"; grep -rnEi "#\s*(Bug|Subtle|Logical bug|Introduc\w*|Chang\w*|Swap\w*|Revers\w*|Alter(ed|ing)|Incorrect|Incorrectly|Used incorrect|Used wrong|Wrong|Invert\w*|Flip\w*|Removed|Modified|Off-by-one|Exclud\w*)\b" --include=*.py . | grep -vE "^\./(tests?|docs?)/"; } 2>&1 | head -n 150`
+
+Your second call writes your test: put the issue's example into `/tmp/check.py` so that it prints what you get next to what the issue says you should get (`print('GOT', ...)` / `print('EXPECTED', ...)`), and run it. That file is the test suite for this task — the project's own tests for this bug are gone and nothing else on this machine or online can tell you more, so do not look. If the command printed `# Changed …` / `# Swap …`-style comments, your next calls undo every one of them (one patch per file, comments deleted) before anything else, then rerun `/tmp/check.py`. Otherwise patch the function the traceback or the wrong output points to by your 6th call, rerun `/tmp/check.py` after every patch, and keep going until GOT equals EXPECTED.
+
+It finds the damage for you. On undamaged code it prints almost nothing, so read every line it prints:
+- `F821 undefined name` / `F841 assigned but never used` / `assigned but never used`: a statement near that line was deleted, moved or reordered — restore it. Several such lines are usually several damaged spots; fix all of them.
+- a comment such as `# Changed from …`, `# Bug introduced: …`, `# Swapped …`, `# Incorrect …`: the line it sits on was altered on purpose — undo exactly what the comment describes and delete the comment. Every such comment is a separate damaged spot.
+- `== sqlglot/<file>` followed by `-` / `+` lines: change the file so it matches the `-` lines exactly, hunk by hunk (the `+` lines are what is there now).
+If the issue says a method or function is missing (an `AttributeError` for a method, a `NameError`, "has no method"), it was deleted: write it back right away, modelled on the same-named method of the sibling classes in that file (`grep -n "def <name>" <file>`) and on how its callers use it. But a missing dictionary key, setting or default value means the opposite: the code that asks for it was changed — find that code (usually a function rewritten to ask for the wrong key or value) and restore it; never add the missing entry to make the error go away. Do not search `tests/` for the bug: the tests that check it were removed from this tree, and no other copy of the original code exists outside sqlglot's docs.
+
+Damage is usually spread over several spots — often 3 to 5 functions in the same file, sometimes in sibling modules. Fixing the first spot is never the end: fix every line the command flagged, then read each other function of the damaged file that the issue's behaviour touches, 60 lines at a time, and repair anything altered (a reversed string, an off-by-one, a flipped condition, a changed constant or argument order). Before you stop, put every example and every symptom the issue lists into one `/tmp/check.py` (one short check per symptom, printing what you get) and run it. A symptom that is still wrong is another damaged spot — often in a different module from your first fix: grep the names that symptom mentions and fix it there. Stop only when the issue's example behaves exactly as described and the command no longer flags anything in the files you changed.
