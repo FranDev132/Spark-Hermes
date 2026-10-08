@@ -1,0 +1,27 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0067-p22",
+ "round_id": "r0067",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nDict field serialization broken with key/value field serializers\n\n#### Description\n\nWhen using `fields.Dict` with `keys` or `values` field serializers, the serialization is not working correctly. The key and value serializers are receiving `None` instead of the actual data to serialize.\n\n#### Steps/Code to Reproduce\n\n```python\nfrom marshmallow import fields\nimport decimal\n\n# Test with value serializer\nfield = fields.Dict(values=fields.Decimal)\ndata = {'foo': decimal.Decimal('1')}\nresult = field._serialize(data, None, None)\nprint(f\"Expected: {{'foo': 1}}\")\nprint(f\"Actual: {result}\")\n\n# Test with key serializer  \nfield = fields.Dict(keys=fields.Str)\ndata = {1: 'bar'}\nresult = field._serialize(data, None, None)\nprint(f\"Expected: {{'1': 'bar'}}\")\nprint(f\"Actual: {result}\")\n\n# Test with both key and value serializers\nfield = fields.Dict(keys=fields.Str, values=fields.Decimal)\ndata = {1: decimal.Decimal('1')}\nresult = field._serialize(data, None, None)\nprint(f\"Expected: {{'1': 1}}\")\nprint(f\"Actual: {result}\")\n```\n\nThe output shows that keys and values are not being serialized properly - they're coming out as `None` instead of their serialized forms.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "marshmallow-code__marshmallow.9716fc62.func_basic__x7o3i1eb",
+  "environment": "jyangballin/swesmith.x86_64.marshmallow-code_1776_marshmallow.9716fc62",
+  "fail_to_pass": [
+   "tests/test_serialization.py::TestFieldSerialization::test_structured_dict_key_serialize",
+   "tests/test_serialization.py::TestFieldSerialization::test_structured_dict_key_value_serialize",
+   "tests/test_serialization.py::TestFieldSerialization::test_structured_dict_value_serialize"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

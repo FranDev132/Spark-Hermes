@@ -1,0 +1,25 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0067-p20",
+ "round_id": "r0067",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\n# Inference cache issue with numpy ndarray methods\n\nI'm encountering an issue with inference of numpy ndarray methods. When trying to infer the return type of certain ndarray methods, the inference fails and doesn't correctly identify them as returning ndarray objects.\n\n## Steps to reproduce\n\nHere's a simple example that demonstrates the issue:\n\n```python\nimport numpy as np\nimport astroid\nfrom astroid import MANAGER\n\n# Create a simple numpy array\ncode = \"\"\"\nimport numpy as np\narr = np.array([1, 2, 3])\nresult = arr.reshape(3, 1)  # This should be inferred as ndarray\n\"\"\"\n\nmodule = astroid.parse(code)\nresult_assign = module.body[-1]\ncall_node = result_assign.value\n\n# Try to infer the type\ninferred = list(call_node.infer())\nprint(f\"Inferred type: {inferred[0].pytype()}\")  # Should be '.ndarray' but fails\n```\n\n## Expected behavior\n\nThe inference should correctly identify that methods like `reshape`, `transpose`, etc. return numpy ndarray objects.\n\n## Actual behavior\n\nThe inference fails to correctly identify the return type, and in some cases may raise a `UseInferenceDefault` exception or return an incorrect type.\n\nThis seems to be related to how the inference cache is being handled, particularly when dealing with recursive inference patterns. The issue appears to be in the `_inference_tip_cached` function where the recursion guard mechanism might be interfering with proper inference of numpy array methods.\n\nHas anyone else encountered this issue or have suggestions on how to fix it?\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "pylint-dev__astroid.b114f6b5.pr_2166",
+  "environment": "jyangballin/swesmith.x86_64.pylint-dev_1776_astroid.b114f6b5",
+  "fail_to_pass": [
+   "tests/brain/numpy/test_ndarray.py::NumpyBrainNdarrayTest::test_numpy_function_calls_inferred_as_ndarray"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

@@ -1,0 +1,30 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0067-p18",
+ "round_id": "r0067",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nOAuth1 access token validation broken due to undefined variable\n\n#### Description\n\nThe OAuth1 access token endpoint validation is failing with a NameError for an undefined variable `v`. This appears to be causing access token requests to fail unexpectedly.\n\n#### Steps/Code to Reproduce\n\n```python\nfrom oauthlib.oauth1 import Client\nfrom oauthlib.oauth1.rfc5849.endpoints import AccessTokenEndpoint\nfrom oauthlib.oauth1.rfc5849 import RequestValidator\n\n# Create a basic validator and endpoint\nvalidator = RequestValidator()\nendpoint = AccessTokenEndpoint(validator)\n\n# Create a client with valid credentials\nclient = Client('client_key', \n               client_secret='client_secret',\n               resource_owner_key='request_token',\n               resource_owner_secret='request_token_secret',\n               verifier='verifier')\n\n# Sign a request\nuri, headers, body = client.sign('http://example.com/access_token')\n\n# Try to create access token response\nh, b, s = endpoint.create_access_token_response(uri, headers=headers)\n```\n\nThis should work but instead raises a NameError about variable `v` not being defined.\n\nThe issue seems to be in the validate_access_token_request method where the code tries to use variable `v` before it's defined, and the method structure appears to have been corrupted with misplaced docstrings and code blocks.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "oauthlib__oauthlib.1fd52536.func_pm_ctrl_shuffle__ugi2x6nz",
+  "environment": "jyangballin/swesmith.x86_64.oauthlib_1776_oauthlib.1fd52536",
+  "fail_to_pass": [
+   "tests/oauth1/rfc5849/endpoints/test_access_token.py::AccessTokenEndpointTest::test_check_request_token",
+   "tests/oauth1/rfc5849/endpoints/test_access_token.py::AccessTokenEndpointTest::test_valid_request",
+   "tests/oauth1/rfc5849/endpoints/test_access_token.py::AccessTokenEndpointTest::test_validate_client_key",
+   "tests/oauth1/rfc5849/endpoints/test_access_token.py::AccessTokenEndpointTest::test_validate_request_token",
+   "tests/oauth1/rfc5849/endpoints/test_access_token.py::AccessTokenEndpointTest::test_validate_signature",
+   "tests/oauth1/rfc5849/endpoints/test_access_token.py::AccessTokenEndpointTest::test_validate_verifier"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

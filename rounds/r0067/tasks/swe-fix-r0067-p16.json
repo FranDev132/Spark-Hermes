@@ -1,0 +1,26 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0067-p16",
+ "round_id": "r0067",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nNameError in simplify_polyline function when max_distance is None\n\nWhen calling `simplify_polyline` with `max_distance=None`, the function raises a `NameError` because variables `real_max_distance` and `_max_distance` are referenced but not defined.\n\n#### Steps/Code to Reproduce\n\n```python\nimport gpxpy\nimport gpxpy.gpx as mod_gpx\n\n# Create a simple GPX with a few points\ngpx = mod_gpx.GPX()\ngpx.tracks.append(mod_gpx.GPXTrack())\ngpx.tracks[0].segments.append(mod_gpx.GPXTrackSegment())\ngpx.tracks[0].segments[0].points.append(mod_gpx.GPXTrackPoint(latitude=13, longitude=12))\ngpx.tracks[0].segments[0].points.append(mod_gpx.GPXTrackPoint(latitude=13.25, longitude=12))\ngpx.tracks[0].segments[0].points.append(mod_gpx.GPXTrackPoint(latitude=13.5, longitude=12))\n\n# This will raise NameError\ngpx.simplify()\n```\n\nThe error occurs because the `simplify_polyline` function in `gpxpy/geo.py` references undefined variables when `max_distance` is `None`.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "tkrajina__gpxpy.09fc46b3.func_pm_remove_assign__8dpyhhgb",
+  "environment": "jyangballin/swesmith.x86_64.tkrajina_1776_gpxpy.09fc46b3",
+  "fail_to_pass": [
+   "test.py::GPXTests::test_simplify",
+   "test.py::GPXTests::test_simplify_circular_gpx"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

@@ -1,0 +1,29 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0067-p25",
+ "round_id": "r0067",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\n# Offset and choices properties in Data class are not working correctly\n\nI found some issues with the `Data` class in the diagnostics module. When trying to use the `offset` and `choices` properties, I'm getting unexpected behavior.\n\n## Description\n\nI was working with the diagnostics database and noticed several problems:\n\n1. The `offset` property is adding 1 to the actual offset value, which breaks calculations\n2. The `choices` property is modifying the values by adding 1 to each value\n3. The `__repr__` method has logic issues:\n   - The condition for choices is inverted (checking `is not None` instead of `is None`)\n   - The format of choices is wrong, showing `text: 'value'` instead of `value: 'text'`\n   - The order of parameters in the repr string doesn't match the actual constructor\n\n## Steps to reproduce\n\nHere's a simple example that demonstrates the issue:\n\n```python\nfrom cantools.database.diagnostics.data import Data\nfrom cantools.database.diagnostics.conversion import LinearConversion\n\n# Create a conversion with offset 10 and some choices\nconversion = LinearConversion(scale=2.0, offset=10.0, choices={1: 'Option1', 2: 'Option2'})\n\n# Create a data object\ndata = Data('TestSignal', 0, 8, 'big_endian', conversion=conversion)\n\n# Check the offset - should be 10 but returns 11\nprint(f\"Offset: {data.offset}\")  # Prints 11 instead of 10\n\n# Check the choices - values should be unchanged but are incremented by 1\nprint(f\"Choices: {data.choices}\")  # Shows {1: 'Option1' + 1, 2: 'Option2' + 1}\n\n# The repr string is also incorrect\nprint(repr(data))  # Parameters are in wrong order and choices format is incorrect\n```\n\nThis is causing issues when working with diagnostic data, especially when trying to decode values correctly.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "cantools__cantools.0c6a7871.combine_module__4zau2aj7",
+  "environment": "jyangballin/swesmith.x86_64.cantools_1776_cantools.0c6a7871",
+  "fail_to_pass": [
+   "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_be_example_cdd",
+   "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_be_example_cdd_repr",
+   "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_datarefs",
+   "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_le_example_cdd",
+   "tests/test_diagnostics_database.py::CanToolsDiagnosticsDatabaseTest::test_le_example_cdd_repr"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

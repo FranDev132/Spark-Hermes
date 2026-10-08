@@ -1,0 +1,30 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0067-p10",
+ "round_id": "r0067",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nNameError in SQL generation after optimizer changes\n\n#### Description\n\nAfter recent changes to the optimizer's simplify module, SQL generation is failing with a `NameError` for undefined variable `exp_handler_name`. This affects multiple optimizer functions including `optimize`, `normalize`, and `pushdown_predicates`.\n\n#### Steps/Code to Reproduce\n\n```python\nimport sqlglot\nfrom sqlglot import optimizer\n\n# Simple optimization that should work\nresult = optimizer.optimize('x = 1 + 1', identify=None)\nprint(result.sql())  # Should print 'x = 2' but raises NameError\n\n# Or try normalizing an expression\nfrom sqlglot.parser import parse_one\nfrom sqlglot.optimizer.normalize import normalize\n\nexpr = parse_one('x AND (y OR z)')\nnormalized = normalize(expr, dnf=True)\nprint(normalized.sql())  # Should work but fails\n```\n\nThe error occurs when trying to generate SQL from optimized expressions. The variable `exp_handler_name` is referenced but not defined in the generation process.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "tobymao__sqlglot.036601ba.func_pm_remove_assign__jp8omlqp",
+  "environment": "jyangballin/swesmith.x86_64.tobymao_1776_sqlglot.036601ba",
+  "fail_to_pass": [
+   "tests/test_optimizer.py::TestOptimizer::test_normalize",
+   "tests/test_optimizer.py::TestOptimizer::test_optimize",
+   "tests/test_optimizer.py::TestOptimizer::test_pushdown_predicates",
+   "tests/test_optimizer.py::TestOptimizer::test_simplify",
+   "tests/test_optimizer.py::TestOptimizer::test_tpcds",
+   "tests/test_optimizer.py::TestOptimizer::test_tpch"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

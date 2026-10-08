@@ -1,0 +1,31 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0067-p15",
+ "round_id": "r0067",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\nDict method inference returns wrong object type\n\n#### Description\n\nWhen accessing dict methods like `.keys()`, `.values()`, or `.items()` as attributes (not calling them), the inference is returning the wrong object type. This affects code analysis and type checking.\n\n#### Steps/Code to Reproduce\n\n```python\nimport astroid\n\n# This should infer as a BoundMethod but returns something else\nnode = astroid.extract_node('{}.values #@')\ninferred = next(node.infer())\nprint(type(inferred))  # Expected: <class 'astroid.BoundMethod'>\n```\n\nThe same issue occurs with other dict methods:\n\n```python\nnodes = astroid.extract_node('''\n{}.values #@\n{}.items #@  \n{}.keys #@\n''')\n\nfor node in nodes:\n    inferred = next(node.infer())\n    print(f\"{node.as_string()}: {type(inferred)}\")\n```\n\nThis also breaks more complex scenarios like using dict methods in slots or iteration contexts where the method objects need to be properly inferred.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "pylint-dev__astroid.b114f6b5.func_basic__zw9rmgvp",
+  "environment": "jyangballin/swesmith.x86_64.pylint-dev_1776_astroid.b114f6b5",
+  "fail_to_pass": [
+   "tests/brain/test_brain.py::RandomSampleTest::test_no_crash_on_evaluatedobject",
+   "tests/test_inference.py::InferenceTest::test_conversion_of_dict_methods",
+   "tests/test_inference.py::InferenceTest::test_for_dict",
+   "tests/test_object_model.py::DictObjectModelTest::test_attributes_inferred_as_methods",
+   "tests/test_object_model.py::DictObjectModelTest::test_wrapper_objects_for_dict_methods_python3",
+   "tests/test_protocols.py::ProtocolTests::test_assigned_stmts_nested_for_dict",
+   "tests/test_scoped_nodes.py::ClassNodeTest::test_slots_for_dict_keys"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}

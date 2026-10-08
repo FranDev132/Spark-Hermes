@@ -1,0 +1,26 @@
+{
+ "schema": "sh-preview-v1",
+ "task_id": "swe-fix-r0067-p04",
+ "round_id": "r0067",
+ "family": "swe_fix",
+ "prompt": "The repository at /testbed has a bug, described below. Fix it by changing the source code; do not modify or\nadd tests. When you are done, the project's existing test suite should pass.\n\n<issue>\n# Window functions with OVER keyword not properly parsed\n\nI've noticed an issue with how SQL window functions using the OVER keyword are parsed. The parser doesn't correctly group the OVER clause with its associated function.\n\n## What happened?\n\nWhen parsing SQL queries containing window functions with the OVER keyword, the parser fails to properly group the OVER clause with the function. This breaks functionality that depends on this grouping.\n\nFor example, when parsing something like:\n\n```sql\nSELECT foo(c1) OVER (PARTITION BY c2 ORDER BY c3) as bar FROM table\n```\n\nThe parser should recognize `foo(c1) OVER (PARTITION BY c2 ORDER BY c3)` as a function with an OVER clause, but it's not working correctly.\n\n## Reproduction\n\nHere's a simple script that demonstrates the issue:\n\n```python\nimport sqlparse\n\n# This should parse correctly but doesn't\nsql = \"SELECT foo(c1) OVER (PARTITION BY c2 ORDER BY c3) as bar FROM table\"\nparsed = sqlparse.parse(sql)[0]\n\n# Try to access the function and its window clause\nprint(parsed.tokens[0])  # Should be an Identifier\nprint(parsed.tokens[0].tokens[0])  # Should be a Function with an Over clause\n```\n\nWhen running this code, you'll see that the OVER clause is not properly grouped with the function, causing issues when trying to access the window specification.\n\n## Expected behavior\n\nThe parser should correctly identify and group window functions with their OVER clauses, allowing code to properly navigate the parse tree and access window specifications.\n\nThe issue seems to be in the `group_over` function in the grouping engine, which is responsible for identifying and grouping OVER clauses with their associated functions.\n</issue>\n",
+ "workdir": "/testbed",
+ "tools": [
+  "terminal",
+  "file"
+ ],
+ "max_turns": 100,
+ "timeout_s": 1800,
+ "token_budget": 600000,
+ "grading": "share of the tests the bug breaks that pass, counted only if no kept test fails",
+ "source": {
+  "dataset": "SWE-bench/SWE-smith",
+  "instance_id": "andialbrecht__sqlparse.e57923b3.lm_rewrite__52qalajw",
+  "environment": "jyangballin/swesmith.x86_64.andialbrecht_1776_sqlparse.e57923b3",
+  "fail_to_pass": [
+   "tests/test_grouping.py::test_grouping_function",
+   "tests/test_grouping.py::test_grouping_identifier_function"
+  ]
+ },
+ "note": "A practice bug. The round is scored on different, hidden bugs from the same repository."
+}
