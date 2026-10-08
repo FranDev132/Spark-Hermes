@@ -7813,6 +7813,221 @@
     "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj": "gold-tree-tech"
    },
    "pr": 607
+  },
+  {
+   "round_id": "r0068",
+   "closed_at": 1791485650.77723,
+   "window": {
+    "opens_at": 1791449371.140055,
+    "closes_at": 1791456571.140055,
+    "seconds": 7200
+   },
+   "episodes": 562,
+   "king": "5D4txntYBCZ7dAXuFDHEubK1f84LYzPjBNCtVELenfUPCQzK",
+   "weights": {
+    "5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh": 0.12398636524563464,
+    "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ": 0.1851772191819389,
+    "5D4txntYBCZ7dAXuFDHEubK1f84LYzPjBNCtVELenfUPCQzK": 0.11792781700139321,
+    "5DPhKi77DLciQzNDr6iCZ2cD41oHcV75vLdf82d3crVnERN6": 0.10102574822587486,
+    "5DSD14t7dACJcd9f8rPdrkMVngRqLUnM3EnM3dHfHLZTHJGf": 0.08913098378305226,
+    "5Dh9YpJeTYKmgh9weSH9j24AtgEwVWoW37xsXakYGcpqVbKJ": 0.01006898335047143,
+    "5Di3Dd8PKn7uQbBc4WrzxkUqqvSL8QS3KVgCPSt3kzPE5KFb": 0.0019369471151812914,
+    "5E4iMWRACSJrnbnCLNVfWXjHc5VRkgzRfaAzBiB1VXfkqPUg": 0.06348063234133769,
+    "5Et8zmN8dq4eFvy7grf2fqtf5PE2mgngTdr1WA6ADJJUUCrE": 0.046031191736014526,
+    "5EwAJCVFUV1UwBqQpT7JqcEGSGBsM3gwxiJNehTeVKqKqkqc": 0.1972773991017302,
+    "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj": 0.06395671291737103
+   },
+   "scores": {
+    "5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh": {
+     "score": 0.10261,
+     "weight": 0.12398636524563464,
+     "mean_d": 0.10261,
+     "delta_c": 0.03730409690610892,
+     "n": 52
+    },
+    "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ": {
+     "score": 0.153251,
+     "weight": 0.1851772191819389,
+     "mean_d": 0.153251,
+     "delta_c": 0.0845309319906314,
+     "n": 52
+    },
+    "5D4txntYBCZ7dAXuFDHEubK1f84LYzPjBNCtVELenfUPCQzK": {
+     "score": 0.097596,
+     "weight": 0.11792781700139321,
+     "mean_d": 0.097596,
+     "delta_c": 0.030776842970492796,
+     "n": 52
+    },
+    "5DPhKi77DLciQzNDr6iCZ2cD41oHcV75vLdf82d3crVnERN6": {
+     "score": 0.083608,
+     "weight": 0.10102574822587486,
+     "mean_d": 0.083608,
+     "delta_c": 0.020346347224358685,
+     "n": 52
+    },
+    "5DSD14t7dACJcd9f8rPdrkMVngRqLUnM3EnM3dHfHLZTHJGf": {
+     "score": 0.073764,
+     "weight": 0.08913098378305226,
+     "mean_d": 0.073764,
+     "delta_c": 0.008863333866582307,
+     "n": 52
+    },
+    "5Dh9YpJeTYKmgh9weSH9j24AtgEwVWoW37xsXakYGcpqVbKJ": {
+     "score": 0.008333,
+     "weight": 0.01006898335047143,
+     "mean_d": 0.008333,
+     "delta_c": 0.0,
+     "n": 40
+    },
+    "5Di3Dd8PKn7uQbBc4WrzxkUqqvSL8QS3KVgCPSt3kzPE5KFb": {
+     "score": 0.001603,
+     "weight": 0.0019369471151812914,
+     "mean_d": 0.001603,
+     "delta_c": 0.0,
+     "n": 52
+    },
+    "5E4iMWRACSJrnbnCLNVfWXjHc5VRkgzRfaAzBiB1VXfkqPUg": {
+     "score": 0.052536,
+     "weight": 0.06348063234133769,
+     "mean_d": 0.052536,
+     "delta_c": 0.0,
+     "n": 46
+    },
+    "5Et8zmN8dq4eFvy7grf2fqtf5PE2mgngTdr1WA6ADJJUUCrE": {
+     "score": 0.038095,
+     "weight": 0.046031191736014526,
+     "mean_d": 0.038095,
+     "delta_c": 0.0,
+     "n": 40
+    },
+    "5EwAJCVFUV1UwBqQpT7JqcEGSGBsM3gwxiJNehTeVKqKqkqc": {
+     "score": 0.163265,
+     "weight": 0.1972773991017302,
+     "mean_d": 0.163265,
+     "delta_c": 0.039249772530219565,
+     "n": 14
+    },
+    "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj": {
+     "score": 0.05293,
+     "weight": 0.06395671291737103,
+     "mean_d": 0.05293,
+     "delta_c": 0.0,
+     "n": 52
+    }
+   },
+   "crown": {
+    "5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh": {
+     "n": 8,
+     "verified": 1,
+     "dq": 0,
+     "credit": 0.330357,
+     "delta": 0.160714,
+     "rank": 6
+    },
+    "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ": {
+     "n": 8,
+     "verified": 1,
+     "dq": 0,
+     "credit": 0.392857,
+     "delta": 0.223214,
+     "rank": 3
+    },
+    "5D4txntYBCZ7dAXuFDHEubK1f84LYzPjBNCtVELenfUPCQzK": {
+     "n": 8,
+     "verified": 2,
+     "dq": 0,
+     "credit": 0.419643,
+     "delta": 0.25,
+     "rank": 1
+    },
+    "5DPhKi77DLciQzNDr6iCZ2cD41oHcV75vLdf82d3crVnERN6": {
+     "n": 8,
+     "verified": 1,
+     "dq": 0,
+     "credit": 0.392857,
+     "delta": 0.223214,
+     "rank": 4
+    },
+    "5DSD14t7dACJcd9f8rPdrkMVngRqLUnM3EnM3dHfHLZTHJGf": {
+     "n": 8,
+     "verified": 1,
+     "dq": 0,
+     "credit": 0.330357,
+     "delta": 0.160714,
+     "rank": 5
+    },
+    "5Di3Dd8PKn7uQbBc4WrzxkUqqvSL8QS3KVgCPSt3kzPE5KFb": {
+     "n": 8,
+     "verified": 0,
+     "dq": 0,
+     "credit": 0.232143,
+     "delta": 0.0625,
+     "rank": 9
+    },
+    "5E4iMWRACSJrnbnCLNVfWXjHc5VRkgzRfaAzBiB1VXfkqPUg": {
+     "n": 8,
+     "verified": 1,
+     "dq": 0,
+     "credit": 0.294643,
+     "delta": 0.125,
+     "rank": 8
+    },
+    "5Et8zmN8dq4eFvy7grf2fqtf5PE2mgngTdr1WA6ADJJUUCrE": {
+     "n": 8,
+     "verified": 1,
+     "dq": 0,
+     "credit": 0.401786,
+     "delta": 0.232143,
+     "rank": 2
+    },
+    "5EwAJCVFUV1UwBqQpT7JqcEGSGBsM3gwxiJNehTeVKqKqkqc": {
+     "n": 8,
+     "verified": 1,
+     "dq": 0,
+     "credit": 0.330357,
+     "delta": 0.160714,
+     "rank": 7
+    },
+    "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj": {
+     "n": 8,
+     "verified": 0,
+     "dq": 0,
+     "credit": 0.205357,
+     "delta": 0.035714,
+     "rank": 10
+    }
+   },
+   "commitments_ok": true,
+   "sft_rows": 2,
+   "dpo_pairs": 2,
+   "hf": "https://huggingface.co/datasets/gittensor-model-hub/spark-hermes-rounds/tree/main/rounds/r0068",
+   "revealed": [
+    "5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh",
+    "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ",
+    "5DPhKi77DLciQzNDr6iCZ2cD41oHcV75vLdf82d3crVnERN6",
+    "5DSD14t7dACJcd9f8rPdrkMVngRqLUnM3EnM3dHfHLZTHJGf",
+    "5Dh9YpJeTYKmgh9weSH9j24AtgEwVWoW37xsXakYGcpqVbKJ",
+    "5Di3Dd8PKn7uQbBc4WrzxkUqqvSL8QS3KVgCPSt3kzPE5KFb",
+    "5E4iMWRACSJrnbnCLNVfWXjHc5VRkgzRfaAzBiB1VXfkqPUg",
+    "5Et8zmN8dq4eFvy7grf2fqtf5PE2mgngTdr1WA6ADJJUUCrE",
+    "5EwAJCVFUV1UwBqQpT7JqcEGSGBsM3gwxiJNehTeVKqKqkqc",
+    "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj"
+   ],
+   "github": {
+    "5D4txntYBCZ7dAXuFDHEubK1f84LYzPjBNCtVELenfUPCQzK": "widecloud",
+    "5E4iMWRACSJrnbnCLNVfWXjHc5VRkgzRfaAzBiB1VXfkqPUg": "Tet-9",
+    "5EwAJCVFUV1UwBqQpT7JqcEGSGBsM3gwxiJNehTeVKqKqkqc": "K-3-LT",
+    "5C5JKnm8M8pyn6neLqwmAKZ7DoyzJf7ZB1Mabv62LwfSEsHh": "kaivexa",
+    "5Et8zmN8dq4eFvy7grf2fqtf5PE2mgngTdr1WA6ADJJUUCrE": "ismayilovibadet802-svg",
+    "5Di3Dd8PKn7uQbBc4WrzxkUqqvSL8QS3KVgCPSt3kzPE5KFb": "harrythomasben",
+    "5CoTfEgMhZ46ETtT6RSdt3RQkXizYu3vy9Spg33qTSt3eBtQ": "dato-bitar",
+    "5DPhKi77DLciQzNDr6iCZ2cD41oHcV75vLdf82d3crVnERN6": "kaivaryn",
+    "5DSD14t7dACJcd9f8rPdrkMVngRqLUnM3EnM3dHfHLZTHJGf": "FranDev132",
+    "5Dh9YpJeTYKmgh9weSH9j24AtgEwVWoW37xsXakYGcpqVbKJ": "e11734937-beep",
+    "5HbvMH2hCEecnyhMsUMSCo54mJia1ujJGRVwsfg3LbEWBsVj": "gold-tree-tech"
+   },
+   "pr": 614
   }
  ]
 }
